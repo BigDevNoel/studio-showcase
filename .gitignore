@@ -1,0 +1,7 @@
+# OS / editor cruft at the repo root
+.DS_Store
+Thumbs.db
+
+# Each project folder (carpentry/, hairsalon/, gym/, architecture/,
+# clinic/, hub/) has its own .gitignore covering node_modules/, dist/,
+# and .astro/ — this file only covers the repo root itself.
