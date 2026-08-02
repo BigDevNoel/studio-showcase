@@ -92,6 +92,75 @@ const { title, description } = Astro.props;
 					inner.style.setProperty('--rx', '0deg');
 				});
 			});
+
+			// Every big/bold heading (h1/h2/h3 — never body copy) types itself
+			// out, holds for 3s, clears, and retypes — forever. The heading's
+			// accessible name is fixed to the full text via aria-label so
+			// assistive tech always gets the complete line, independent of
+			// animation state; an invisible sibling span reserves the box's
+			// full wrapped size so nothing reflows as characters come and go.
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			const HOLD_MS = 3000;
+			const TYPE_SPEED_MS = 32;
+
+			document.querySelectorAll<HTMLElement>('main h1, main h2, main h3').forEach((heading) => {
+				const text = (heading.textContent || '').replace(/\s+/g, ' ').trim();
+				if (!text) return;
+
+				heading.setAttribute('aria-label', text);
+				heading.classList.add('relative');
+				heading.textContent = '';
+
+				const reserved = document.createElement('span');
+				reserved.className = 'invisible';
+				reserved.setAttribute('aria-hidden', 'true');
+				reserved.textContent = text;
+
+				const overlay = document.createElement('span');
+				overlay.className = 'typewriter-text absolute inset-0';
+				overlay.setAttribute('aria-hidden', 'true');
+
+				const chars = document.createElement('span');
+				chars.className = 'typewriter-chars';
+
+				const cursor = document.createElement('span');
+				cursor.className = 'typewriter-cursor';
+
+				overlay.append(chars, cursor);
+				heading.append(reserved, overlay);
+
+				if (reduceMotion) {
+					chars.textContent = text;
+					cursor.remove();
+					return;
+				}
+
+				const runLoop = () => {
+					let i = 0;
+					const tick = () => {
+						chars.textContent = text.slice(0, i);
+						i++;
+						if (i <= text.length) {
+							setTimeout(tick, TYPE_SPEED_MS);
+						} else {
+							setTimeout(() => {
+								chars.textContent = '';
+								runLoop();
+							}, HOLD_MS);
+						}
+					};
+					tick();
+				};
+
+				// The hero heading rises in on load via .hero-intro; start typing
+				// once that entrance finishes rather than mid-fade. Every other
+				// heading has no separate entrance, so it can start right away.
+				if (heading.closest('.hero-intro')) {
+					heading.addEventListener('animationend', runLoop, { once: true });
+				} else {
+					runLoop();
+				}
+			});
 		</script>
 	</body>
 </html>

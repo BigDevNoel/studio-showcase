@@ -44,12 +44,21 @@ import velvetTexture from '../assets/images/swatch-velvet-texture.jpg';
 
 <style>
 	.swatch-cover {
-		animation: swatch-slide 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.7s forwards;
+		animation: swatch-slide 7s cubic-bezier(0.16, 1, 0.3, 1) 1.7s infinite;
 		transform-origin: left;
 	}
 	@keyframes swatch-slide {
-		to {
+		0%,
+		10% {
+			transform: translateX(0) rotate(0deg);
+		}
+		25%,
+		78% {
 			transform: translateX(102%) rotate(1deg);
+		}
+		92%,
+		100% {
+			transform: translateX(0) rotate(0deg);
 		}
 	}
 

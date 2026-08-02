@@ -46,7 +46,7 @@ const process = [
 >
 	<!-- HERO -->
 	<section class="hero-band relative overflow-hidden">
-		<div class="absolute inset-0 overflow-hidden">
+		<div class="absolute inset-0 overflow-hidden bg-ink">
 			<div class="hero-bg-video-wrap absolute inset-0">
 				<video
 					class="hero-bg-video absolute inset-0 h-full w-full object-cover"
@@ -275,6 +275,22 @@ const process = [
 		transform-origin: 50% 42%;
 		will-change: transform;
 		backface-visibility: hidden;
+	}
+	/* Below lg the text + swatch card stack into one tall column, which
+	   would otherwise stretch this 16:9 video into a tall, narrow box —
+	   object-cover then crops in hard and reads as "zoomed in". Pin the
+	   video to its native ratio at the top of the band instead; the
+	   .bg-ink fallback behind it covers the rest of the (now taller)
+	   section so the dark backdrop still reads as one continuous field. */
+	@media (max-width: 1023px) {
+		.hero-bg-video-wrap {
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: auto;
+			height: auto;
+			aspect-ratio: 16 / 9;
+		}
 	}
 	.hero-bg-video {
 		will-change: transform;

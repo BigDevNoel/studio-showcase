@@ -275,3 +275,28 @@ body {
     transition: none;
   }
 }
+
+/* Typewriter headings — every h1/h2/h3 in the page body types itself out,
+   holds, clears, and retypes on an endless loop (see Layout.astro). The
+   heading's real text sits in an invisible sibling span so the box keeps
+   its full, wrapped size the whole time — nothing around it reflows as
+   characters are added or removed each cycle. */
+.typewriter-cursor {
+  display: inline-block;
+  width: 0.08em;
+  height: 0.85em;
+  margin-left: 0.04em;
+  background: currentColor;
+  vertical-align: -0.08em;
+  animation: typewriter-blink 0.9s steps(1, jump-none) infinite;
+}
+@keyframes typewriter-blink {
+  50% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-cursor {
+    animation: none;
+  }
+}
