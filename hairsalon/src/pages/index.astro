@@ -1,17 +1,166 @@
 ---
-import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
+import HeatIronHero from '../components/HeatIronHero.astro';
+import TiltPhoto from '../components/TiltPhoto.astro';
+
+import colorFoil from '../assets/images/color-application-brush-foil.jpg';
+import barberCutting from '../assets/images/barber-cutting-trendy-shop.jpg';
+import facialMask from '../assets/images/facial-mask-closeup.jpg';
+import salonInterior from '../assets/images/salon-interior-chairs-mirrors.jpg';
+import barberTools from '../assets/images/barber-tools-brick-wall.jpg';
+
+const teaser = [
+	{
+		title: 'Color & Highlights',
+		copy: 'Balayage, foils, and single-process color mixed to your skin tone, not a swatch book.',
+		img: colorFoil,
+		alt: 'Colorist applying hair color with a brush and foil section',
+		href: '/services#color',
+	},
+	{
+		title: 'Cuts & Barbering',
+		copy: 'Precision cuts and fades for every hair type, plus straight-razor beard work.',
+		img: barberCutting,
+		alt: 'Barber cutting a client’s hair with scissors in the studio',
+		href: '/services#hair',
+	},
+	{
+		title: 'Facials & Spa',
+		copy: 'Skin treatments built around what your face is actually doing that week.',
+		img: facialMask,
+		alt: 'Client receiving a facial treatment',
+		href: '/services#spa',
+	},
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Hair Salon</title>
-	</head>
-	<body class="flex min-h-screen items-center justify-center bg-neutral-950 text-neutral-100">
-		<main class="text-center">
-			<h1 class="text-3xl font-semibold tracking-tight">Hair Salon — coming soon</h1>
-		</main>
-	</body>
-</html>
+<Layout
+	title="Home"
+	description="Salt & Iron is a unisex hair studio and spa in Asheville's River Arts District — cut, color, barbering, and facials inside a converted 1948 metal shop."
+>
+	<HeatIronHero />
+
+	<section class="border-y border-steel-dark/40 bg-graphite-2">
+		<div class="mx-auto max-w-6xl px-6 py-16 text-center">
+			<p class="mx-auto max-w-2xl font-display text-2xl font-medium leading-snug text-plaster sm:text-3xl">
+				One shop floor, two trades, no separate &ldquo;men's side&rdquo; or &ldquo;women's
+				side.&rdquo; Just chairs, color, and heat.
+			</p>
+		</div>
+	</section>
+
+	<section class="mx-auto max-w-6xl px-6 py-20">
+		<div class="mb-12 flex items-end justify-between">
+			<div>
+				<p class="font-mono text-xs uppercase tracking-[0.25em] text-temper-gold">What we do</p>
+				<h2 class="mt-2 font-display text-4xl font-bold uppercase tracking-tight text-ivory sm:text-5xl">
+					Three rooms, one shop
+				</h2>
+			</div>
+			<a href="/services" class="hidden font-mono text-xs uppercase tracking-[0.15em] text-steel hover:text-temper-gold sm:block">
+				Full menu &amp; pricing &rarr;
+			</a>
+		</div>
+
+		<div class="grid gap-8 sm:grid-cols-3">
+			{
+				teaser.map((item, i) => (
+					<a href={item.href} class="foil-reveal group block" style={`transition-delay:${i * 90}ms`}>
+						<TiltPhoto src={item.img} alt={item.alt} aspect="aspect-[4/5]" priority={i === 0} />
+						<h3 class="mt-5 font-display text-2xl font-semibold text-ivory group-hover:text-temper-gold">
+							{item.title}
+						</h3>
+						<p class="mt-2 text-sm leading-relaxed text-steel">{item.copy}</p>
+					</a>
+				))
+			}
+		</div>
+	</section>
+
+	<div class="steel-rail mx-auto max-w-6xl"></div>
+
+	<section class="mx-auto max-w-6xl px-6 py-20">
+		<div class="grid items-center gap-14 lg:grid-cols-2">
+			<div class="foil-reveal order-2 lg:order-1">
+				<p class="font-mono text-xs uppercase tracking-[0.25em] text-temper-gold">Since 2016</p>
+				<h2 class="mt-2 font-display text-4xl font-bold uppercase tracking-tight text-ivory sm:text-5xl">
+					A metal shop, reheated
+				</h2>
+				<p class="mt-6 text-lg leading-relaxed text-plaster">
+					Before it held styling chairs, 142 Clingman Ave was Coxe Avenue Metal Works &mdash; a
+					fabrication shop that bent rebar and ductwork for half of downtown Asheville. Reva
+					Odom and Dez Calloway kept the roll-up loading door, the exposed trusses, and the
+					name's spirit when they opened Salt &amp; Iron in its place.
+				</p>
+				<a
+					href="/about"
+					class="mt-6 inline-block font-mono text-xs uppercase tracking-[0.15em] text-temper-gold hover:underline"
+				>
+					Read the full story &rarr;
+				</a>
+			</div>
+			<div class="order-1 lg:order-2">
+				<TiltPhoto src={barberTools} alt="Barber tools laid out against an exposed brick wall" aspect="aspect-[4/3]" />
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-graphite-2 py-20">
+		<div class="mx-auto max-w-6xl px-6">
+			<p class="mb-10 font-mono text-xs uppercase tracking-[0.25em] text-temper-gold">In their words</p>
+			<div class="grid gap-10 sm:grid-cols-3">
+				<blockquote class="foil-reveal border-l-2 border-temper-gold/60 pl-5">
+					<p class="text-plaster">
+						&ldquo;Reva color-matched me in about ninety seconds and it's the first balayage
+						that's actually grown out well.&rdquo;
+					</p>
+					<footer class="mt-4 font-mono text-xs uppercase tracking-[0.15em] text-steel">
+						Marisol T. &middot; West Asheville
+					</footer>
+				</blockquote>
+				<blockquote class="foil-reveal border-l-2 border-temper-gold/60 pl-5" style="transition-delay:90ms">
+					<p class="text-plaster">
+						&ldquo;First shop where the fade and the facial happen twenty feet apart. I do
+						both on my lunch break now.&rdquo;
+					</p>
+					<footer class="mt-4 font-mono text-xs uppercase tracking-[0.15em] text-steel">
+						Jonah P. &middot; Montford
+					</footer>
+				</blockquote>
+				<blockquote class="foil-reveal border-l-2 border-temper-gold/60 pl-5" style="transition-delay:180ms">
+					<p class="text-plaster">
+						&ldquo;Priya's facials fixed a year of maskne in three visits. The scalp massage
+						add-on is worth it alone.&rdquo;
+					</p>
+					<footer class="mt-4 font-mono text-xs uppercase tracking-[0.15em] text-steel">
+						Devon K. &middot; Kenilworth
+					</footer>
+				</blockquote>
+			</div>
+		</div>
+	</section>
+
+	<section class="mx-auto max-w-6xl px-6 py-20">
+		<div class="grid items-center gap-14 lg:grid-cols-2">
+			<TiltPhoto src={salonInterior} alt="Salon interior with styling chairs and mirrors" aspect="aspect-[4/3]" />
+			<div class="foil-reveal">
+				<h2 class="font-display text-4xl font-bold uppercase tracking-tight text-ivory sm:text-5xl">
+					Find the loading door
+				</h2>
+				<p class="mt-4 font-mono text-sm leading-relaxed text-plaster">
+					142 Clingman Ave, Asheville, NC 28801
+					<br />Tue&ndash;Fri 9a&ndash;7p &middot; Sat 9a&ndash;5p &middot; Sun&ndash;Mon closed
+				</p>
+				<p class="mt-4 text-plaster">
+					Street parking on Clingman, plus the RAD lot two doors down at the old candle factory.
+				</p>
+				<a
+					href="/contact"
+					class="mt-6 inline-block rounded-sm bg-temper-gold px-6 py-3 font-mono text-sm uppercase tracking-[0.15em] text-graphite transition-transform hover:-translate-y-0.5"
+				>
+					Book an appointment
+				</a>
+			</div>
+		</div>
+	</section>
+</Layout>

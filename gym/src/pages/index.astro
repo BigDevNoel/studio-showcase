@@ -1,17 +1,335 @@
 ---
-import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
+
+const programs = [
+	{
+		name: 'Open Gym',
+		price: '$119/mo',
+		blurb: '24/7 fob access to four competition platforms, calibrated plates, and every specialty bar we own. No classes, no waiting on equipment.',
+		href: '/programs#open-gym',
+	},
+	{
+		name: 'Coached Strength Program',
+		price: '$189/mo',
+		blurb: 'Three sessions a week, capped at eight lifters per group, programmed and adjusted by a coach who watches your bar path, not a screen.',
+		href: '/programs#coached',
+	},
+	{
+		name: 'Personal Coaching',
+		price: '$85/session',
+		blurb: '1:1 technique work and meet prep with a USAPL-certified coach. Most lifters start here to fix one specific thing, then move to group.',
+		href: '/programs#personal',
+	},
+];
+
+const disciplines = [
+	{ label: 'Squat', id: '33581693-sq', img: '13106591', alt: 'Lifter racking a loaded barbell for a back squat' },
+	{ label: 'Bench', id: '11433060-bp', img: '11433060', alt: 'Lifter pressing a barbell on a flat bench' },
+	{ label: 'Pull', id: '841125-dl', img: '841125', alt: 'Close-up of hands gripping a loaded barbell before a deadlift' },
+	{ label: 'Conditioning', id: '6389514-cd', img: '6389514', alt: 'Athlete training on an air bike' },
+];
+
+const schedule = [
+	{ day: 'Mon', open: '6a–8p', classes: ['Oly Lifting 6a', 'Coached Strength 6p'] },
+	{ day: 'Tue', open: '6a–8p', classes: ['Competitive Squad 6p'] },
+	{ day: 'Wed', open: '6a–8p', classes: ['Oly Lifting 6a', 'Coached Strength 6p'] },
+	{ day: 'Thu', open: '6a–8p', classes: ['Competitive Squad 6p'] },
+	{ day: 'Fri', open: '6a–8p', classes: ['Oly Lifting 6a', 'Coached Strength 6p'] },
+	{ day: 'Sat', open: '8a–2p', classes: ['Competition Prep 9a'] },
+	{ day: 'Sun', open: '8a–2p', classes: [] },
+];
+
+const floorRules = [
+	'Re-rack your plates. Every time.',
+	'Chalk stays on the bar and platform, not the walls.',
+	'No dropping an empty bar.',
+	'Wipe benches down after use.',
+	'Ask before working in on someone’s platform.',
+	'Film your own lifts, not other members.',
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Gym</title>
-	</head>
-	<body class="flex min-h-screen items-center justify-center bg-neutral-950 text-neutral-100">
-		<main class="text-center">
-			<h1 class="text-3xl font-semibold tracking-tight">Gym — coming soon</h1>
-		</main>
-	</body>
-</html>
+<Layout
+	title="Home"
+	description="A strength training gym in a converted 1920s iron foundry in Lawrenceville, Pittsburgh. Powerlifting, Olympic lifting, and coached barbell programs."
+>
+	<!-- HERO -->
+	<section class="relative overflow-hidden pt-16 pb-10 sm:pt-24 sm:pb-16">
+		<div class="absolute inset-0 -z-20 overflow-hidden">
+			<div class="duotone duotone-fade h-full w-full">
+				<video
+					id="hero-video"
+					class="h-full w-full object-cover opacity-80"
+					muted
+					loop
+					playsinline
+					preload="metadata"
+					poster="https://images.pexels.com/videos/5319998/pictures/preview-0.jpg"
+				>
+					<source src="https://videos.pexels.com/video-files/5319998/5319998-sd_640_360_25fps.mp4" media="(max-width: 639px)" type="video/mp4" />
+					<source src="https://videos.pexels.com/video-files/5319998/5319998-hd_1280_720_25fps.mp4" type="video/mp4" />
+				</video>
+			</div>
+		</div>
+
+		<div class="pointer-events-none absolute inset-0 -z-10">
+			<span class="dust-mote absolute left-[18%] top-[30%] h-1.5 w-1.5 rounded-full bg-chalk/40" style="--dur:7s; --delay:0s; --dx:18px;"></span>
+			<span class="dust-mote absolute left-[42%] top-[55%] h-1 w-1 rounded-full bg-chalk/30" style="--dur:9s; --delay:1.5s; --dx:-14px;"></span>
+			<span class="dust-mote absolute left-[68%] top-[38%] h-1.5 w-1.5 rounded-full bg-chalk/30" style="--dur:8s; --delay:3s; --dx:10px;"></span>
+			<span class="dust-mote absolute left-[80%] top-[62%] h-1 w-1 rounded-full bg-chalk/20" style="--dur:10s; --delay:2s; --dx:-20px;"></span>
+		</div>
+
+		<div class="mx-auto max-w-6xl px-6 text-center">
+			<p class="font-mono text-xs uppercase tracking-[0.3em] text-green">Lawrenceville, Pittsburgh &middot; Est. 2016</p>
+			<h1 class="mx-auto mt-4 max-w-4xl font-display text-5xl uppercase leading-[0.95] tracking-tight text-chalk sm:text-7xl">
+				Strength is built<br /> one plate at a time.
+			</h1>
+			<p class="mx-auto mt-6 max-w-xl text-base text-chalk-dim sm:text-lg">
+				The Foundry is a barbell gym for people training to actually get stronger — powerlifting,
+				Olympic lifting, and coached strength programs, in a foundry building that's held weight
+				since 1911.
+			</p>
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+				<a href="/contact" class="rounded-sm bg-green px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-void transition-colors hover:bg-green-dim">
+					Book a Tour
+				</a>
+				<a href="/programs" class="rounded-sm border border-steel px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-chalk-dim transition-colors hover:border-green hover:text-green">
+					See Programs &amp; Pricing
+				</a>
+			</div>
+		</div>
+
+		<div class="mx-auto mt-14 grid max-w-3xl grid-cols-2 gap-4 px-6 text-center sm:mt-20 sm:grid-cols-4">
+			<div>
+				<p class="font-mono text-2xl text-chalk sm:text-3xl">10</p>
+				<p class="mt-1 text-[11px] uppercase tracking-[0.15em] text-chalk-dim">Years open</p>
+			</div>
+			<div>
+				<p class="font-mono text-2xl text-chalk sm:text-3xl">4</p>
+				<p class="mt-1 text-[11px] uppercase tracking-[0.15em] text-chalk-dim">Competition platforms</p>
+			</div>
+			<div>
+				<p class="font-mono text-2xl text-chalk sm:text-3xl">5,400</p>
+				<p class="mt-1 text-[11px] uppercase tracking-[0.15em] text-chalk-dim">Sq ft on the floor</p>
+			</div>
+			<div>
+				<p class="font-mono text-2xl text-chalk sm:text-3xl">120+</p>
+				<p class="mt-1 text-[11px] uppercase tracking-[0.15em] text-chalk-dim">Total lifters/mo</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- THE BOARD — the literal whiteboard schedule + floor rules every serious
+	     barbell gym posts, and this page's white-background section -->
+	<section class="whiteboard py-16 sm:py-20">
+		<div class="mx-auto max-w-6xl px-6">
+			<div class="flash-reveal relative rounded-md p-6 sm:p-10">
+				<span class="whiteboard-magnet left-6 top-4 bg-green-ink/80 sm:left-10"></span>
+				<span class="whiteboard-magnet right-6 top-4 bg-red/80 sm:right-10"></span>
+				<p class="font-mono text-xs uppercase tracking-[0.3em] text-green-ink">On the board this week</p>
+				<h2 class="mt-2 font-display text-3xl uppercase tracking-tight text-void sm:text-4xl">The schedule &amp; the rules</h2>
+
+				<div class="mt-10 grid gap-10 lg:grid-cols-[1.3fr_1fr]">
+					<div class="overflow-x-auto">
+						<table class="w-full min-w-[480px] border-collapse text-left">
+							<thead>
+								<tr class="border-b border-void/15">
+									<th class="pb-3 font-mono text-xs uppercase tracking-[0.15em] text-void/60">Day</th>
+									<th class="pb-3 font-mono text-xs uppercase tracking-[0.15em] text-void/60">Open gym</th>
+									<th class="pb-3 font-mono text-xs uppercase tracking-[0.15em] text-void/60">Coached sessions</th>
+								</tr>
+							</thead>
+							<tbody>
+								{
+									schedule.map((s) => (
+										<tr class="border-b border-void/10">
+											<td class="py-3 pr-4 font-display text-sm uppercase tracking-tight text-void">{s.day}</td>
+											<td class="py-3 pr-4 font-mono text-sm text-void/70">{s.open}</td>
+											<td class="py-3 font-mono text-sm text-green-ink">
+												{s.classes.length ? s.classes.join(' · ') : '—'}
+											</td>
+										</tr>
+									))
+								}
+							</tbody>
+						</table>
+					</div>
+
+					<div>
+						<p class="font-mono text-xs uppercase tracking-[0.15em] text-void/60">Floor rules</p>
+						<ul class="mt-4 space-y-3">
+							{
+								floorRules.map((rule) => (
+									<li class="flex gap-3 text-sm leading-relaxed text-void/80">
+										<span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-red" />
+										{rule}
+									</li>
+								))
+							}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="flight-ticks mx-auto max-w-6xl"></div>
+
+	<!-- PROGRAMS TEASER — styled as a flight board, not a card grid -->
+	<section class="mx-auto max-w-6xl px-6 py-20">
+		<div class="flash-reveal grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
+			<div>
+				<p class="font-mono text-xs uppercase tracking-[0.3em] text-green">How lifters train here</p>
+				<h2 class="mt-2 font-display text-3xl uppercase tracking-tight text-chalk sm:text-4xl">Three ways in</h2>
+			</div>
+			<a href="/programs" class="font-mono text-xs uppercase tracking-[0.15em] text-chalk-dim hover:text-green">Full pricing &rarr;</a>
+		</div>
+
+		<div class="mt-10 divide-y divide-steel/30 overflow-hidden rounded-md border border-steel/40">
+			{
+				programs.map((p, i) => (
+					<a
+						href={p.href}
+						class="flash-reveal group flex flex-col gap-3 bg-void-2 px-6 py-5 transition-colors hover:bg-void-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+						style={`transition-delay: ${i * 90}ms`}
+					>
+						<div class="flex items-baseline gap-4 sm:w-64 sm:shrink-0">
+							<span class="font-mono text-xs text-chalk-dim">FLIGHT {i + 1}</span>
+							<h3 class="font-display text-lg uppercase tracking-tight text-chalk group-hover:text-green">{p.name}</h3>
+						</div>
+						<p class="text-sm leading-relaxed text-chalk-dim sm:flex-1">{p.blurb}</p>
+						<span class="font-mono text-lg text-green sm:w-32 sm:shrink-0 sm:text-right">{p.price}</span>
+					</a>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- THE THREE LIFTS -->
+	<section class="mx-auto max-w-6xl px-6 pb-20">
+		<p class="flash-reveal font-mono text-xs uppercase tracking-[0.3em] text-green">The competition lifts</p>
+		<h2 class="flash-reveal mt-2 font-display text-3xl uppercase tracking-tight text-chalk sm:text-4xl">
+			Squat. Bench. Pull. Repeat.
+		</h2>
+		<div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+			{
+				disciplines.map((d, i) => (
+					<div class="flash-reveal viewfinder aspect-[3/4] overflow-hidden rounded-md" style={`transition-delay: ${i * 80}ms`}>
+						<img
+							src={`https://images.pexels.com/photos/${d.img}/pexels-photo-${d.img}.jpeg?auto=compress&cs=tinysrgb&w=700`}
+							alt={d.alt}
+							class="h-full w-full object-cover"
+							loading="lazy"
+							width="700"
+							height="933"
+						/>
+						<span class="vf-corner"></span>
+						<span class="vf-corner"></span>
+						<span class="vf-corner"></span>
+						<span class="vf-corner"></span>
+						<div class="vf-scan"></div>
+						<span class="absolute bottom-0 left-0 right-0 z-[2] bg-gradient-to-t from-void via-void/60 to-transparent px-3 pb-3 pt-8 font-mono text-xs uppercase tracking-[0.15em] text-chalk">
+							{d.label}
+						</span>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- INSIDE THE FOUNDRY -->
+	<section class="mx-auto max-w-6xl px-6 py-8 sm:py-16">
+		<div class="grid items-center gap-10 sm:grid-cols-2">
+			<div class="flash-reveal viewfinder overflow-hidden rounded-md">
+				<img
+					src="https://images.pexels.com/photos/34440925/pexels-photo-34440925.jpeg?auto=compress&cs=tinysrgb&w=1200"
+					alt="Exposed brick pillars and steel roof trusses in an industrial building, similar to the Foundry's training floor"
+					class="h-[420px] w-full object-cover"
+					loading="lazy"
+					width="1200"
+					height="420"
+				/>
+				<span class="vf-corner"></span>
+				<span class="vf-corner"></span>
+				<span class="vf-corner"></span>
+				<span class="vf-corner"></span>
+				<div class="vf-scan"></div>
+			</div>
+			<div class="flash-reveal" style="transition-delay: 120ms">
+				<p class="font-mono text-xs uppercase tracking-[0.3em] text-green">The building</p>
+				<h2 class="mt-2 font-display text-3xl uppercase tracking-tight text-chalk sm:text-4xl">
+					Whitfield &amp; Sons Foundry, 1911&ndash;1987
+				</h2>
+				<p class="mt-4 text-sm leading-relaxed text-chalk-dim sm:text-base">
+					Before it held barbells, this building held molten iron. Whitfield &amp; Sons cast valve
+					fittings here for six decades before the shop closed in 1987. It sat empty for almost
+					thirty years &mdash; the brick, the roof trusses, and the crane rail overhead are original.
+					We kept all three.
+				</p>
+				<a href="/about" class="mt-6 inline-block font-mono text-xs uppercase tracking-[0.15em] text-chalk-dim hover:text-green">
+					Read the full story &rarr;
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- LIFT LOG — a testimonial styled as a meet attempt card, not a pull-quote -->
+	<section class="border-y border-steel/40 bg-void-2">
+		<div class="mx-auto max-w-2xl px-6 py-16">
+			<div class="flash-reveal overflow-hidden rounded-md border border-steel/40 bg-void">
+				<div class="flex items-center justify-between border-b border-steel/30 bg-void-3 px-5 py-3">
+					<span class="font-mono text-[11px] uppercase tracking-[0.2em] text-chalk-dim">Attempt &middot; Backsquat</span>
+					<span class="flex items-center gap-1.5">
+						<span class="h-2.5 w-2.5 rounded-full bg-green shadow-[0_0_8px_rgba(198,255,62,0.7)]"></span>
+						<span class="h-2.5 w-2.5 rounded-full bg-green shadow-[0_0_8px_rgba(198,255,62,0.7)]"></span>
+						<span class="h-2.5 w-2.5 rounded-full bg-green shadow-[0_0_8px_rgba(198,255,62,0.7)]"></span>
+						<span class="ml-2 font-mono text-[11px] uppercase tracking-[0.15em] text-green">Good lift</span>
+					</span>
+				</div>
+				<div class="px-6 py-8">
+					<p class="font-display text-xl uppercase leading-snug tracking-tight text-chalk sm:text-2xl">
+						&ldquo;I'd been stuck at the same squat for two years at a commercial gym. Six months of
+						coached programming here and I qualified for state.&rdquo;
+					</p>
+					<p class="mt-5 font-mono text-xs uppercase tracking-[0.15em] text-chalk-dim">
+						Renee K. &middot; Member since 2023
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- FINAL CTA -->
+	<section class="relative overflow-hidden py-24 text-center sm:py-32">
+		<div class="absolute inset-0 -z-10">
+			<div class="duotone duotone-fade h-full w-full">
+				<img
+					src="https://images.pexels.com/photos/6389506/pexels-photo-6389506.jpeg?auto=compress&cs=tinysrgb&w=1800"
+					alt=""
+					class="h-full w-full object-cover opacity-70"
+					loading="lazy"
+				/>
+			</div>
+		</div>
+		<div class="mx-auto max-w-6xl px-6">
+			<h2 class="font-display text-3xl uppercase tracking-tight text-chalk sm:text-4xl">Come load a bar with us.</h2>
+			<p class="mx-auto mt-3 max-w-lg text-sm text-chalk-dim sm:text-base">
+				Tours run daily during staffed hours &mdash; no appointment needed. Bring shoes you can squat in.
+			</p>
+			<a href="/contact" class="mt-7 inline-block rounded-sm bg-green px-7 py-3 font-mono text-xs uppercase tracking-[0.15em] text-void transition-colors hover:bg-green-dim">
+				Book a Tour
+			</a>
+		</div>
+	</section>
+</Layout>
+
+<script>
+	const heroVideo = document.getElementById('hero-video') as HTMLVideoElement | null;
+	if (heroVideo) {
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (!reduceMotion) {
+			heroVideo.playbackRate = 0.5;
+			heroVideo.play().catch(() => {});
+		}
+	}
+</script>

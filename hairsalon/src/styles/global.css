@@ -1,1 +1,178 @@
 @import "tailwindcss";
+
+@theme {
+  --font-display: "Big Shoulders Display", sans-serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  --color-graphite: #1f1d1b;
+  --color-graphite-2: #29261f;
+  --color-plaster: #e8e1d6;
+  --color-plaster-2: #ded4c4;
+  --color-steel: #98978f;
+  --color-steel-dark: #55534c;
+  --color-temper-straw: #c9a227;
+  --color-temper-gold: #c08a3e;
+  --color-temper-bronze: #8b5a2b;
+  --color-temper-purple: #6b4c7a;
+  --color-temper-blue: #3e5c76;
+  --color-ivory: #f5f1ea;
+  --color-rust: #a54a2c;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-graphite);
+  color: var(--color-ivory);
+}
+
+::selection {
+  background-color: var(--color-temper-gold);
+  color: var(--color-graphite);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-temper-gold);
+  outline-offset: 3px;
+}
+
+/* Steel rail section divider — an I-beam rail with rivets */
+.steel-rail {
+  position: relative;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-steel) 8%,
+    var(--color-steel) 92%,
+    transparent
+  );
+}
+.steel-rail::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--color-graphite) 1.5px, transparent 1.6px);
+  background-size: 28px 3px;
+  background-position: center;
+}
+
+/* Temper-color heat sweep — the real straw -> gold -> bronze -> purple -> blue
+   sequence steel runs through when heated */
+@keyframes temper-sweep {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.temper-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-steel-dark) 0%,
+    var(--color-temper-straw) 22%,
+    var(--color-temper-gold) 38%,
+    var(--color-temper-bronze) 54%,
+    var(--color-temper-purple) 70%,
+    var(--color-temper-blue) 86%,
+    var(--color-steel-dark) 100%
+  );
+  background-size: 220% 100%;
+  animation: temper-sweep 3.6s ease-in-out 0.3s 1 forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .temper-gradient {
+    animation: none;
+    background-position: 65% 50%;
+  }
+}
+
+/* Hair-strand ribbons drifting behind the hero iron, layered at different depths */
+@keyframes strand-drift-a {
+  0%,
+  100% {
+    transform: translate3d(-2%, 0, 0) rotate(-1deg);
+  }
+  50% {
+    transform: translate3d(2%, -1.5%, 0) rotate(0.5deg);
+  }
+}
+@keyframes strand-drift-b {
+  0%,
+  100% {
+    transform: translate3d(1.5%, -1%, 0) rotate(0.8deg);
+  }
+  50% {
+    transform: translate3d(-1.5%, 1%, 0) rotate(-0.6deg);
+  }
+}
+
+.strand-a {
+  animation: strand-drift-a 9s ease-in-out infinite;
+}
+.strand-b {
+  animation: strand-drift-b 11s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .strand-a,
+  .strand-b {
+    animation: none;
+  }
+}
+
+/* Scroll-reveal: panels lift like a foil being raised during a color service */
+.foil-reveal {
+  opacity: 0;
+  transform: perspective(800px) rotateX(-8deg) translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.foil-reveal.is-visible {
+  opacity: 1;
+  transform: perspective(800px) rotateX(0deg) translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .foil-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* 3D tilt wrapper for photos — mouse-driven, JS sets --rx/--ry custom props */
+.tilt-card {
+  --rx: 0deg;
+  --ry: 0deg;
+  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card {
+    transform: none !important;
+    transition: none;
+  }
+}

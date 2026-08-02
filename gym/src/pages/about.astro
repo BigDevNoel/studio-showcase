@@ -1,0 +1,187 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const coaches = [
+	{
+		name: 'Dave Kowalczyk',
+		role: 'Founder & Head Coach',
+		bio: 'USAPL national qualifier, 2013–2019. Grew up two blocks from this building and remembers it boarded up. Coaches the Tuesday/Thursday competitive squad.',
+		img: '4720780',
+	},
+	{
+		name: 'Priya Shah',
+		role: 'Coach, Olympic Lifting',
+		bio: 'Former Division I track athlete turned weightlifter. Runs the Monday/Wednesday/Friday Olympic lifting sessions and programs meet peaks for USAW competitors.',
+		img: '4373472',
+	},
+	{
+		name: 'Marcus Webb',
+		role: 'Coach, Coached Strength Program',
+		bio: 'Started as a member in 2019 after a back injury sidelined him from another gym. Now runs our beginner-through-intermediate group programming.',
+		img: '6455906',
+	},
+];
+---
+
+<Layout
+	title="About"
+	description="How a vacant Lawrenceville iron foundry became The Foundry Barbell Club, and the coaches who run it."
+>
+	<!-- INTRO -->
+	<section class="mx-auto max-w-6xl px-6 pt-16 pb-10 sm:pt-24">
+		<p class="font-mono text-xs uppercase tracking-[0.3em] text-green">About</p>
+		<h1 class="mt-3 max-w-3xl font-display text-4xl uppercase leading-[0.95] tracking-tight text-chalk sm:text-6xl">
+			We didn't build a gym. We reopened a foundry.
+		</h1>
+		<p class="mt-6 max-w-2xl text-base leading-relaxed text-chalk-dim sm:text-lg">
+			The Foundry Barbell Club opened in June 2016 at 4417 Butler Street, in a building that spent
+			76 years making something and 29 years making nothing.
+		</p>
+	</section>
+
+	<!-- BUILDING HISTORY -->
+	<section class="mx-auto max-w-6xl px-6 py-10">
+		<div class="grid items-center gap-10 sm:grid-cols-2">
+			<div class="flash-reveal order-2 sm:order-1">
+				<h2 class="font-display text-2xl uppercase tracking-tight text-chalk sm:text-3xl">1911&ndash;1987: Whitfield &amp; Sons</h2>
+				<p class="mt-4 text-sm leading-relaxed text-chalk-dim sm:text-base">
+					Whitfield &amp; Sons Foundry cast iron valve fittings for the mills along the Allegheny
+					until the last pour in 1987. The building sat vacant for almost thirty years &mdash;
+					long enough that the crane rail overhead, still bolted to the trusses, was original
+					equipment nobody had bothered to salvage.
+				</p>
+				<p class="mt-4 text-sm leading-relaxed text-chalk-dim sm:text-base">
+					Dave Kowalczyk bought the building in 2015. He kept the brick, the trusses, and the crane
+					rail &mdash; it now holds gymnastic rings and resistance bands instead of molten iron. The
+					original loading dock, wide enough for a foundry truck, is the front entrance.
+				</p>
+			</div>
+			<div class="flash-reveal viewfinder order-1 overflow-hidden rounded-md sm:order-2">
+				<img
+					src="https://images.pexels.com/photos/5505165/pexels-photo-5505165.jpeg?auto=compress&cs=tinysrgb&w=1200"
+					alt="Vintage warehouse interior with exposed brick walls, similar to the original foundry floor"
+					class="h-[380px] w-full object-cover"
+					loading="lazy"
+					width="1200"
+					height="380"
+				/>
+				<span class="vf-corner"></span>
+				<span class="vf-corner"></span>
+				<span class="vf-corner"></span>
+				<span class="vf-corner"></span>
+				<div class="vf-scan"></div>
+			</div>
+		</div>
+	</section>
+
+	<div class="flight-ticks mx-auto max-w-6xl"></div>
+
+	<!-- FOUNDER STORY -->
+	<section class="mx-auto max-w-6xl px-6 py-16">
+		<div class="grid items-center gap-10 sm:grid-cols-2">
+			<div class="flash-reveal viewfinder overflow-hidden rounded-md">
+				<img
+					src="https://images.pexels.com/photos/4720780/pexels-photo-4720780.jpeg?auto=compress&cs=tinysrgb&w=1200"
+					alt="Lifter performing an overhead press in an industrial gym with gymnastic rings hanging from the trusses, representing founder Dave Kowalczyk's training"
+					class="h-[420px] w-full object-cover"
+					loading="lazy"
+					width="1200"
+					height="420"
+				/>
+				<span class="vf-corner"></span>
+				<span class="vf-corner"></span>
+				<span class="vf-corner"></span>
+				<span class="vf-corner"></span>
+				<div class="vf-scan"></div>
+			</div>
+			<div class="flash-reveal" style="transition-delay: 100ms">
+				<p class="font-mono text-xs uppercase tracking-[0.3em] text-green">Why we exist</p>
+				<h2 class="mt-2 font-display text-2xl uppercase tracking-tight text-chalk sm:text-3xl">
+					Built by someone who was tired of commercial gyms
+				</h2>
+				<p class="mt-4 text-sm leading-relaxed text-chalk-dim sm:text-base">
+					Dave spent eight years training for USAPL meets in the corner of a big-box gym, sharing
+					one power rack with a line of people waiting for the leg press. He qualified for Raw
+					Nationals in 2018 anyway, and decided the next lifter shouldn't have to fight a crowd for
+					a rack to do it.
+				</p>
+				<p class="mt-4 text-sm leading-relaxed text-chalk-dim sm:text-base">
+					The Foundry runs on four full competition platforms, Eleiko bars, calibrated bumper
+					plates, and a coaching staff that actually watches your set &mdash; not a gym with a
+					squat rack bolted on as an afterthought.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- COACHES -->
+	<section class="mx-auto max-w-6xl px-6 py-16">
+		<p class="font-mono text-xs uppercase tracking-[0.3em] text-green">The staff</p>
+		<h2 class="mt-2 font-display text-3xl uppercase tracking-tight text-chalk sm:text-4xl">Coaches</h2>
+
+		<div class="mt-10 grid gap-8 sm:grid-cols-3">
+			{
+				coaches.map((c, i) => (
+					<div class="flash-reveal" style={`transition-delay: ${i * 90}ms`}>
+						<div class="viewfinder overflow-hidden rounded-md">
+							<img
+								src={`https://images.pexels.com/photos/${c.img}/pexels-photo-${c.img}.jpeg?auto=compress&cs=tinysrgb&w=800`}
+								alt={`${c.name}, ${c.role} at The Foundry Barbell Club`}
+								class="h-64 w-full object-cover"
+								loading="lazy"
+								width="800"
+								height="256"
+							/>
+							<span class="vf-corner"></span>
+							<span class="vf-corner"></span>
+							<span class="vf-corner"></span>
+							<span class="vf-corner"></span>
+							<div class="vf-scan"></div>
+						</div>
+						<h3 class="mt-4 font-display text-lg uppercase tracking-tight text-chalk">{c.name}</h3>
+						<p class="font-mono text-xs uppercase tracking-[0.15em] text-green">{c.role}</p>
+						<p class="mt-2 text-sm leading-relaxed text-chalk-dim">{c.bio}</p>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- CERTIFICATIONS — this page's white-background section -->
+	<section class="whiteboard py-16 sm:py-20">
+		<div class="mx-auto max-w-6xl px-6">
+			<div class="flash-reveal">
+				<p class="font-mono text-xs uppercase tracking-[0.3em] text-green-ink">On file</p>
+				<h2 class="mt-2 font-display text-3xl uppercase tracking-tight text-void sm:text-4xl">Certifications &amp; affiliations</h2>
+				<div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+					<div>
+						<p class="font-display text-2xl text-void">USAPL</p>
+						<p class="mt-1 text-sm text-void/70">Sanctioned host site since 2019. We run two local meets a year on-site.</p>
+					</div>
+					<div>
+						<p class="font-display text-2xl text-void">USAW</p>
+						<p class="mt-1 text-sm text-void/70">All coaching staff hold current USA Weightlifting Level 1 certification.</p>
+					</div>
+					<div>
+						<p class="font-display text-2xl text-void">CPR/AED</p>
+						<p class="mt-1 text-sm text-void/70">Every staff member on the floor is current on CPR/AED, renewed annually.</p>
+					</div>
+					<div>
+						<p class="font-display text-2xl text-void">Insured</p>
+						<p class="mt-1 text-sm text-void/70">Fully insured facility, member of the Lawrenceville Business Association.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section class="border-t border-steel/40 bg-void-2">
+		<div class="mx-auto max-w-6xl px-6 py-16 text-center">
+			<h2 class="font-display text-3xl uppercase tracking-tight text-chalk sm:text-4xl">See the floor yourself</h2>
+			<a href="/contact" class="mt-6 inline-block rounded-sm bg-green px-7 py-3 font-mono text-xs uppercase tracking-[0.15em] text-void transition-colors hover:bg-green-dim">
+				Book a Tour
+			</a>
+		</div>
+	</section>
+</Layout>

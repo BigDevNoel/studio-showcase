@@ -1,0 +1,123 @@
+---
+// Signature hero: a 3D flat-iron rig that runs the real straw→gold→bronze→
+// purple→blue "temper color" sequence steel shows when heated, with layered
+// hair-strand ribbons drifting past it at different depths.
+---
+
+<section class="relative overflow-hidden bg-graphite pb-24 pt-16 sm:pt-24">
+	<!-- background strand layers, deepest to nearest -->
+	<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+		<svg
+			class="strand-b absolute -left-10 top-8 h-[60%] w-[120%] opacity-20 blur-[1px] sm:top-4"
+			viewBox="0 0 1200 300"
+			preserveAspectRatio="none"
+		>
+			<path
+				d="M-50,150 C150,40 350,260 550,140 C750,20 950,240 1250,120"
+				fill="none"
+				stroke="#98978F"
+				stroke-width="3"
+			></path>
+		</svg>
+		<svg
+			class="strand-a absolute -left-10 top-24 h-[55%] w-[120%] opacity-30 blur-[0.5px] sm:top-32"
+			viewBox="0 0 1200 300"
+			preserveAspectRatio="none"
+		>
+			<path
+				d="M-50,90 C200,220 400,10 620,130 C840,250 1000,60 1250,170"
+				fill="none"
+				stroke="#3E5C76"
+				stroke-width="2.5"
+			></path>
+		</svg>
+		<svg
+			class="strand-a absolute -left-10 bottom-0 h-[45%] w-[120%] opacity-25"
+			viewBox="0 0 1200 300"
+			preserveAspectRatio="none"
+		>
+			<path
+				d="M-50,60 C220,180 420,10 640,110 C860,210 1040,40 1250,140"
+				fill="none"
+				stroke="#C08A3E"
+				stroke-width="2"
+			></path>
+		</svg>
+	</div>
+
+	<div class="relative mx-auto max-w-6xl px-6">
+		<div class="grid items-center gap-16 lg:grid-cols-[1.1fr_0.9fr]">
+			<div>
+				<p class="font-mono text-xs uppercase tracking-[0.3em] text-temper-gold">
+					River Arts District &middot; Asheville, NC
+				</p>
+				<h1 class="mt-4 font-display text-6xl font-bold uppercase leading-[0.95] tracking-tight text-ivory sm:text-7xl lg:text-8xl">
+					Heat,
+					<br />
+					held with
+					<br />
+					<span class="text-temper-gold">precision.</span>
+				</h1>
+				<p class="mt-6 max-w-md text-lg leading-relaxed text-plaster">
+					Salt &amp; Iron is a unisex hair studio and spa built inside a former metal shop
+					on Clingman Ave &mdash; where cut, color, and skin care share one floor, and every
+					tool still runs hot.
+				</p>
+				<div class="mt-8 flex flex-wrap gap-4">
+					<a
+						href="/contact"
+						class="rounded-sm bg-temper-gold px-6 py-3 font-mono text-sm uppercase tracking-[0.15em] text-graphite transition-transform hover:-translate-y-0.5"
+					>
+						Book an appointment
+					</a>
+					<a
+						href="/services"
+						class="rounded-sm border border-steel px-6 py-3 font-mono text-sm uppercase tracking-[0.15em] text-ivory transition-colors hover:border-temper-gold hover:text-temper-gold"
+					>
+						See services &amp; pricing
+					</a>
+				</div>
+			</div>
+
+			<!-- the iron rig -->
+			<div class="relative mx-auto h-64 w-full max-w-md [perspective:1400px] sm:h-80">
+				<div
+					class="iron-stack relative h-full w-full [transform-style:preserve-3d]"
+					style="transform: rotateX(14deg) rotateY(-10deg);"
+				>
+					<div
+						class="absolute inset-x-6 top-10 h-20 rounded-md bg-steel-dark opacity-90 sm:h-24"
+						style="transform: translateZ(-30px) scale(0.96);"
+					>
+					</div>
+					<div
+						class="absolute inset-x-4 top-8 h-20 rounded-md bg-graphite-2 sm:h-24"
+						style="transform: translateZ(-14px) scale(0.98);"
+					>
+					</div>
+					<div
+						class="temper-gradient absolute inset-x-0 top-6 h-20 rounded-md shadow-[0_30px_60px_-20px_rgba(0,0,0,0.65)] ring-1 ring-white/10 sm:h-24"
+					>
+						<div class="absolute inset-x-3 top-1 h-px bg-white/20"></div>
+					</div>
+
+					<!-- handle -->
+					<div
+						class="absolute right-2 top-1/2 h-8 w-28 -translate-y-1/2 rounded-sm bg-graphite-2 ring-1 ring-steel-dark sm:w-36"
+						style="transform: translateZ(6px) translateY(-50%) rotate(-2deg);"
+					>
+						<div class="absolute inset-x-2 top-1.5 h-1 rounded-full bg-steel-dark/70"></div>
+						<div class="absolute inset-x-2 bottom-1.5 h-1 rounded-full bg-steel-dark/70"></div>
+					</div>
+
+					<!-- rivets -->
+					<div class="absolute left-8 top-16 h-1.5 w-1.5 rounded-full bg-graphite shadow-inner sm:top-20"></div>
+					<div class="absolute right-32 top-16 h-1.5 w-1.5 rounded-full bg-graphite shadow-inner sm:top-20 sm:right-40"></div>
+				</div>
+				<p class="mt-6 text-center font-mono text-[11px] uppercase tracking-[0.25em] text-steel">
+					Straw &middot; Gold &middot; Bronze &middot; Purple &middot; Blue
+				</p>
+			</div>
+		</div>
+	</div>
+</section>

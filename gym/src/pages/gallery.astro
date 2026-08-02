@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const photos = [
+	{ id: '5505921', caption: 'Butler Street entrance, the original loading dock', h: 380 },
+	{ id: '34440925', caption: 'Training floor, west end, before opening', h: 460 },
+	{ id: '949134', caption: 'Deadlift work, Platform 2', h: 420 },
+	{ id: '7671476', caption: 'Chalk before a heavy set', h: 340 },
+	{ id: '4793231', caption: 'Plate wall, calibrated bumpers', h: 460 },
+	{ id: '6455906', caption: 'Coached session, technique check', h: 400 },
+	{ id: '8369547', caption: 'Meet-day focus, USAPL local', h: 460 },
+	{ id: '669577', caption: 'Iron plates, full range 2.5–55 lb', h: 340 },
+	{ id: '841130', caption: 'First pull off the floor', h: 420 },
+	{ id: '6628962', caption: 'Bar and kettlebell rack, accessory corner', h: 340 },
+	{ id: '8481198', caption: 'Grip prep between sets', h: 380 },
+	{ id: '4793229', caption: 'Loading for a working set', h: 400 },
+];
+---
+
+<Layout
+	title="Gallery"
+	description="Photos from the training floor at The Foundry Barbell Club — Lawrenceville, Pittsburgh."
+>
+	<section class="mx-auto max-w-6xl px-6 pt-16 pb-10 sm:pt-24">
+		<p class="font-mono text-xs uppercase tracking-[0.3em] text-green">Gallery</p>
+		<h1 class="mt-3 max-w-2xl font-display text-4xl uppercase leading-[0.95] tracking-tight text-chalk sm:text-6xl">
+			The floor, on a normal week.
+		</h1>
+		<p class="mt-6 max-w-xl text-base leading-relaxed text-chalk-dim sm:text-lg">
+			No staged shots &mdash; this is what training here actually looks like.
+		</p>
+	</section>
+
+	<section class="mx-auto max-w-6xl px-6 py-10 pb-20">
+		<div class="columns-1 gap-5 sm:columns-2 lg:columns-3">
+			{
+				photos.map((p, i) => (
+					<div class="flash-reveal mb-5 break-inside-avoid" style={`transition-delay: ${(i % 6) * 70}ms`}>
+						<div class="viewfinder overflow-hidden rounded-md">
+							<img
+								src={`https://images.pexels.com/photos/${p.id}/pexels-photo-${p.id}.jpeg?auto=compress&cs=tinysrgb&w=900`}
+								alt={p.caption}
+								class="w-full object-cover"
+								style={`height: ${p.h}px;`}
+								loading="lazy"
+								width="900"
+								height={p.h}
+							/>
+							<span class="vf-corner"></span>
+							<span class="vf-corner"></span>
+							<span class="vf-corner"></span>
+							<span class="vf-corner"></span>
+							<div class="vf-scan"></div>
+						</div>
+						<p class="mt-2 font-mono text-[11px] uppercase tracking-[0.1em] text-chalk-dim">{p.caption}</p>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- CTA — this page's white-background section -->
+	<section class="whiteboard py-16 sm:py-20">
+		<div class="mx-auto max-w-3xl px-6 text-center">
+			<p class="flash-reveal font-mono text-xs uppercase tracking-[0.3em] text-green-ink">Shot on the floor</p>
+			<h2 class="flash-reveal mt-2 font-display text-2xl uppercase tracking-tight text-void sm:text-3xl">
+				Want to see it for yourself?
+			</h2>
+			<p class="flash-reveal mt-3 text-sm text-void/70">
+				Tours run daily during staffed hours &mdash; no camera required, but bring one if you want.
+			</p>
+			<a href="/contact" class="mt-7 inline-block rounded-sm bg-green px-7 py-3 font-mono text-xs uppercase tracking-[0.15em] text-void transition-colors hover:bg-green-dim">
+				Book a Tour
+			</a>
+		</div>
+	</section>
+</Layout>

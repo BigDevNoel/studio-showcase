@@ -1,0 +1,29 @@
+---
+// Visualizes program "load" as stacked plates instead of an arbitrary 01/02/03 —
+// more plates = more of the gym committed to you (equipment access -> coaching -> 1:1).
+// Colored with the same real IPF calibrated-plate code used on the hero bar:
+// 25kg red, 20kg blue, 15kg yellow, 10kg green, 5kg white.
+interface Props {
+	count: number;
+}
+const { count } = Astro.props;
+const sizes = [22, 19, 16, 13, 10];
+const colors = [
+	'var(--color-plate-red)',
+	'var(--color-plate-blue)',
+	'var(--color-plate-yellow)',
+	'var(--color-plate-green)',
+	'var(--color-plate-white)',
+];
+---
+
+<div class="flex items-end gap-1" role="img" aria-label={`Load level ${count} of 5`}>
+	{
+		Array.from({ length: 5 }).map((_, i) => (
+			<span
+				class="rounded-sm"
+				style={`width: 7px; height: ${sizes[i]}px; background-color: ${i < count ? colors[i] : 'var(--color-steel)'}; opacity: ${i < count ? 1 : 0.3};`}
+			/>
+		))
+	}
+</div>

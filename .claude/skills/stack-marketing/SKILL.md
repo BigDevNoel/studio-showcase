@@ -1,6 +1,6 @@
 # Stack Skill — Marketing / Business Websites
 
-*Drop into `.claude/skills/stack-marketing/SKILL.md` for projects that are informational sites — no login, no user data, no persistent app state. Home, About, Services, Contact, Portfolio, Blog, etc.*
+*Drop into `.claude/skills/stack-marketing/SKILL.md` for projects that are informational sites — no login, no user data, no persistent app state. Home, About, Services, Contact, Portfolio, Blog, etc. See the project's root `CLAUDE.md` for repo-wide context and rules this skill assumes.*
 
 ---
 

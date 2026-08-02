@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TiltPhoto from '../components/TiltPhoto.astro';
+
+import g1 from '../assets/images/stylist-curling-mirror.jpg';
+import g2 from '../assets/images/salon-chandelier-mirrors.jpg';
+import g3 from '../assets/images/color-highlighting-closeup.jpg';
+import g4 from '../assets/images/barber-styling-bearded-man.jpg';
+import g5 from '../assets/images/spa-cucumber-mask.jpg';
+import g6 from '../assets/images/barber-tools-razors-combs.jpg';
+import g7 from '../assets/images/color-application-male-client.jpg';
+import g8 from '../assets/images/barbershop-interior-contemporary.jpg';
+import g9 from '../assets/images/facial-jade-roller.jpg';
+
+const photos = [
+	{ img: g1, alt: 'Stylist curling a client’s hair, reflected in the mirror', span: 'sm:row-span-2' },
+	{ img: g3, alt: 'Close-up of foil highlighting in progress', span: '' },
+	{ img: g6, alt: 'Barber tools — razors and combs — laid out neatly', span: '' },
+	{ img: g4, alt: 'Barber styling a bearded client’s hair', span: '' },
+	{ img: g2, alt: 'Salon interior with round mirrors and pendant lighting', span: 'sm:row-span-2' },
+	{ img: g5, alt: 'Facial treatment with a cucumber and mask', span: '' },
+	{ img: g8, alt: 'Barbershop interior seating and stations', span: '' },
+	{ img: g7, alt: 'Colorist applying dye for a male client', span: '' },
+	{ img: g9, alt: 'Jade roller facial massage close-up', span: '' },
+];
+---
+
+<Layout
+	title="Gallery"
+	description="A look inside Salt & Iron Salon + Spa — the studio, the work, and the process, in Asheville's River Arts District."
+>
+	<section class="mx-auto max-w-6xl px-6 py-20">
+		<p class="font-mono text-xs uppercase tracking-[0.25em] text-temper-gold">Gallery</p>
+		<h1 class="mt-2 max-w-2xl font-display text-5xl font-bold uppercase leading-[0.95] tracking-tight text-ivory sm:text-6xl">
+			The shop, in progress
+		</h1>
+		<p class="mt-6 max-w-xl text-lg text-plaster">
+			No posed &ldquo;after&rdquo; shots without the &ldquo;during.&rdquo; This is what the floor
+			actually looks like on a Tuesday.
+		</p>
+	</section>
+
+	<section class="mx-auto max-w-6xl px-6 pb-24">
+		<div class="grid auto-rows-[220px] grid-cols-2 gap-4 sm:grid-cols-3">
+			{
+				photos.map((p, i) => (
+					<div class={`foil-reveal ${p.span}`} style={`transition-delay:${(i % 6) * 70}ms`}>
+						<TiltPhoto src={p.img} alt={p.alt} aspect="h-full" class="h-full" priority={i < 3} />
+					</div>
+				))
+			}
+		</div>
+	</section>
+</Layout>

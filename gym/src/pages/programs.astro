@@ -1,0 +1,163 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PlateStack from '../components/PlateStack.astro';
+
+const tiers = [
+	{
+		id: 'day-pass',
+		name: 'Day Pass',
+		price: '$25',
+		unit: 'per visit',
+		load: 1,
+		blurb: 'Passing through Pittsburgh or want to try the floor before committing. Full access to open gym equipment for one session.',
+		features: ['Full equipment access for the visit', 'No booking required during staffed hours', 'Chalk and belts available at the desk'],
+	},
+	{
+		id: 'open-gym',
+		name: 'Open Gym',
+		price: '$119',
+		unit: 'per month',
+		load: 2,
+		blurb: 'Train on your own program. Full run of the floor, any hour, no classes to work around.',
+		features: ['24/7 fob access', 'All 4 competition platforms', 'Full specialty bar and plate inventory', 'No long-term contract'],
+	},
+	{
+		id: 'coached',
+		name: 'Coached Strength Program',
+		price: '$189',
+		unit: 'per month',
+		load: 3,
+		blurb: 'Three group sessions a week, capped at 8 lifters, programmed and adjusted in real time by a coach.',
+		features: ['3x/week programmed sessions', 'Groups capped at 8 lifters', 'Includes full Open Gym access', 'Monthly progress check-in'],
+	},
+	{
+		id: 'personal',
+		name: 'Personal Coaching',
+		price: '$85',
+		unit: 'per session',
+		load: 4,
+		blurb: 'One-on-one technique work or programming with a coach. Most lifters use this to fix a specific sticking point.',
+		features: ['1:1 with a certified coach', 'Video review of your lifts', '4-session pack: $320', 'Can be paired with any membership'],
+	},
+	{
+		id: 'competition-prep',
+		name: 'Competition Prep',
+		price: '$225',
+		unit: 'per month',
+		load: 5,
+		blurb: 'For lifters training toward a USAPL or USPA meet. Peaking programs, attempt selection, and meet-day handling.',
+		features: ['Custom peaking program', 'Meet-day coaching in your flight', 'Video review every session', 'Includes full Open Gym access'],
+	},
+];
+
+const equipment = [
+	'4 Eleiko competition platforms',
+	'Eleiko competition & training bars',
+	'Calibrated bumper plates (kg + lb)',
+	'Safety squat bar, cambered bar, trap bar',
+	'Reverse hyper & GHD',
+	'Monolift',
+	'Assault bikes & rowers for conditioning',
+	'Full dumbbell range, 5–100 lb',
+];
+---
+
+<Layout
+	title="Programs & Pricing"
+	description="Membership, coached programs, and personal coaching pricing at The Foundry Barbell Club in Lawrenceville, Pittsburgh."
+>
+	<section class="mx-auto max-w-6xl px-6 pt-16 pb-10 sm:pt-24">
+		<p class="font-mono text-xs uppercase tracking-[0.3em] text-green">Programs &amp; Pricing</p>
+		<h1 class="mt-3 max-w-2xl font-display text-4xl uppercase leading-[0.95] tracking-tight text-chalk sm:text-6xl">
+			Pick your load.
+		</h1>
+		<p class="mt-6 max-w-xl text-base leading-relaxed text-chalk-dim sm:text-lg">
+			Every tier includes full run of the equipment. What changes is how much coaching sits on top
+			of it. A one-time $50 initiation covers your fob and a 20-minute intro assessment on any
+			membership tier.
+		</p>
+	</section>
+
+	<section class="mx-auto max-w-6xl px-6 py-10">
+		<div class="grid gap-6 md:grid-cols-2">
+			{
+				tiers.map((t, i) => (
+					<div id={t.id} class="flash-reveal scroll-mt-24 rounded-md border border-steel/40 bg-void-2 p-7" style={`transition-delay: ${i * 70}ms`}>
+						<div class="flex items-start justify-between gap-4">
+							<div>
+								<h2 class="font-display text-xl uppercase tracking-tight text-chalk">{t.name}</h2>
+								<p class="mt-1 font-mono text-2xl text-green">
+									{t.price} <span class="text-sm text-chalk-dim">{t.unit}</span>
+								</p>
+							</div>
+							<PlateStack count={t.load} />
+						</div>
+						<p class="mt-4 text-sm leading-relaxed text-chalk-dim">{t.blurb}</p>
+						<ul class="mt-5 space-y-2 border-t border-steel/30 pt-5">
+							{t.features.map((f) => (
+								<li class="flex gap-2 text-sm text-chalk-dim">
+									<span class="mt-1 h-1 w-1 shrink-0 rounded-full bg-green" />
+									{f}
+								</li>
+							))}
+						</ul>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<div class="flight-ticks mx-auto max-w-6xl"></div>
+
+	<!-- EQUIPMENT -->
+	<section class="mx-auto max-w-6xl px-6 py-16">
+		<div class="grid gap-10 sm:grid-cols-2 sm:items-center">
+			<div class="flash-reveal viewfinder overflow-hidden rounded-md">
+				<img
+					src="https://images.pexels.com/photos/4793231/pexels-photo-4793231.jpeg?auto=compress&cs=tinysrgb&w=1200"
+					alt="Heavy weight plates racked inside a loft-style gym, similar to the Foundry's plate storage"
+					class="h-[380px] w-full object-cover"
+					loading="lazy"
+					width="1200"
+					height="380"
+				/>
+				<span class="vf-corner"></span>
+				<span class="vf-corner"></span>
+				<span class="vf-corner"></span>
+				<span class="vf-corner"></span>
+				<div class="vf-scan"></div>
+			</div>
+			<div class="flash-reveal" style="transition-delay: 100ms">
+				<p class="font-mono text-xs uppercase tracking-[0.3em] text-green">On the floor</p>
+				<h2 class="mt-2 font-display text-2xl uppercase tracking-tight text-chalk sm:text-3xl">What's here</h2>
+				<ul class="mt-5 grid grid-cols-1 gap-x-6 gap-y-2 text-sm text-chalk-dim sm:grid-cols-2">
+					{equipment.map((e) => (
+						<li class="flex gap-2">
+							<span class="mt-1 h-1 w-1 shrink-0 rounded-full bg-green" />
+							<span>{e}</span>
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<!-- POLICY NOTE — this page's white-background section -->
+	<section class="whiteboard py-16 sm:py-20">
+		<div class="mx-auto max-w-3xl px-6 text-center">
+			<p class="flash-reveal font-mono text-xs uppercase tracking-[0.3em] text-green-ink">The fine print</p>
+			<h2 class="flash-reveal mt-2 font-display text-2xl uppercase tracking-tight text-void sm:text-3xl">
+				No contracts, no surprises
+			</h2>
+			<ul class="flash-reveal mt-6 space-y-2 text-sm leading-relaxed text-void/70">
+				<li>Month-to-month on every tier &mdash; cancel with 14 days' notice, no penalty.</li>
+				<li>Membership freezes are free for injury or travel, up to 60 days a year.</li>
+				<li>Bring a guest twice a month at no charge with any Open Gym tier or above.</li>
+				<li>Active military and first responders get 15% off any monthly tier.</li>
+			</ul>
+			<a href="/contact" class="mt-8 inline-block rounded-sm bg-green px-7 py-3 font-mono text-xs uppercase tracking-[0.15em] text-void transition-colors hover:bg-green-dim">
+				Book a Tour
+			</a>
+		</div>
+	</section>
+</Layout>

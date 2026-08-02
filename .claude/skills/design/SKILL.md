@@ -1,6 +1,6 @@
 # Website Design Skill — Distinctive Client Sites
 
-*Drop this file into every client project as `.claude/skills/design/SKILL.md` (or paste it into `CLAUDE.md` at the project root). It tells Claude Code how to design, not just how to code.*
+*Drop this file into every client project as `.claude/skills/design/SKILL.md`. It tells Claude Code how to design, not just how to code. See the project's root `CLAUDE.md` for repo-wide context and rules this skill assumes.*
 
 ---
 
