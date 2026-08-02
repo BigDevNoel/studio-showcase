@@ -1,1 +1,204 @@
 @import "tailwindcss";
+
+@theme {
+  --font-display: "Zilla Slab", serif;
+  --font-body: "Source Sans 3", sans-serif;
+  --font-mono: "Courier Prime", monospace;
+
+  /* Broad Brook Timberworks — pale raw-sawdust neutrals plus a verdigris
+     accent, the blue-green patina that forms on the copper cupolas and
+     bronze hardware of old New England barns as they weather. A different
+     hue family from the warm graphite/gold in hairsalon, the cream/navy/
+     brass in architecture, the porcelain/clinical-blue in clinic, and the
+     void/lime-green in gym. */
+  --color-sawdust: #ede1c8;
+  --color-sawdust-2: #e3d3ac;
+  --color-shaving: #f6f0e2;
+  --color-oak-ink: #2b2116;
+  --color-oak-ink-soft: #5a4a35;
+  --color-oak-ink-faint: #8a7a62;
+
+  --color-verdigris: #3f7a6e;
+  --color-verdigris-deep: #275349;
+  --color-verdigris-light: #7fb3a6;
+
+  --color-crayon: #c1531f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-sawdust);
+  color: var(--color-oak-ink);
+}
+
+::selection {
+  background-color: var(--color-verdigris);
+  color: var(--color-shaving);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-verdigris);
+  outline-offset: 3px;
+}
+
+/* Story-pole — a real layout tool: a marked stick carpenters snap
+   dimensions onto once, then reuse for every repeat measurement instead
+   of a tape. Used as a section divider with actual tick hierarchy
+   (long tick every 4th mark) rather than a decorative hairline. */
+.story-pole {
+  position: relative;
+  height: 14px;
+  background-image: repeating-linear-gradient(
+      90deg,
+      var(--color-oak-ink-faint) 0,
+      var(--color-oak-ink-faint) 1px,
+      transparent 1px,
+      transparent 18px
+    ),
+    repeating-linear-gradient(90deg, var(--color-verdigris) 0, var(--color-verdigris) 2px, transparent 2px, transparent 72px);
+  background-size: 18px 7px, 72px 14px;
+  background-position: left top, left top;
+  background-repeat: repeat-x;
+  opacity: 0.55;
+}
+
+/* Mortise-and-tenon join — the signature hero move: a tenon (the tongue
+   cut into one timber) slides into a mortise (the pocket cut into the
+   other) in true 3D, then a wooden peg drives home through both. This is
+   the literal mechanism that holds a timber frame together with no metal
+   fasteners — not a generic dimensional effect. */
+@keyframes tenon-slide {
+  0% {
+    transform: translateX(-38%) translateZ(0);
+  }
+  70% {
+    transform: translateX(0%) translateZ(0);
+  }
+  100% {
+    transform: translateX(0%) translateZ(0);
+  }
+}
+@keyframes peg-drive {
+  0%,
+  55% {
+    transform: translateY(-140%);
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  90% {
+    transform: translateY(4%);
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+.tenon-piece {
+  animation: tenon-slide 1.3s cubic-bezier(0.22, 0.8, 0.28, 1) 0.2s both;
+}
+.peg-piece {
+  animation: peg-drive 1.3s cubic-bezier(0.3, 0.9, 0.3, 1) 1.1s both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tenon-piece,
+  .peg-piece {
+    animation: none;
+  }
+}
+
+/* Shaving curl — a thin ribbon of wood peeling away, used as a small
+   loading/hover flourish on primary CTAs, echoing a hand plane's shaving. */
+@keyframes curl-peel {
+  0% {
+    transform: scaleX(0) rotate(0deg);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1) rotate(-8deg);
+    opacity: 0;
+  }
+}
+.plane-cta {
+  position: relative;
+  isolation: isolate;
+}
+.plane-cta::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -4px;
+  width: 22px;
+  height: 6px;
+  border-radius: 999px 999px 999px 0;
+  background: var(--color-shaving);
+  opacity: 0;
+  transform-origin: left center;
+  pointer-events: none;
+}
+.plane-cta:hover::after,
+.plane-cta:focus-visible::after {
+  animation: curl-peel 0.5s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .plane-cta::after {
+    display: none;
+  }
+}
+
+/* Scroll-reveal: panels rise onto the workbench */
+.bench-reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bench-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .bench-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Chisel-edge card — restrained 3D tilt plus a beveled corner cut, like a
+   chamfered timber edge, instead of a plain rounded rectangle. */
+.timber-card {
+  --rx: 0deg;
+  --ry: 0deg;
+  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  transform-style: preserve-3d;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+@media (prefers-reduced-motion: reduce) {
+  .timber-card {
+    transform: none !important;
+    transition: none;
+  }
+}

@@ -1,17 +1,304 @@
 ---
-import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
+import SwatchHero from '../components/SwatchHero.astro';
+import ModelCard from '../components/ModelCard.astro';
+import { Image, getImage } from 'astro:assets';
+import moodBoard from '../assets/images/mood-board-fabric-swatches.jpg';
+import rennieCurated from '../assets/images/rennie-street-curated-living.jpg';
+import windsorExterior from '../assets/images/windsor-farms-exterior.jpg';
+import lakeAnnaLiving from '../assets/images/lake-anna-living-room.jpg';
+import heroPosterPhoto from '../assets/images/hero-video-poster.jpg';
+
+const heroPoster = await getImage({ src: heroPosterPhoto, width: 1920 });
+
+const process = [
+	{
+		sheet: 'No. 01',
+		title: 'Discovery & Space Planning',
+		copy: 'A walkthrough of the home, an honest read on how you actually live in it, and a rough plan for how the rooms should work before anything gets specified.',
+	},
+	{
+		sheet: 'No. 02',
+		title: 'Concept & Materials',
+		copy: 'Mood boards, fabric, stone, and finish selections — pulled from our own material library and pieces we source specifically for your home.',
+	},
+	{
+		sheet: 'No. 03',
+		title: 'Design Development & Custom Pieces',
+		copy: 'Furniture layouts, custom millwork, and any bespoke pieces get drawn and detailed for our own workshop to build.',
+	},
+	{
+		sheet: 'No. 04',
+		title: 'Procurement & Sourcing',
+		copy: 'Ordering fine furnishings and textiles, and tracking down the antiques and art pieces that don’t come from a catalog.',
+	},
+	{
+		sheet: 'No. 05',
+		title: 'Installation & Styling',
+		copy: 'A full install, usually in a single week, ending with a home that is styled and finished — not a pile of boxes for you to unpack.',
+	},
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Architecture</title>
-	</head>
-	<body class="flex min-h-screen items-center justify-center bg-neutral-950 text-neutral-100">
-		<main class="text-center">
-			<h1 class="text-3xl font-semibold tracking-tight">Architecture — coming soon</h1>
-		</main>
-	</body>
-</html>
+<Layout
+	title="Home"
+	description="Plumbline Studio is a full-service interior design practice in Scott's Addition, Richmond, taking on twelve residences a year — primary homes, historic restorations, and vacation houses across Virginia."
+>
+	<!-- HERO -->
+	<section class="hero-band relative overflow-hidden">
+		<div class="absolute inset-0 overflow-hidden">
+			<div class="hero-bg-video-wrap absolute inset-0">
+				<video
+					class="hero-bg-video absolute inset-0 h-full w-full object-cover"
+					poster={heroPoster.src}
+					autoplay
+					muted
+					loop
+					playsinline
+					preload="auto"
+					aria-hidden="true"
+				>
+					<source src="/video/hero-living-room.mp4" type="video/mp4" />
+				</video>
+			</div>
+			<div class="hero-scrim absolute inset-0"></div>
+		</div>
+
+		<div class="relative mx-auto max-w-6xl px-6 pb-16 pt-10 sm:pt-16">
+			<div class="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-end">
+				<div class="hero-intro">
+					<p class="ref-tag inline-block text-brass-light">No. 00 · Plumbline Studio</p>
+					<h1 class="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-vellum sm:text-5xl lg:text-6xl">
+						Considered interiors, built to be lived in for decades.
+					</h1>
+					<p class="mt-6 max-w-md text-base leading-relaxed text-vellum/80 sm:text-lg">
+						Plumbline Studio is a full-service interior design practice housed in a converted
+						tobacco warehouse in Scott&rsquo;s Addition. We take on twelve residences a year —
+						primary homes, historic restorations, and vacation houses across Virginia — and touch
+						every material ourselves before it goes into your home.
+					</p>
+					<div class="mt-8 flex flex-wrap items-center gap-4">
+						<a
+							href="/contact"
+							class="rounded-sm bg-vellum px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-navy transition-colors hover:bg-brass-light"
+						>
+							Request a Consultation
+						</a>
+						<a
+							href="/projects"
+							class="font-mono text-xs uppercase tracking-[0.15em] text-vellum/80 underline decoration-vellum/30 underline-offset-4 hover:text-brass-light"
+						>
+							View the Portfolio
+						</a>
+					</div>
+				</div>
+				<SwatchHero />
+			</div>
+		</div>
+	</section>
+
+	<!-- STUDIO INTRO -->
+	<section class="border-t border-ink/10 bg-paper-2">
+		<div class="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-2 md:items-center">
+			<div class="veil-lift aspect-[4/5] overflow-hidden rounded-sm">
+				<div class="veil-content h-full w-full">
+					<Image
+						src={moodBoard}
+						alt="A designer reviewing a mood board of fabric and material samples in the Plumbline Studio workshop"
+						class="h-full w-full object-cover"
+						widths={[500, 900, 1300]}
+						sizes="(max-width: 768px) 100vw, 50vw"
+					/>
+				</div>
+			</div>
+			<div>
+				<p class="font-mono text-xs uppercase tracking-[0.2em] text-navy">Our Approach</p>
+				<h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+					We start with how a room is actually used.
+				</h2>
+				<p class="mt-5 leading-relaxed text-ink-soft">
+					Founded in 2015 by Dana Okafor, who trained as an architect before turning to
+					interiors, and Marcus Feld, a furniture maker by trade, Plumbline takes on a
+					deliberately small number of homes each year — the kind where every material gets
+					touched before it gets specified, not chosen from a screen.
+				</p>
+				<p class="mt-4 leading-relaxed text-ink-soft">
+					That means twelve residences running at once at most, a principal on every
+					installation, and a workshop down the hall where Marcus still builds the pieces that
+					don&rsquo;t exist anywhere else.
+				</p>
+				<a
+					href="/about"
+					class="mt-6 inline-block font-mono text-xs uppercase tracking-[0.15em] text-navy underline decoration-navy/30 underline-offset-4 hover:text-ink"
+				>
+					Meet the Studio →
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- PROCESS -->
+	<section class="bg-weave border-t border-ink/10">
+		<div class="mx-auto max-w-6xl px-6 py-20">
+			<div class="max-w-xl">
+				<p class="font-mono text-xs uppercase tracking-[0.2em] text-navy">How a Project Runs</p>
+				<h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+					Five phases, the same as our reference numbers.
+				</h2>
+				<p class="mt-4 leading-relaxed text-ink-soft">
+					We number project phases the way we number a fabric or finish sample, because
+					that&rsquo;s genuinely how the work is tracked — each phase closes with a real
+					deliverable, not a status update.
+				</p>
+			</div>
+
+			<div class="mt-14 grid gap-px overflow-hidden rounded-sm border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-5">
+				{
+					process.map((step, i) => (
+						<div class="rise-in bg-vellum p-6" style={`transition-delay:${i * 90}ms`}>
+							<p class="ref-tag inline-block text-navy">{step.sheet}</p>
+							<h3 class="mt-4 font-display text-lg font-semibold text-ink">{step.title}</h3>
+							<p class="mt-2 text-sm leading-relaxed text-ink-soft">{step.copy}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- FEATURED PROJECTS -->
+	<section class="border-t border-ink/10 bg-paper-2" data-sheet="No. 06" data-sheet-label="Selected Work">
+		<div class="mx-auto max-w-6xl px-6 py-20">
+			<div class="flex flex-wrap items-end justify-between gap-6">
+				<div>
+					<p class="font-mono text-xs uppercase tracking-[0.2em] text-navy">Selected Work</p>
+					<h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+						Three homes, three very different briefs.
+					</h2>
+				</div>
+				<a
+					href="/projects"
+					class="font-mono text-xs uppercase tracking-[0.15em] text-ink-soft underline decoration-ink/30 underline-offset-4 hover:text-navy"
+				>
+					All Projects →
+				</a>
+			</div>
+
+			<div class="mt-12 grid gap-8 md:grid-cols-3">
+				<a href="/projects#rennie-street-loft" class="block">
+					<ModelCard src={rennieCurated} alt="Curated art and bookshelves in the fully furnished Rennie Street Loft living room" />
+					<p class="mt-4 ref-tag inline-block text-ink-faint">No. 01</p>
+					<h3 class="mt-2 font-display text-xl font-semibold text-ink">Rennie Street Loft</h3>
+					<p class="text-sm text-ink-soft">Warehouse residence · Scott&rsquo;s Addition · 2019</p>
+				</a>
+				<a href="/projects#windsor-farms-residence" class="block">
+					<ModelCard src={windsorExterior} alt="A grand Georgian brick estate home in Windsor Farms" />
+					<p class="mt-4 ref-tag inline-block text-ink-faint">No. 03</p>
+					<h3 class="mt-2 font-display text-xl font-semibold text-ink">Windsor Farms Residence</h3>
+					<p class="text-sm text-ink-soft">Whole-home design · Windsor Farms · 2023</p>
+				</a>
+				<a href="/projects#lake-anna-retreat" class="block">
+					<ModelCard src={lakeAnnaLiving} alt="A spacious living room with panoramic lake views at the Lake Anna Retreat" />
+					<p class="mt-4 ref-tag inline-block text-ink-faint">No. 05</p>
+					<h3 class="mt-2 font-display text-xl font-semibold text-ink">Lake Anna Retreat</h3>
+					<p class="text-sm text-ink-soft">Vacation home · Lake Anna · 2024</p>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- TESTIMONIAL -->
+	<section class="border-t border-ink/10 bg-navy text-vellum">
+		<div class="mx-auto max-w-3xl px-6 py-20 text-center">
+			<p class="font-display text-2xl font-medium italic leading-snug sm:text-3xl">
+				&ldquo;Dana and Marcus treated our library like a piece of furniture, not a room — the
+				reading chair alone went through four fittings before it was right. Worth every one of
+				them.&rdquo;
+			</p>
+			<p class="mt-6 font-mono text-xs uppercase tracking-[0.15em] text-vellum/70">
+				Eleanor Whitfield &middot; Windsor Farms Residence
+			</p>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section class="border-t border-ink/10">
+		<div class="mx-auto flex max-w-6xl flex-col items-start gap-6 px-6 py-20 sm:flex-row sm:items-center sm:justify-between">
+			<div>
+				<h2 class="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+					Have a home ready for real design?
+				</h2>
+				<p class="mt-3 max-w-md text-ink-soft">
+					A first walkthrough is complimentary and confidential. Full-service design typically
+					begins at $60,000.
+				</p>
+			</div>
+			<a
+				href="/contact"
+				class="whitespace-nowrap rounded-sm bg-navy px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-vellum transition-colors hover:bg-ink"
+			>
+				Request a Consultation
+			</a>
+		</div>
+	</section>
+</Layout>
+
+
+<script>
+	// Moderate slow motion on the hero background video (not glacial) +
+	// respect reduced-motion by freezing on the poster frame.
+	const heroVideo = document.querySelector<HTMLVideoElement>('.hero-bg-video');
+	if (heroVideo) {
+		const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (reduce) {
+			heroVideo.pause();
+			heroVideo.removeAttribute('autoplay');
+			heroVideo.currentTime = 0;
+		} else {
+			const setRate = () => {
+				heroVideo.playbackRate = 0.65;
+			};
+			// Setting playbackRate before the browser has buffered enough to
+			// play smoothly can itself cause a stutter on the first loop.
+			if (heroVideo.readyState >= 2) setRate();
+			else heroVideo.addEventListener('loadeddata', setRate, { once: true });
+		}
+	}
+</script>
+
+<style>
+	/* Animate the wrapper, not the <video> itself — scaling a playing video
+	   element directly with CSS fights its own decode/paint cycle and reads
+	   as stutter. The wrapper gets the zoom; the video just fills it. */
+	.hero-bg-video-wrap {
+		animation: hero-ken-burns 26s ease-in-out infinite alternate;
+		transform-origin: 50% 42%;
+		will-change: transform;
+		backface-visibility: hidden;
+	}
+	.hero-bg-video {
+		will-change: transform;
+	}
+	@keyframes hero-ken-burns {
+		0% {
+			transform: scale(1) translateZ(0);
+		}
+		100% {
+			transform: scale(1.07) translateZ(0);
+		}
+	}
+	.hero-scrim {
+		background: linear-gradient(
+			100deg,
+			rgba(15, 17, 19, 0.82) 0%,
+			rgba(15, 17, 19, 0.72) 32%,
+			rgba(15, 17, 19, 0.4) 58%,
+			rgba(15, 17, 19, 0.18) 100%
+		);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.hero-bg-video-wrap {
+			animation: none;
+		}
+	}
+</style>

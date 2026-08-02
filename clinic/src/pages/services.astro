@@ -1,0 +1,120 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ClinicalReveal from '../components/ClinicalReveal.astro';
+import treatmentRoom from '../assets/images/clinic-bed-blue-white.jpg';
+import instrumentTray from '../assets/images/surgical-instruments-tray.jpg';
+
+const services = [
+	{
+		category: 'Screening',
+		title: 'Full-Body Skin Cancer Screening',
+		copy: 'A head-to-toe exam with dermoscopy on any spot worth a closer look. Recommended annually, sooner if you have a personal or family history of melanoma.',
+		fee: 'New patient $225 · returning patient $145. Billed to most insurance plans as a medical visit.',
+		note: 'Runs 30–40 minutes. Bring a list of anything that’s changed since your last visit.',
+	},
+	{
+		category: 'Imaging',
+		title: 'Mole Mapping & Dermoscopic Imaging',
+		copy: 'Baseline photography of your whole body, stored and compared at every future visit — the fastest way to catch a spot that’s genuinely new or changing.',
+		fee: 'Baseline session $310 · follow-up mapping visit $185.',
+		note: 'Recommended for patients with 50+ moles or a prior atypical biopsy.',
+	},
+	{
+		category: 'Procedure',
+		title: 'Biopsy & Lesion Removal',
+		copy: 'Shave, punch, or excisional biopsy performed the same visit a concerning spot is found, plus removal of benign-but-bothersome growths like skin tags and cysts.',
+		fee: 'Self-pay from $175–$350 depending on technique; typically billed to insurance alongside the visit.',
+		note: 'Pathology results in 3–5 business days through our Denver lab.',
+	},
+	{
+		category: 'Medical',
+		title: 'Acne, Eczema, Psoriasis & Rosacea',
+		copy: 'Ongoing management for chronic skin conditions, from a first-line prescription plan to biologic therapy for cases that haven’t responded to anything else.',
+		fee: 'New patient visit $195 · follow-up $115.',
+		note: null,
+	},
+	{
+		category: 'Cosmetic',
+		title: 'Cosmetic Dermatology',
+		copy: 'Botox, dermal filler, and laser resurfacing — offered, but never the reason we built this practice. Consultations are complimentary.',
+		fee: 'Botox from $13/unit · filler from $650/syringe.',
+		note: 'Performed by Dr. Marsh only, by appointment.',
+	},
+];
+---
+
+<Layout
+	title="Services"
+	description="Full-body skin cancer screening, mole mapping, biopsy, medical dermatology, and cosmetic services at Cherry Creek Dermatology in Denver, CO. Pricing and insurance details for each visit type."
+>
+	<section class="mx-auto max-w-6xl px-6 pb-16 pt-10 sm:pt-16">
+		<p class="font-mono text-xs uppercase tracking-[0.2em] text-clinical-blue">Services</p>
+		<h1 class="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl">
+			Five ways we see patients.
+		</h1>
+		<p class="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
+			Prices below are self-pay rates for patients without insurance or who prefer not to bill it.
+			Most medical visits &mdash; screening, biopsy, and chronic condition management &mdash; are
+			covered by insurance; we&rsquo;ll verify your benefits before your visit.
+		</p>
+	</section>
+
+	<section class="border-t border-ink/10 bg-porcelain-2">
+		<div class="mx-auto max-w-6xl divide-y divide-ink/10 px-6">
+			{
+				services.map((s) => (
+					<div class="rise-in grid gap-6 py-12 md:grid-cols-[130px_1fr_1fr] md:gap-10">
+						<p class="h-fit font-mono text-xs uppercase tracking-[0.15em] text-clinical-blue">{s.category}</p>
+						<div>
+							<h2 class="font-display text-2xl font-semibold text-ink">{s.title}</h2>
+							<p class="mt-3 leading-relaxed text-ink-soft">{s.copy}</p>
+						</div>
+						<div class="border-t border-ink/10 pt-4 md:border-t-0 md:border-l md:pl-10 md:pt-0">
+							<p class="font-mono text-xs uppercase tracking-[0.15em] text-clinical-blue">Fee</p>
+							<p class="mt-2 text-sm leading-relaxed text-ink">{s.fee}</p>
+							{s.note && <p class="mt-2 text-sm leading-relaxed text-ink-faint">{s.note}</p>}
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- ROOMS -->
+	<section class="border-t border-ink/10">
+		<div class="mx-auto max-w-6xl px-6 py-20">
+			<p class="font-mono text-xs uppercase tracking-[0.2em] text-clinical-blue">The Exam Rooms</p>
+			<h2 class="mt-4 max-w-xl font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+				Every visit happens in the same three rooms.
+			</h2>
+			<p class="mt-4 max-w-2xl leading-relaxed text-ink-soft">
+				We don&rsquo;t split screening and cosmetic visits into different suites. The dermoscope on
+				the counter gets used whether you&rsquo;re here for a mole check or a filler follow-up
+				&mdash; it&rsquo;s the same close look either way.
+			</p>
+
+			<div class="mt-12 grid gap-6 sm:grid-cols-2">
+				<ClinicalReveal src={treatmentRoom} alt="A treatment room at Cherry Creek Dermatology" aspect="aspect-[4/3]" />
+				<ClinicalReveal src={instrumentTray} alt="Sterile surgical instruments laid out on a procedure tray, used for biopsies and lesion removal" aspect="aspect-[4/3]" />
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-ink/10 bg-clinical-blue text-porcelain">
+		<div class="mx-auto flex max-w-6xl flex-col items-start gap-6 px-6 py-20 sm:flex-row sm:items-center sm:justify-between">
+			<div>
+				<h2 class="font-display text-3xl font-semibold tracking-tight sm:text-4xl">Not sure which visit you need?</h2>
+				<p class="mt-3 max-w-md text-porcelain/80">
+					Tell us what&rsquo;s going on and we&rsquo;ll point you to the right one &mdash; most
+					questions are answered before you ever book.
+				</p>
+			</div>
+			<a
+				href="/contact"
+				class="whitespace-nowrap rounded-sm bg-porcelain px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-clinical-blue transition-colors hover:bg-clinical-blue-glow"
+			>
+				Request an Appointment
+			</a>
+		</div>
+	</section>
+</Layout>

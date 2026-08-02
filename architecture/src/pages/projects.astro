@@ -1,0 +1,175 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ModelCard from '../components/ModelCard.astro';
+import { Image } from 'astro:assets';
+
+import rennieHero from '../assets/images/hero-luxury-living.jpg';
+import rennieShell from '../assets/images/project-rennie-street-loft-interior.jpg';
+import rennieCurated from '../assets/images/rennie-street-curated-living.jpg';
+
+import churchHillExterior from '../assets/images/project-church-hill-residence.jpg';
+import churchHillDining from '../assets/images/church-hill-dining-room.jpg';
+
+import windsorExterior from '../assets/images/windsor-farms-exterior.jpg';
+import windsorFoyer from '../assets/images/windsor-farms-foyer.jpg';
+
+import riverRoadDining from '../assets/images/river-road-dining-room.jpg';
+import riverRoadBath from '../assets/images/river-road-primary-bath.jpg';
+
+import lakeAnnaLiving from '../assets/images/lake-anna-living-room.jpg';
+import lakeAnnaExterior from '../assets/images/lake-anna-exterior.jpg';
+
+const projects = [
+	{
+		id: 'rennie-street-loft',
+		sheet: 'No. 01',
+		title: 'Rennie Street Loft',
+		category: 'Warehouse Residence',
+		neighborhood: "Scott's Addition",
+		year: '2019',
+		scope: '11,200 sq ft · 6 residences + studio',
+		img: rennieHero,
+		alt: 'A furnished living room with a marble fireplace and mirrored wall inside the Rennie Street Loft',
+		copy: "Our own building, and the project that set the tone for everything after it. We furnished all six loft residences plus our studio floor with a mix of custom millwork, mid-century pieces sourced from regional dealers, and an art collection built room by room over four years. The exposed heart-pine and steel stayed; almost everything else is ours.",
+		details: [
+			{ src: rennieShell, alt: 'The original exposed brick and steel ductwork before furnishing', caption: 'The shell we started with' },
+			{ src: rennieCurated, alt: 'Curated art and bookshelves in the finished living room', caption: 'The finished living room' },
+		],
+	},
+	{
+		id: 'church-hill-residence',
+		sheet: 'No. 02',
+		title: 'Church Hill Residence',
+		category: 'Full-Home Design',
+		neighborhood: 'Church Hill',
+		year: '2021',
+		scope: '2,400 sq ft · 4 bed, whole-home',
+		img: churchHillExterior,
+		alt: 'Restored 1880s brick rowhouse facade in Church Hill',
+		copy: "An 1880s rowhouse furnished in pieces by three generations of one family. We kept the grandmother's dining table, reupholstered the wingback chairs she wouldn't part with, and built the rest of the home — art, lighting, a proper library — around what mattered enough to survive the move.",
+		details: [
+			{ src: churchHillDining, alt: 'A formal dining room with a chandelier and the family\'s inherited table', caption: 'The dining room, table included' },
+		],
+	},
+	{
+		id: 'windsor-farms-residence',
+		sheet: 'No. 03',
+		title: 'Windsor Farms Residence',
+		category: 'Whole-Home Design',
+		neighborhood: 'Windsor Farms',
+		year: '2023',
+		scope: '7,800 sq ft · Formal + family wings',
+		img: windsorExterior,
+		alt: 'A grand 1930s Georgian brick estate home in Windsor Farms',
+		copy: 'A 1930s Georgian on a corner lot, bought with almost nothing left inside it. We designed every room from the foyer\'s curved staircase down to the guest powder room, sourcing English antiques for the formal rooms and keeping the family wing warmer and less precious on purpose.',
+		details: [
+			{ src: windsorFoyer, alt: 'A grand curved staircase and hardwood floors in the entry foyer', caption: 'The entry foyer' },
+		],
+	},
+	{
+		id: 'river-road-residence',
+		sheet: 'No. 04',
+		title: 'River Road Residence',
+		category: 'Renovation & Interiors',
+		neighborhood: 'River Road',
+		year: '2022',
+		scope: '6,200 sq ft · Full interior renovation',
+		img: riverRoadDining,
+		alt: 'An elegant formal dining room with chandeliers in the River Road Residence',
+		copy: "A Mediterranean-style estate whose interiors hadn't been touched since 1998. We reworked the primary suite bath in book-matched marble, replaced the dining room's dated chandelier with a piece found at a Charleston estate sale, and unified twelve rooms under one material palette without making any of them feel matched.",
+		details: [
+			{ src: riverRoadBath, alt: 'A luxurious marble primary bathroom with gold fixtures', caption: 'The primary suite bath' },
+		],
+	},
+	{
+		id: 'lake-anna-retreat',
+		sheet: 'No. 05',
+		title: 'Lake Anna Retreat',
+		category: 'Vacation Home',
+		neighborhood: 'Lake Anna',
+		year: '2024',
+		scope: '3,100 sq ft · New-build vacation home',
+		img: lakeAnnaLiving,
+		alt: 'A spacious living room with panoramic lake views at the Lake Anna Retreat',
+		copy: 'A second home for a family who wanted it to feel nothing like their primary residence — lighter woods, washable linen instead of silk, furniture that can survive a wet swimsuit. Still fully custom, just built for a different kind of wear.',
+		details: [
+			{ src: lakeAnnaExterior, alt: 'The lake house exterior at sunset, reflected in the water', caption: 'Sunset, from the dock' },
+		],
+	},
+];
+---
+
+<Layout
+	title="Projects"
+	description="Selected full-service interior design projects by Plumbline Studio across Richmond, VA — Scott's Addition, Church Hill, Windsor Farms, River Road, and Lake Anna."
+>
+	<section class="mx-auto max-w-6xl px-6 pb-16 pt-10 sm:pt-16">
+		<p class="ref-tag inline-block text-navy">No. 00 · Projects</p>
+		<h1 class="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl">
+			Five homes, five very different briefs.
+		</h1>
+		<p class="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
+			A selection of full-service interior design work completed since 2019. Every home below is
+			furnished, lived in, and still ours to be proud of.
+		</p>
+	</section>
+
+	<section class="border-t border-ink/10">
+		{
+			projects.map((p, i) => (
+				<div id={p.id} class="scroll-mt-24 border-b border-ink/10 bg-paper-2 odd:bg-paper">
+					<div class="mx-auto max-w-6xl px-6 py-16">
+						<div
+							class:list={[
+								'grid gap-10 md:grid-cols-2 md:items-center md:gap-14',
+								i % 2 === 1 && 'md:[&>*:first-child]:order-2',
+							]}
+						>
+							<ModelCard src={p.img} alt={p.alt} aspect="aspect-[4/3]" />
+							<div>
+								<p class="ref-tag inline-block text-navy">{p.sheet}</p>
+								<h2 class="mt-4 font-display text-2xl font-semibold text-ink sm:text-3xl">{p.title}</h2>
+								<p class="mt-2 font-mono text-xs uppercase tracking-[0.15em] text-ink-faint">
+									{p.category} · {p.neighborhood} · {p.year}
+								</p>
+								<p class="mt-5 leading-relaxed text-ink-soft">{p.copy}</p>
+								<p class="mt-4 font-mono text-xs uppercase tracking-[0.15em] text-navy">{p.scope}</p>
+							</div>
+						</div>
+
+						<div class:list={['mt-8 grid gap-4', p.details.length > 1 ? 'sm:grid-cols-2' : 'max-w-xs']}>
+							{p.details.map((d) => (
+								<div>
+									<div class="aspect-[4/3] overflow-hidden rounded-sm">
+										<Image
+											src={d.src}
+											alt={d.alt}
+											class="h-full w-full object-cover"
+											widths={[400, 700]}
+											sizes="(max-width: 640px) 100vw, 33vw"
+										/>
+									</div>
+									<p class="mt-2 font-mono text-xs uppercase tracking-[0.13em] text-ink-faint">{d.caption}</p>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			))
+		}
+	</section>
+
+	<section class="border-t border-ink/10">
+		<div class="mx-auto flex max-w-6xl flex-col items-start gap-6 px-6 py-20 sm:flex-row sm:items-center sm:justify-between">
+			<h2 class="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+				See something close to your home?
+			</h2>
+			<a
+				href="/contact"
+				class="whitespace-nowrap rounded-sm bg-navy px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-vellum transition-colors hover:bg-ink"
+			>
+				Request a Consultation
+			</a>
+		</div>
+	</section>
+</Layout>

@@ -1,19 +1,33 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 
+import loadingDockImg from '../assets/images/loading-dock-entrance.jpg';
+import trainingFloorImg from '../assets/images/training-floor-brick-trusses.jpg';
+import deadliftPlatformImg from '../assets/images/deadlift-platform-2.jpg';
+import chalkHandsImg from '../assets/images/chalk-hands-before-lift.jpg';
+import plateWallImg from '../assets/images/plate-wall-calibrated-bumpers.jpg';
+import coachedSessionImg from '../assets/images/coach-marcus-technique-check.jpg';
+import meetDayImg from '../assets/images/meet-day-focus-competition.jpg';
+import ironPlatesImg from '../assets/images/iron-plates-full-range.jpg';
+import firstPullImg from '../assets/images/first-pull-off-floor.jpg';
+import kettlebellRackImg from '../assets/images/kettlebell-rack-accessory-corner.jpg';
+import gripPrepImg from '../assets/images/grip-prep-between-sets.jpg';
+import loadingSetImg from '../assets/images/loading-working-set.jpg';
+
 const photos = [
-	{ id: '5505921', caption: 'Butler Street entrance, the original loading dock', h: 380 },
-	{ id: '34440925', caption: 'Training floor, west end, before opening', h: 460 },
-	{ id: '949134', caption: 'Deadlift work, Platform 2', h: 420 },
-	{ id: '7671476', caption: 'Chalk before a heavy set', h: 340 },
-	{ id: '4793231', caption: 'Plate wall, calibrated bumpers', h: 460 },
-	{ id: '6455906', caption: 'Coached session, technique check', h: 400 },
-	{ id: '8369547', caption: 'Meet-day focus, USAPL local', h: 460 },
-	{ id: '669577', caption: 'Iron plates, full range 2.5–55 lb', h: 340 },
-	{ id: '841130', caption: 'First pull off the floor', h: 420 },
-	{ id: '6628962', caption: 'Bar and kettlebell rack, accessory corner', h: 340 },
-	{ id: '8481198', caption: 'Grip prep between sets', h: 380 },
-	{ id: '4793229', caption: 'Loading for a working set', h: 400 },
+	{ img: loadingDockImg, caption: 'Butler Street entrance, the original loading dock', h: 380 },
+	{ img: trainingFloorImg, caption: 'Training floor, west end, before opening', h: 460 },
+	{ img: deadliftPlatformImg, caption: 'Deadlift work, Platform 2', h: 420 },
+	{ img: chalkHandsImg, caption: 'Chalk before a heavy set', h: 340 },
+	{ img: plateWallImg, caption: 'Plate wall, calibrated bumpers', h: 460 },
+	{ img: coachedSessionImg, caption: 'Coached session, technique check', h: 400 },
+	{ img: meetDayImg, caption: 'Meet-day focus, USAPL local', h: 460 },
+	{ img: ironPlatesImg, caption: 'Iron plates, full range 2.5–55 lb', h: 340 },
+	{ img: firstPullImg, caption: 'First pull off the floor', h: 420 },
+	{ img: kettlebellRackImg, caption: 'Bar and kettlebell rack, accessory corner', h: 340 },
+	{ img: gripPrepImg, caption: 'Grip prep between sets', h: 380 },
+	{ img: loadingSetImg, caption: 'Loading for a working set', h: 400 },
 ];
 ---
 
@@ -37,14 +51,14 @@ const photos = [
 				photos.map((p, i) => (
 					<div class="flash-reveal mb-5 break-inside-avoid" style={`transition-delay: ${(i % 6) * 70}ms`}>
 						<div class="viewfinder overflow-hidden rounded-md">
-							<img
-								src={`https://images.pexels.com/photos/${p.id}/pexels-photo-${p.id}.jpeg?auto=compress&cs=tinysrgb&w=900`}
+							<Image
+								src={p.img}
 								alt={p.caption}
 								class="w-full object-cover"
 								style={`height: ${p.h}px;`}
+								widths={[400, 700, 900]}
+								sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
 								loading="lazy"
-								width="900"
-								height={p.h}
 							/>
 							<span class="vf-corner"></span>
 							<span class="vf-corner"></span>

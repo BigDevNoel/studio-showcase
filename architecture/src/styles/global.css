@@ -1,1 +1,277 @@
 @import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", serif;
+  --font-body: "Public Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Plumbline Studio — cream/linen neutrals with a deep navy and brass
+     accent, the classic "old money" luxury-interiors palette. A different
+     hue family from the warm graphite/gold used in hairsalon or the cool
+     void/green used in gym. */
+  --color-paper: #efece2;
+  --color-paper-2: #e3ded0;
+  --color-vellum: #f6f4ec;
+  --color-ink: #191d1f;
+  --color-ink-soft: #4a5257;
+  --color-ink-faint: #7c8386;
+
+  --color-navy: #1d3557;
+  --color-navy-2: #3a6ea5;
+
+  --color-brass: #a9812e;
+  --color-brass-light: #c9a24b;
+
+  --color-emerald: #24402f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+::selection {
+  background-color: var(--color-navy);
+  color: var(--color-vellum);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 3px;
+}
+
+/* Linen weave — a very fine diagonal crosshatch suggesting woven fabric,
+   used as a section texture (never pure decoration). Ink hairlines on
+   paper at low opacity, distinct from any grid used elsewhere in the
+   repo and from this site's own earlier blueprint-grid concept. */
+.bg-weave {
+  background-image: repeating-linear-gradient(45deg, rgba(25, 29, 31, 0.05) 0px, rgba(25, 29, 31, 0.05) 1px, transparent 1px, transparent 9px),
+    repeating-linear-gradient(-45deg, rgba(25, 29, 31, 0.05) 0px, rgba(25, 29, 31, 0.05) 1px, transparent 1px, transparent 9px);
+}
+
+/* Reference tag — the small bordered label an atelier pins to a fabric
+   swatch or material sample (a collection or reference number), used as
+   a real navigational device rather than decoration. */
+.ref-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  border: 1px solid currentColor;
+  padding: 0.2rem 0.55rem;
+}
+
+/* Veil-lift — a fabric swatch or drape sliding aside to reveal the
+   finished room underneath. Plumbline's scroll-reveal signature: soft/
+   veiled -> drawn back and sharp, the literal move from material sample
+   to finished room. */
+.veil-lift {
+  position: relative;
+  overflow: hidden;
+}
+.veil-lift > .veil-content {
+  filter: blur(7px) saturate(0.7);
+  transform: scale(1.035);
+  opacity: 0.85;
+  transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.veil-lift::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: 2;
+  background: var(--color-vellum);
+  background-image: linear-gradient(100deg, rgba(25, 29, 31, 0.09), transparent 40%),
+    repeating-linear-gradient(45deg, rgba(25, 29, 31, 0.04) 0px, rgba(25, 29, 31, 0.04) 1px, transparent 1px, transparent 9px),
+    repeating-linear-gradient(-45deg, rgba(25, 29, 31, 0.04) 0px, rgba(25, 29, 31, 0.04) 1px, transparent 1px, transparent 9px);
+  transform-origin: left;
+  box-shadow: 18px 0 30px -10px rgba(25, 29, 31, 0.25);
+  transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.veil-lift.is-visible > .veil-content {
+  filter: blur(0) saturate(1);
+  transform: scale(1);
+  opacity: 1;
+}
+.veil-lift.is-visible::after {
+  transform: translateX(102%) rotate(1deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .veil-lift > .veil-content {
+    filter: none;
+    transform: none;
+    opacity: 1;
+  }
+  .veil-lift::after {
+    transition: none;
+    transform: translateX(102%);
+  }
+}
+
+/* Sample card — a material or furnishing sample presented for review:
+   soft mouse-driven 3D tilt like turning a swatch or object in your hand,
+   with an offset shadow instead of a flat drop-shadow. */
+.model-card {
+  --rx: 0deg;
+  --ry: 0deg;
+  perspective: 1200px;
+}
+.model-card__inner {
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 26px 34px -18px rgba(25, 29, 31, 0.4);
+}
+.model-card:hover .model-card__inner,
+.model-card:focus-within .model-card__inner {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 34px 44px -16px rgba(25, 29, 31, 0.48);
+}
+
+/* Sheen sweep — the gleam of tilting a fine material to catch the light,
+   the way you'd check a marble slab or a bolt of silk. A diagonal band of
+   light crosses the sample on hover; pairs with the 3D tilt above. */
+.model-card__inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, 0.5) 48%, transparent 64%);
+  transform: translateX(-130%);
+  transition: transform 0.85s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+.model-card:hover .model-card__inner::after,
+.model-card:focus-within .model-card__inner::after {
+  transform: translateX(130%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .model-card__inner {
+    transform: none !important;
+    transition: none;
+  }
+  .model-card__inner::after {
+    display: none;
+  }
+}
+
+/* Brass pin — the pin that fixes a fabric swatch or reference tag to a
+   sample board. Drops in with a small overshoot and casts a growing
+   shadow, marking a flagship detail rather than decorating a corner. */
+@keyframes pin-fall {
+  0% {
+    transform: translateY(-22px) scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(2px) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+.pin-drop {
+  animation: pin-fall 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pin-drop {
+    animation: none;
+  }
+}
+
+/* Stitch draw-on — a dashed overlock-stitch outline stroking itself in
+   around the hero's fabric swatch, as if the sample were being edged
+   live. pathLength="1" on each <path> normalizes length so dasharray/
+   offset of 1 works for any path. */
+.stitchwork path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-line 1.4s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation-delay: var(--d, 0s);
+}
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stitchwork path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Hero entrance — the eyebrow, headline, copy, and CTAs rise in with a
+   short stagger on page load, so landing on the hero feels choreographed
+   rather than instant. Load-triggered (no scroll needed), unlike rise-in. */
+.hero-intro > * {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: hero-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero-intro > *:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.hero-intro > *:nth-child(2) {
+  animation-delay: 0.16s;
+}
+.hero-intro > *:nth-child(3) {
+  animation-delay: 0.28s;
+}
+.hero-intro > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+@keyframes hero-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-intro > * {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Simple fade/rise used for smaller inline reveals (stat rows, list items) */
+.rise-in {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.rise-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

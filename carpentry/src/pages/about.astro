@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TimberCard from '../components/TimberCard.astro';
+
+import sawmillInterior from '../assets/images/historic-sawmill-interior.jpg';
+import chiselCuttingJoint from '../assets/images/chisel-cutting-joint.jpg';
+import colinPortrait from '../assets/images/craftsman-portrait-plank.jpg';
+import breePortrait from '../assets/images/woman-sanding-wood-workshop.jpg';
+import tomasPortrait from '../assets/images/carpenter-table-saw-workshop.jpg';
+
+const crew = [
+	{
+		name: 'Colin Harjes',
+		role: 'Founder & Master Timber Framer',
+		bio: 'Apprenticed six years under a Guild-trained framer in the Champlain Valley before cutting his first solo frame in 2003. Founded Broad Brook in 2009 and still lays out every mortise by hand.',
+		img: colinPortrait,
+	},
+	{
+		name: 'Bree Sandoval',
+		role: 'Joiner & Shop Manager',
+		bio: 'Runs the cutting schedule and specializes in scribe-rule joinery for reclaimed and irregular timbers, where no two beams are quite the same dimension.',
+		img: breePortrait,
+	},
+	{
+		name: 'Tomas Wren',
+		role: 'Raising Crew Lead',
+		bio: 'Coordinates every raising day &mdash; crew safety, gin-pole and crane rigging on larger frames, and the choreography of getting a dry-fit frame standing in one afternoon.',
+		img: tomasPortrait,
+	},
+];
+---
+
+<Layout
+	title="About"
+	description="How an 1890s Waitsfield dairy barn became Broad Brook Timberworks, and the crew who hand-cuts every frame."
+>
+	<!-- INTRO -->
+	<section class="mx-auto max-w-6xl px-6 pt-16 pb-10 sm:pt-24">
+		<p class="font-mono text-xs uppercase tracking-[0.3em] text-verdigris-deep">About</p>
+		<h1 class="mt-3 max-w-3xl font-display text-4xl font-semibold leading-[0.98] tracking-tight text-oak-ink sm:text-6xl">
+			We didn't build a shop. We reframed one.
+		</h1>
+		<p class="mt-6 max-w-2xl text-base leading-relaxed text-oak-ink-soft sm:text-lg">
+			Broad Brook Timberworks opened in 2009 in a barn that had already been standing for
+			118 years &mdash; we just gave it a second job.
+		</p>
+	</section>
+
+	<!-- BUILDING HISTORY -->
+	<section class="mx-auto max-w-6xl px-6 py-10">
+		<div class="grid items-center gap-10 sm:grid-cols-2">
+			<div class="bench-reveal order-2 sm:order-1">
+				<h2 class="font-display text-2xl font-semibold tracking-tight text-oak-ink sm:text-3xl">1890&ndash;1991: A working dairy barn</h2>
+				<p class="mt-4 text-sm leading-relaxed text-oak-ink-soft sm:text-base">
+					The barn at 212 Broad Brook Road milked cows for the Fitch family for a century, until
+					the herd was sold off in 1991. It sat empty through eighteen Vermont winters, roof
+					sagging, the hemlock frame still standing square under it the whole time &mdash; proof,
+					Colin says, that hand-cut joinery outlasts almost anything you do to a building.
+				</p>
+				<p class="mt-4 text-sm leading-relaxed text-oak-ink-soft sm:text-base">
+					We re-set the sills, replaced six rotted posts with hand-cut hemlock to match the
+					original scribe marks, and left the hayloft track bolted to the ridge beam. It carries
+					clamps and chain hoists now instead of hay.
+				</p>
+			</div>
+			<div class="bench-reveal order-1 sm:order-2">
+				<TimberCard
+					src={sawmillInterior}
+					alt="Historic timber-framed sawmill interior with exposed beams, similar to the Broad Brook shop"
+					aspect="aspect-[4/3]"
+				/>
+			</div>
+		</div>
+	</section>
+
+	<div class="story-pole mx-auto max-w-6xl"></div>
+
+	<!-- FOUNDER STORY -->
+	<section class="mx-auto max-w-6xl px-6 py-16">
+		<div class="grid items-center gap-10 sm:grid-cols-2">
+			<div class="bench-reveal">
+				<TimberCard
+					src={chiselCuttingJoint}
+					alt="Craftsman cutting a mortise joint by hand with a chisel and mallet"
+					aspect="aspect-[4/3]"
+				/>
+			</div>
+			<div class="bench-reveal" style="transition-delay: 100ms">
+				<p class="font-mono text-xs uppercase tracking-[0.3em] text-verdigris-deep">Why we exist</p>
+				<h2 class="mt-2 font-display text-2xl font-semibold tracking-tight text-oak-ink sm:text-3xl">
+					Started by someone who wanted to see the joint
+				</h2>
+				<p class="mt-4 text-sm leading-relaxed text-oak-ink-soft sm:text-base">
+					Colin spent four years framing stick-built additions before an apprenticeship with a
+					Timber Framers Guild member in Charlotte, VT, showed him a raising day for the first
+					time. He watched a whole bent go up on wooden pegs alone and decided that was the only
+					kind of building he wanted to do.
+				</p>
+				<p class="mt-4 text-sm leading-relaxed text-oak-ink-soft sm:text-base">
+					Every frame that leaves the shop is dry-fit first &mdash; assembled whole, checked for
+					square, then knocked back down and trucked to site in numbered pieces, marked in
+					lumber crayon the way they've always been marked.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- CREW -->
+	<section class="mx-auto max-w-6xl px-6 py-16">
+		<p class="font-mono text-xs uppercase tracking-[0.3em] text-verdigris-deep">The crew</p>
+		<h2 class="mt-2 font-display text-3xl font-semibold tracking-tight text-oak-ink sm:text-4xl">Who cuts your frame</h2>
+
+		<div class="mt-10 grid gap-8 sm:grid-cols-3">
+			{
+				crew.map((c, i) => (
+					<div class="bench-reveal" style={`transition-delay: ${i * 90}ms`}>
+						<TimberCard
+							src={c.img}
+							alt={`${c.name}, ${c.role} at Broad Brook Timberworks`}
+							aspect="aspect-[4/5]"
+						/>
+						<h3 class="mt-4 font-display text-lg font-semibold tracking-tight text-oak-ink">{c.name}</h3>
+						<p class="font-mono text-xs uppercase tracking-[0.15em] text-verdigris-deep">{c.role}</p>
+						<p class="mt-2 text-sm leading-relaxed text-oak-ink-soft">{c.bio}</p>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- AFFILIATIONS -->
+	<section class="bg-sawdust-2 py-16 sm:py-20">
+		<div class="mx-auto max-w-6xl px-6">
+			<p class="font-mono text-xs uppercase tracking-[0.3em] text-verdigris-deep">On record</p>
+			<h2 class="mt-2 font-display text-3xl font-semibold tracking-tight text-oak-ink sm:text-4xl">Affiliations &amp; standing</h2>
+			<div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+				<div>
+					<p class="font-display text-2xl font-semibold text-oak-ink">TFG</p>
+					<p class="mt-1 text-sm text-oak-ink-soft">Member, Timber Framers Guild, since 2010. Colin sits on the guild's Vermont chapter board.</p>
+				</div>
+				<div>
+					<p class="font-display text-2xl font-semibold text-oak-ink">Licensed</p>
+					<p class="mt-1 text-sm text-oak-ink-soft">Vermont-licensed contractor #VT-TC-04471, current since 2009.</p>
+				</div>
+				<div>
+					<p class="font-display text-2xl font-semibold text-oak-ink">Insured</p>
+					<p class="mt-1 text-sm text-oak-ink-soft">$2M general liability, workers' comp on all crew, verified before every raising day.</p>
+				</div>
+				<div>
+					<p class="font-display text-2xl font-semibold text-oak-ink">Local</p>
+					<p class="mt-1 text-sm text-oak-ink-soft">Member, Mad River Valley Chamber of Commerce. Sourcing hemlock and pine from mills within 40 miles.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section class="border-t border-oak-ink-faint/25 bg-sawdust">
+		<div class="mx-auto max-w-6xl px-6 py-16 text-center">
+			<h2 class="font-display text-3xl font-semibold tracking-tight text-oak-ink sm:text-4xl">Come see the shop</h2>
+			<a
+				href="/contact"
+				class="plane-cta mt-6 inline-block rounded-sm bg-verdigris px-7 py-3 font-mono text-xs uppercase tracking-[0.15em] text-shaving transition-colors hover:bg-verdigris-deep"
+			>
+				Request a Quote
+			</a>
+		</div>
+	</section>
+</Layout>

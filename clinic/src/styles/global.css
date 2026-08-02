@@ -1,1 +1,228 @@
 @import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Karla", sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  /* Cherry Creek Dermatology — cool porcelain neutrals plus a clinical
+     blue system: the color of a diagnostic monitor glow and a clean
+     exam-light, paired with a near-black for moodier, photo-led sections. */
+  --color-porcelain: #eef1ee;
+  --color-porcelain-2: #e1e6e0;
+  --color-ink: #161a19;
+  --color-ink-soft: #4a5450;
+  --color-ink-faint: #7c8682;
+
+  --color-ink-deep: #0b1420;
+
+  --color-clinical-blue: #2f8fe0;
+  --color-clinical-blue-dim: #1c6dae;
+  --color-clinical-blue-glow: #7ec8f2;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-porcelain);
+  color: var(--color-ink);
+}
+
+::selection {
+  background-color: var(--color-clinical-blue);
+  color: var(--color-porcelain);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-clinical-blue);
+  outline-offset: 3px;
+}
+
+/* Millimeter scale — a literal ruler tick strip, the way a lesion's
+   diameter gets measured against a paper ruler during a skin check. Used
+   as a real section divider / measurement device, not a decorative rule. */
+.mm-scale {
+  position: relative;
+  height: 10px;
+  background-image: repeating-linear-gradient(
+      90deg,
+      var(--color-ink-faint) 0,
+      var(--color-ink-faint) 1px,
+      transparent 1px,
+      transparent 8px
+    ),
+    repeating-linear-gradient(90deg, var(--color-ink-faint) 0, var(--color-ink-faint) 1px, transparent 1px, transparent 40px);
+  background-size: 8px 5px, 40px 10px;
+  background-position: left top, left top;
+  background-repeat: repeat-x;
+  opacity: 0.4;
+}
+
+/* Clinical reveal — this studio's signature for Cherry Creek Dermatology.
+   The wrapped content starts soft/desaturated, and a clinical-blue glow
+   band sweeps once across it, leaving the image sharp and true-color in
+   its wake — the same beat as a diagnostic light or monitor glow passing
+   over an exam. Slow, one-directional, no bounce — refined for a medical
+   audience rather than the bolder dimensional moments used elsewhere in
+   this repo. */
+.clinical-reveal {
+  position: relative;
+  overflow: hidden;
+}
+.clinical-reveal .clinical-reveal-content {
+  filter: blur(7px) saturate(0.55) brightness(0.92);
+  transform: scale(1.025);
+  transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.clinical-reveal.is-visible .clinical-reveal-content {
+  filter: blur(0) saturate(1) brightness(1);
+  transform: scale(1);
+}
+.clinical-reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(126, 200, 242, 0.5) 44%,
+    rgba(47, 143, 224, 0.88) 50%,
+    rgba(126, 200, 242, 0.5) 56%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  transform: translateX(-130%);
+  opacity: 0;
+}
+.clinical-reveal.is-visible::after {
+  animation: clinical-scan 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.1s forwards;
+}
+@keyframes clinical-scan {
+  0% {
+    transform: translateX(-130%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(130%);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .clinical-reveal .clinical-reveal-content {
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+  .clinical-reveal::after {
+    display: none;
+  }
+}
+
+/* Loupe card — the restrained depth cue for service/team cards: a lift,
+   a deepened shadow, and a thin blue focus-ring, echoing the edge of a
+   magnifier lens rather than a full mouse-tracked 3D tilt. Kept quieter
+   than the tilt-cards used on other sites in this repo on purpose —
+   clinic/medical calls for refined, not bold, per the studio's own rule
+   for conservative-industry briefs. */
+.loupe-card {
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+.loupe-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 1.5px var(--color-clinical-blue-glow);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.loupe-card:hover,
+.loupe-card:focus-within {
+  transform: translateY(-5px);
+  box-shadow: 0 26px 40px -22px rgba(22, 26, 25, 0.45);
+}
+.loupe-card:hover::after,
+.loupe-card:focus-within::after {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .loupe-card {
+    transition: box-shadow 0.2s ease;
+  }
+  .loupe-card:hover,
+  .loupe-card:focus-within {
+    transform: none;
+  }
+}
+
+/* Hero entrance — eyebrow, headline, copy, CTA rise in with a short
+   stagger on load. */
+.hero-intro > * {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: hero-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero-intro > *:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.hero-intro > *:nth-child(2) {
+  animation-delay: 0.18s;
+}
+.hero-intro > *:nth-child(3) {
+  animation-delay: 0.32s;
+}
+.hero-intro > *:nth-child(4) {
+  animation-delay: 0.46s;
+}
+@keyframes hero-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-intro > * {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Plain fade/rise for smaller inline reveals (stat rows, list items). */
+.rise-in {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.rise-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

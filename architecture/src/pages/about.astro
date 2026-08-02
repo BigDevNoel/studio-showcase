@@ -1,0 +1,174 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import dana from '../assets/images/principal-dana-okafor.jpg';
+import marcus from '../assets/images/principal-marcus-feld.jpg';
+import worktable from '../assets/images/studio-worktable-models.jpg';
+
+const values = [
+	{
+		num: '01',
+		title: 'We furnish the room, not the season’s catalog',
+		copy: 'Most of what goes into a Plumbline home is custom or sourced specifically for it — a piece pulled from a catalog is the exception, not the default.',
+	},
+	{
+		num: '02',
+		title: 'Every material gets touched in the studio first',
+		copy: 'Fabric, stone, and finish samples get reviewed in person under real light, not approved from a photo on a screen. It changes more decisions than clients expect.',
+	},
+	{
+		num: '03',
+		title: 'A principal is in your home every week during install',
+		copy: 'Dana or Marcus walks every installation weekly — not a project coordinator relaying photos. Problems get solved in the same conversation they’re noticed in.',
+	},
+];
+---
+
+<Layout
+	title="About"
+	description="Plumbline Studio was founded in 2015 by Dana Okafor and Marcus Feld. Meet the interior design studio and the principles behind the work."
+>
+	<section class="mx-auto max-w-6xl px-6 pb-16 pt-10 sm:pt-16">
+		<p class="ref-tag inline-block text-navy">No. 00 · About</p>
+		<h1 class="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl">
+			Ten years, twelve homes a year, one workshop.
+		</h1>
+		<p class="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
+			Plumbline Studio opened in 2015 above a since-closed bike shop on Broad Street with two
+			people, a fabric swatch book, and one client. We&rsquo;re seven people now, working out of
+			the warehouse we helped furnish first.
+		</p>
+	</section>
+
+	<section class="border-t border-ink/10 bg-paper-2">
+		<div class="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-2 md:items-center">
+			<div class="veil-lift aspect-[4/5] overflow-hidden rounded-sm md:order-2">
+				<div class="veil-content h-full w-full">
+					<Image
+						src={worktable}
+						alt="Material samples, fabric swatches, and furniture drawings spread across the studio's central worktable"
+						class="h-full w-full object-cover"
+						widths={[500, 900, 1300]}
+						sizes="(max-width: 768px) 100vw, 50vw"
+					/>
+				</div>
+			</div>
+			<div class="md:order-1">
+				<p class="font-mono text-xs uppercase tracking-[0.2em] text-navy">The Studio</p>
+				<h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+					We stayed small on purpose.
+				</h2>
+				<p class="mt-5 leading-relaxed text-ink-soft">
+					In 2019 we took on the full interior design of six loft residences inside the old S.
+					W. Tobacco Company warehouse on Rennie Street — and kept one for our own studio and
+					workshop. It&rsquo;s the project that taught us the most about designing around a raw
+					industrial shell, and it&rsquo;s still where you&rsquo;ll find us.
+				</p>
+				<p class="mt-4 leading-relaxed text-ink-soft">
+					We could have grown past seven people years ago. We didn&rsquo;t, because the thing
+					clients actually pay for — a principal who has personally touched every fabric and
+					finish going into their home — doesn&rsquo;t survive past a certain headcount. Dana or
+					Marcus leads every project from the first walkthrough to the final styling day.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- FOUNDERS -->
+	<section class="border-t border-ink/10">
+		<div class="mx-auto max-w-6xl px-6 py-20">
+			<p class="font-mono text-xs uppercase tracking-[0.2em] text-navy">Principals</p>
+			<h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+				Dana Okafor &amp; Marcus Feld
+			</h2>
+
+			<div class="mt-14 grid gap-14 sm:grid-cols-2">
+				<div>
+					<div class="model-card">
+						<div class="model-card__inner aspect-[4/5] overflow-hidden rounded-sm bg-paper-2">
+							<Image
+								src={dana}
+								alt="Portrait of Dana Okafor, Principal Designer at Plumbline Studio"
+								class="h-full w-full object-cover"
+								widths={[400, 700]}
+								sizes="(max-width: 640px) 100vw, 50vw"
+							/>
+						</div>
+					</div>
+					<h3 class="mt-5 font-display text-xl font-semibold text-ink">Dana Okafor</h3>
+					<p class="font-mono text-xs uppercase tracking-[0.15em] text-ink-faint">Principal Designer</p>
+					<p class="mt-3 text-sm leading-relaxed text-ink-soft">
+						Grew up in Richmond&rsquo;s Northside. B.Arch, Virginia Tech, 2008. Spent six years
+						at a Richmond firm known for historic tax-credit restoration work before turning to
+						full-time interior design and founding Plumbline in 2015. Still the only principal on
+						staff who can tell you whether a wall is load-bearing before she tells you what color
+						to paint it.
+					</p>
+				</div>
+				<div>
+					<div class="model-card">
+						<div class="model-card__inner aspect-[4/5] overflow-hidden rounded-sm bg-paper-2">
+							<Image
+								src={marcus}
+								alt="Portrait of Marcus Feld, Director of Interiors and Workshop at Plumbline Studio"
+								class="h-full w-full object-cover"
+								widths={[400, 700]}
+								sizes="(max-width: 640px) 100vw, 50vw"
+							/>
+						</div>
+					</div>
+					<h3 class="mt-5 font-display text-xl font-semibold text-ink">Marcus Feld</h3>
+					<p class="font-mono text-xs uppercase tracking-[0.15em] text-ink-faint">Director of Interiors &amp; Workshop</p>
+					<p class="mt-3 text-sm leading-relaxed text-ink-soft">
+						Furniture design degree from SCAD Savannah. Ran a small furniture and cabinetry
+						workshop in Manchester for five years before joining Dana in 2016. Every full-home
+						project gets at least one Plumbline-built piece — usually a dining table or a
+						primary-suite headboard.
+					</p>
+				</div>
+			</div>
+
+			<p class="mt-14 max-w-2xl text-sm leading-relaxed text-ink-soft">
+				The rest of the studio: a senior designer, two design associates, a procurement lead with
+				relationships at workrooms and antique dealers up and down the East Coast, and an office
+				manager who has been with us since 2017.
+			</p>
+		</div>
+	</section>
+
+	<!-- VALUES -->
+	<section class="bg-weave border-t border-ink/10">
+		<div class="mx-auto max-w-6xl px-6 py-20">
+			<p class="font-mono text-xs uppercase tracking-[0.2em] text-navy">How We Work</p>
+			<h2 class="mt-4 max-w-xl font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+				Three things we haven&rsquo;t compromised on.
+			</h2>
+
+			<div class="mt-14 grid gap-10 sm:grid-cols-3">
+				{
+					values.map((v) => (
+						<div class="rise-in">
+							<p class="font-display text-4xl font-semibold text-navy/40">{v.num}</p>
+							<h3 class="mt-3 font-display text-lg font-semibold text-ink">{v.title}</h3>
+							<p class="mt-2 text-sm leading-relaxed text-ink-soft">{v.copy}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-ink/10">
+		<div class="mx-auto flex max-w-6xl flex-col items-start gap-6 px-6 py-20 sm:flex-row sm:items-center sm:justify-between">
+			<h2 class="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+				Want to talk through a project?
+			</h2>
+			<a
+				href="/contact"
+				class="whitespace-nowrap rounded-sm bg-navy px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-vellum transition-colors hover:bg-ink"
+			>
+				Request a Consultation
+			</a>
+		</div>
+	</section>
+</Layout>

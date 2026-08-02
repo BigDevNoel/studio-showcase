@@ -1,17 +1,298 @@
 ---
-import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
+import ClinicalReveal from '../components/ClinicalReveal.astro';
+import LoupeCard from '../components/LoupeCard.astro';
+import { Image } from 'astro:assets';
+import heroPhoto from '../assets/images/hero-nurse-equipment.jpg';
+import treatmentRoom from '../assets/images/clinic-bed-blue-white.jpg';
+import instrumentTray from '../assets/images/surgical-instruments-tray.jpg';
+import deskFlatlay from '../assets/images/stethoscope-notebook-desk.jpg';
+import mountains from '../assets/images/colorado-rocky-mountains.jpg';
+import skinDetail from '../assets/images/skin-texture-closeup-detail.jpg';
+
+const stats = [
+	{ label: 'Board-Certified', value: 'FAAD' },
+	{ label: 'Open Since', value: '2026' },
+	{ label: 'Insurance', value: 'Most Plans' },
+	{ label: 'New Patients', value: 'Welcome' },
+];
+
+const abcde = [
+	{
+		letter: 'A',
+		title: 'Asymmetry',
+		copy: 'One half of a mole or spot doesn’t match the other in shape.',
+	},
+	{
+		letter: 'B',
+		title: 'Border',
+		copy: 'Edges are ragged, notched, blurred, or poorly defined rather than smooth.',
+	},
+	{
+		letter: 'C',
+		title: 'Color',
+		copy: 'Uneven shading — tan, brown, black, or patches of white, red, or blue within one spot.',
+	},
+	{
+		letter: 'D',
+		title: 'Diameter',
+		copy: 'Larger than 6mm, about the size of a pencil eraser — though melanomas can start smaller.',
+	},
+	{
+		letter: 'E',
+		title: 'Evolving',
+		copy: 'Any change in size, shape, color, or elevation, or a new symptom like bleeding or itching.',
+	},
+];
+
+const services = [
+	{
+		title: 'Full-Body Skin Cancer Screening',
+		copy: 'A head-to-toe exam with dermoscopy on anything worth a closer look. Our standard first line of defense against Denver’s UV exposure.',
+		image: treatmentRoom,
+		alt: 'A clean, modern treatment room at Cherry Creek Dermatology',
+	},
+	{
+		title: 'Mole Mapping & Dermoscopic Imaging',
+		copy: 'Baseline photography of your skin, mapped and compared visit over visit so we catch what’s new before you would.',
+		image: skinDetail,
+		alt: 'Macro photograph of skin texture, the level of detail examined during dermoscopic imaging',
+	},
+	{
+		title: 'Medical Dermatology',
+		copy: 'Acne, eczema, psoriasis, rosacea, and everything in between — treated in the same rooms as our screening visits.',
+		image: deskFlatlay,
+		alt: 'A stethoscope and patient notebook on a clinician’s desk',
+	},
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Clinic</title>
-	</head>
-	<body class="flex min-h-screen items-center justify-center bg-neutral-950 text-neutral-100">
-		<main class="text-center">
-			<h1 class="text-3xl font-semibold tracking-tight">Clinic — coming soon</h1>
-		</main>
-	</body>
-</html>
+<Layout
+	title="Home"
+	description="Cherry Creek Dermatology is a medical and surgical dermatology practice in Denver's Cherry Creek North, open since 2026, focused on skin cancer screening for the Front Range's high-altitude UV exposure."
+>
+	<!-- HERO -->
+	<section class="relative isolate overflow-hidden bg-ink-deep">
+		<div class="absolute inset-0">
+			<div class="clinical-reveal h-full w-full">
+				<div class="clinical-reveal-content h-full w-full">
+					<Image
+						src={heroPhoto}
+						alt="A clinician in surgical scrubs and mask preparing equipment before a procedure"
+						class="h-full w-full object-cover"
+						widths={[800, 1400, 1920]}
+						sizes="100vw"
+						loading="eager"
+					/>
+				</div>
+			</div>
+			<div class="absolute inset-0 bg-gradient-to-r from-ink-deep/95 via-ink-deep/80 to-ink-deep/45"></div>
+			<div class="absolute inset-0 bg-ink-deep/25"></div>
+		</div>
+
+		<div class="relative mx-auto max-w-6xl px-6 py-28 sm:py-36">
+			<div class="hero-intro max-w-xl">
+				<p class="font-mono text-xs uppercase tracking-[0.2em] text-clinical-blue-glow">
+					Cherry Creek North &middot; Est. 2026
+				</p>
+				<h1 class="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-porcelain sm:text-5xl lg:text-[3.4rem]">
+					Skin health built for mile-high sun.
+				</h1>
+				<p class="mt-6 max-w-md text-base leading-relaxed text-porcelain/80 sm:text-lg">
+					At 5,280 feet, Denver skin takes as much as 25% more UV exposure than sea level.
+					Cherry Creek Dermatology exists mainly to catch what that sun does early &mdash;
+					full-body skin cancer screening, mole mapping, and medical dermatology from Dr.
+					Elena Marsh, FAAD, and PA-C Priya Anand.
+				</p>
+				<div class="mt-8 flex flex-wrap items-center gap-4">
+					<a
+						href="/contact"
+						class="rounded-sm bg-clinical-blue px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-porcelain transition-colors hover:bg-clinical-blue-dim"
+					>
+						Request an Appointment
+					</a>
+					<a
+						href="/services"
+						class="font-mono text-xs uppercase tracking-[0.15em] text-porcelain/80 underline decoration-porcelain/30 underline-offset-4 hover:text-clinical-blue-glow"
+					>
+						View Services
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- TRUST STRIP -->
+	<section class="border-y border-ink/10 bg-porcelain-2">
+		<div class="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 py-10 sm:grid-cols-4">
+			{
+				stats.map((s) => (
+					<div>
+						<p class="font-display text-2xl font-semibold text-clinical-blue sm:text-3xl">{s.value}</p>
+						<p class="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-ink-faint">{s.label}</p>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- APPROACH -->
+	<section class="border-b border-ink/10">
+		<div class="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-2 md:items-center">
+			<ClinicalReveal
+				src={instrumentTray}
+				alt="Sterile surgical instruments laid out on a procedure tray"
+				aspect="aspect-[4/5]"
+			/>
+			<div>
+				<p class="font-mono text-xs uppercase tracking-[0.2em] text-clinical-blue">Why We Lead With Screening</p>
+				<h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+					Colorado has one of the country&rsquo;s highest melanoma rates.
+				</h2>
+				<p class="mt-5 leading-relaxed text-ink-soft">
+					Thinner atmosphere, 300&#43; days of sun a year, and a population that skis, climbs,
+					and runs outdoors nearly year-round &mdash; it&rsquo;s a genuinely tough environment for
+					skin. Dr. Marsh opened this practice in 2026 after a career of seeing too many Front
+					Range patients diagnosed at a late stage simply because no one had looked closely in
+					years.
+				</p>
+				<p class="mt-4 leading-relaxed text-ink-soft">
+					Every new patient starts with a full-body screening, not a five-minute look at the one
+					spot you called about. It&rsquo;s the same standard we&rsquo;d want for our own family.
+				</p>
+				<a
+					href="/about"
+					class="mt-6 inline-block font-mono text-xs uppercase tracking-[0.15em] text-clinical-blue underline decoration-clinical-blue/30 underline-offset-4 hover:text-clinical-blue-dim"
+				>
+					Meet the Practice &rarr;
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- ABCDE -->
+	<section class="border-b border-ink/10 bg-porcelain-2">
+		<div class="mx-auto max-w-6xl px-6 py-20">
+			<div class="max-w-xl">
+				<p class="font-mono text-xs uppercase tracking-[0.2em] text-clinical-blue">Between Visits</p>
+				<h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+					The ABCDEs of a mole worth a closer look.
+				</h2>
+				<p class="mt-4 leading-relaxed text-ink-soft">
+					The same framework dermatologists use during a screening &mdash; worth knowing yourself
+					for the eleven months a year you&rsquo;re not in our chair.
+				</p>
+			</div>
+
+			<div class="mm-scale mt-10 mb-2"></div>
+
+			<div class="mt-8 grid gap-px overflow-hidden rounded-sm border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-5">
+				{
+					abcde.map((item, i) => (
+						<div class="rise-in bg-porcelain p-6" style={`transition-delay:${i * 80}ms`}>
+							<p class="font-display text-4xl font-semibold text-clinical-blue/50">{item.letter}</p>
+							<h3 class="mt-3 font-display text-lg font-semibold text-ink">{item.title}</h3>
+							<p class="mt-2 text-sm leading-relaxed text-ink-soft">{item.copy}</p>
+						</div>
+					))
+				}
+			</div>
+			<p class="mt-6 text-sm text-ink-faint">
+				Any one of these on its own is worth a visit &mdash; you don&rsquo;t need all five to have
+				it checked.
+			</p>
+		</div>
+	</section>
+
+	<!-- SERVICES TEASER -->
+	<section class="border-b border-ink/10">
+		<div class="mx-auto max-w-6xl px-6 py-20">
+			<div class="flex flex-wrap items-end justify-between gap-6">
+				<div>
+					<p class="font-mono text-xs uppercase tracking-[0.2em] text-clinical-blue">What We Treat</p>
+					<h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+						Screening first, everything else as needed.
+					</h2>
+				</div>
+				<a
+					href="/services"
+					class="font-mono text-xs uppercase tracking-[0.15em] text-ink-soft underline decoration-ink/30 underline-offset-4 hover:text-clinical-blue"
+				>
+					All Services &rarr;
+				</a>
+			</div>
+
+			<div class="mt-12 grid gap-8 md:grid-cols-3">
+				{
+					services.map((s) => (
+						<a href="/services" class="block">
+							<LoupeCard src={s.image} alt={s.alt} />
+							<h3 class="mt-4 font-display text-xl font-semibold text-ink">{s.title}</h3>
+							<p class="mt-2 text-sm leading-relaxed text-ink-soft">{s.copy}</p>
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- ALTITUDE CTA BAND -->
+	<section class="relative overflow-hidden border-b border-ink/10">
+		<div class="absolute inset-0">
+			<Image
+				src={mountains}
+				alt="The Colorado Front Range under a clear high-altitude sky"
+				class="h-full w-full object-cover"
+				widths={[800, 1400, 1920]}
+				sizes="100vw"
+			/>
+			<div class="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/60 to-ink/30"></div>
+		</div>
+		<div class="relative mx-auto max-w-6xl px-6 py-24">
+			<p class="font-mono text-xs uppercase tracking-[0.2em] text-clinical-blue-glow">5,280 Feet Of Elevation</p>
+			<h2 class="mt-4 max-w-xl font-display text-3xl font-semibold tracking-tight text-porcelain sm:text-4xl">
+				The same altitude that makes the views worth it makes sunscreen non-negotiable.
+			</h2>
+			<p class="mt-4 max-w-lg leading-relaxed text-porcelain/80">
+				UV intensity climbs roughly 4&ndash;5% for every 1,000 feet of elevation gain. On a clear
+				Denver day, that adds up fast &mdash; and most sunburns here happen on overcast days people
+				didn&rsquo;t think to prepare for.
+			</p>
+		</div>
+	</section>
+
+	<!-- TESTIMONIAL -->
+	<section class="border-b border-ink/10 bg-porcelain-2">
+		<div class="mx-auto max-w-3xl px-6 py-20 text-center">
+			<p class="font-display text-2xl font-medium leading-snug text-ink sm:text-3xl">
+				&ldquo;Dr. Marsh found a melanoma on my shoulder blade at a screening I almost
+				rescheduled. Stage 1, gone in one excision. I tell everyone I know over 30 to just go get
+				looked at.&rdquo;
+			</p>
+			<p class="mt-6 font-mono text-xs uppercase tracking-[0.15em] text-ink-faint">
+				Renata K. &middot; Patient since 2026
+			</p>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section>
+		<div class="mx-auto flex max-w-6xl flex-col items-start gap-6 px-6 py-20 sm:flex-row sm:items-center sm:justify-between">
+			<div>
+				<h2 class="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+					Overdue for a skin check?
+				</h2>
+				<p class="mt-3 max-w-md text-ink-soft">
+					New patient full-body screenings run $225 self-pay, or billed to most insurance plans.
+					Most patients are seen within two weeks.
+				</p>
+			</div>
+			<a
+				href="/contact"
+				class="whitespace-nowrap rounded-sm bg-clinical-blue px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-porcelain transition-colors hover:bg-clinical-blue-dim"
+			>
+				Request an Appointment
+			</a>
+		</div>
+	</section>
+</Layout>

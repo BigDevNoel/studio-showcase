@@ -1,17 +1,179 @@
 ---
-import '../styles/global.css';
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import JointHero from '../components/JointHero.astro';
+import TimberCard from '../components/TimberCard.astro';
+
+import roofConstruction from '../assets/images/roof-construction-loft-beams.jpg';
+import handPlaneFlattening from '../assets/images/hand-plane-flattening-board.jpg';
+import barnInterior from '../assets/images/rustic-barn-interior-beams.jpg';
+import workbenchShavings from '../assets/images/workbench-tools-shavings.jpg';
+import roofTrusses from '../assets/images/roof-trusses-under-construction.jpg';
+
+const teaser = [
+	{
+		title: 'Timber Frame Homes',
+		copy: 'Full post-and-beam shells, hand-cut and dry-fit in our shop before they ever leave for site.',
+		img: roofConstruction,
+		alt: 'Exposed timber roof structure under construction, showing post-and-beam framing',
+		href: '/services#homes',
+	},
+	{
+		title: 'Hand-Cut Joinery',
+		copy: 'Every mortise, tenon, and peg hole laid out with a chisel and a story pole, not a CNC file.',
+		img: handPlaneFlattening,
+		alt: 'Craftsman flattening a lumber board with a hand plane in a joinery shop',
+		href: '/services#joinery',
+	},
+	{
+		title: 'Barn Restoration',
+		copy: 'Repair and re-raise timber barns that are one bad winter from a total loss.',
+		img: barnInterior,
+		alt: 'Rustic wooden barn interior showing exposed structural beams',
+		href: '/services#restoration',
+	},
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Carpentry</title>
-	</head>
-	<body class="flex min-h-screen items-center justify-center bg-neutral-950 text-neutral-100">
-		<main class="text-center">
-			<h1 class="text-3xl font-semibold tracking-tight">Carpentry — coming soon</h1>
-		</main>
-	</body>
-</html>
+<Layout
+	title="Home"
+	description="Broad Brook Timberworks hand-cuts post-and-beam timber frames and restores historic barns in the Mad River Valley, Waitsfield, Vermont."
+>
+	<JointHero />
+
+	<section class="border-y border-oak-ink-faint/25 bg-sawdust-2">
+		<div class="mx-auto max-w-6xl px-6 py-16 text-center">
+			<p class="mx-auto max-w-2xl font-display text-2xl font-medium leading-snug text-oak-ink sm:text-3xl">
+				When a frame is ready, we don't crane it up alone. We raise it by hand, with the people
+				who'll live under it, the way barns went up here for two hundred years.
+			</p>
+		</div>
+	</section>
+
+	<section class="mx-auto max-w-6xl px-6 py-20">
+		<div class="mb-12 flex items-end justify-between">
+			<div>
+				<p class="font-mono text-xs uppercase tracking-[0.25em] text-verdigris-deep">What we build</p>
+				<h2 class="mt-2 font-display text-4xl font-semibold tracking-tight text-oak-ink sm:text-5xl">
+					Three ways we work
+				</h2>
+			</div>
+			<a href="/services" class="hidden font-mono text-xs uppercase tracking-[0.15em] text-oak-ink-faint hover:text-verdigris-deep sm:block">
+				Full services &amp; pricing &rarr;
+			</a>
+		</div>
+
+		<div class="grid gap-8 sm:grid-cols-3">
+			{
+				teaser.map((item, i) => (
+					<a href={item.href} class="bench-reveal group block" style={`transition-delay:${i * 90}ms`}>
+						<TimberCard
+							src={item.img}
+							alt={item.alt}
+							aspect="aspect-[4/5]"
+							priority={i === 0}
+						/>
+						<h3 class="mt-5 font-display text-2xl font-semibold text-oak-ink group-hover:text-verdigris-deep">
+							{item.title}
+						</h3>
+						<p class="mt-2 text-sm leading-relaxed text-oak-ink-soft">{item.copy}</p>
+					</a>
+				))
+			}
+		</div>
+	</section>
+
+	<div class="story-pole mx-auto max-w-6xl"></div>
+
+	<section class="mx-auto max-w-6xl px-6 py-20">
+		<div class="grid items-center gap-14 lg:grid-cols-2">
+			<div class="bench-reveal order-2 lg:order-1">
+				<p class="font-mono text-xs uppercase tracking-[0.25em] text-verdigris-deep">Since 2009</p>
+				<h2 class="mt-2 font-display text-4xl font-semibold tracking-tight text-oak-ink sm:text-5xl">
+					A dairy barn, reframed
+				</h2>
+				<p class="mt-6 text-lg leading-relaxed text-oak-ink-soft">
+					Our shop sits inside an 1890s dairy barn on Broad Brook Road that sat empty for two
+					decades before Colin Harjes bought it in 2009. We cut our first commissioned frame in
+					the same bay where the cows used to stand, and we've cut every one since.
+				</p>
+				<a
+					href="/about"
+					class="mt-6 inline-block font-mono text-xs uppercase tracking-[0.15em] text-verdigris-deep hover:underline"
+				>
+					Read the full story &rarr;
+				</a>
+			</div>
+			<div class="order-1 lg:order-2">
+				<TimberCard
+					src={workbenchShavings}
+					alt="Carpentry workbench with hand tools and wood shavings in the Broad Brook shop"
+					aspect="aspect-[4/3]"
+				/>
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-sawdust-2 py-20">
+		<div class="mx-auto max-w-6xl px-6">
+			<p class="mb-10 font-mono text-xs uppercase tracking-[0.25em] text-verdigris-deep">From clients</p>
+			<div class="grid gap-10 sm:grid-cols-3">
+				<blockquote class="bench-reveal border-l-2 border-verdigris/60 pl-5">
+					<p class="text-oak-ink-soft">
+						&ldquo;Fourteen of our neighbors showed up for the raising and had our great room
+						standing by 4pm. I still can't get over that it went up without a single bolt.&rdquo;
+					</p>
+					<footer class="mt-4 font-mono text-xs uppercase tracking-[0.15em] text-oak-ink-faint">
+						Hannah Voss &middot; Fayston, VT
+					</footer>
+				</blockquote>
+				<blockquote class="bench-reveal border-l-2 border-verdigris/60 pl-5" style="transition-delay:90ms">
+					<p class="text-oak-ink-soft">
+						&ldquo;Our 1888 barn was two winters from a collapsed ridge. Broad Brook replaced
+						eleven timbers and you can't tell which ones are new from the ground.&rdquo;
+					</p>
+					<footer class="mt-4 font-mono text-xs uppercase tracking-[0.15em] text-oak-ink-faint">
+						Roger Prue &middot; Warren, VT
+					</footer>
+				</blockquote>
+				<blockquote class="bench-reveal border-l-2 border-verdigris/60 pl-5" style="transition-delay:180ms">
+					<p class="text-oak-ink-soft">
+						&ldquo;They dry-fit the entire frame in the shop before it ever came to our site. Zero
+						surprises on raising day, which is not something you hear from a builder.&rdquo;
+					</p>
+					<footer class="mt-4 font-mono text-xs uppercase tracking-[0.15em] text-oak-ink-faint">
+						Deb and Alan Kestrel &middot; Moretown, VT
+					</footer>
+				</blockquote>
+			</div>
+		</div>
+	</section>
+
+	<section class="relative overflow-hidden py-24 text-center sm:py-32">
+		<div class="absolute inset-0 -z-10">
+			<Image
+				src={roofTrusses}
+				alt=""
+				class="h-full w-full object-cover opacity-25"
+				widths={[800, 1400, 1800]}
+				sizes="100vw"
+				loading="lazy"
+			/>
+			<div class="absolute inset-0 bg-gradient-to-t from-sawdust via-sawdust/90 to-sawdust/60"></div>
+		</div>
+		<div class="mx-auto max-w-6xl px-6">
+			<h2 class="font-display text-3xl font-semibold tracking-tight text-oak-ink sm:text-4xl">
+				Bring us your site plan.
+			</h2>
+			<p class="mx-auto mt-3 max-w-lg text-sm text-oak-ink-soft sm:text-base">
+				We start every project with a $150 site visit &mdash; waived if you move forward with a frame.
+			</p>
+			<a
+				href="/contact"
+				class="plane-cta mt-7 inline-block rounded-sm bg-verdigris px-7 py-3 font-mono text-xs uppercase tracking-[0.15em] text-shaving transition-colors hover:bg-verdigris-deep"
+			>
+				Request a Quote
+			</a>
+		</div>
+	</section>
+</Layout>

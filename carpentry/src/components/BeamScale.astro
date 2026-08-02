@@ -1,0 +1,21 @@
+---
+// Visualizes project scope as stacked courses of timber rather than an
+// arbitrary 01/02/03 — more courses = more of the shop's calendar the
+// project takes, from a single custom piece up through a full home frame.
+interface Props {
+	count: number;
+}
+const { count } = Astro.props;
+const widths = [14, 20, 26, 32, 38];
+---
+
+<div class="flex flex-col-reverse gap-1" role="img" aria-label={`Scope level ${count} of 5`}>
+	{
+		Array.from({ length: 5 }).map((_, i) => (
+			<span
+				class="rounded-[1px]"
+				style={`width: ${widths[i]}px; height: 6px; background-color: ${i < count ? 'var(--color-verdigris)' : 'var(--color-oak-ink-faint)'}; opacity: ${i < count ? 1 : 0.25};`}
+			/>
+		))
+	}
+</div>

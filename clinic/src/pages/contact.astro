@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ClinicalReveal from '../components/ClinicalReveal.astro';
+import deskFlatlay from '../assets/images/stethoscope-notebook-desk.jpg';
+
+const address = '250 Steele Street, Suite 100, Denver, CO 80206';
+const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
+---
+
+<Layout
+	title="Contact"
+	description="Request an appointment with Cherry Creek Dermatology in Denver, CO. Visit us at 250 Steele Street, Suite 100 in Cherry Creek North, or send your visit details through our intake form."
+>
+	<section class="mx-auto max-w-6xl px-6 pb-10 pt-10 sm:pt-16">
+		<p class="font-mono text-xs uppercase tracking-[0.2em] text-clinical-blue">Contact</p>
+		<h1 class="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl">
+			Let&rsquo;s get you on the schedule.
+		</h1>
+		<p class="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
+			Most new patients are seen within two weeks. If you have a spot that&rsquo;s changed
+			recently, say so in the form &mdash; we hold same-week slots for exactly that.
+		</p>
+	</section>
+
+	<section class="mx-auto max-w-6xl px-6 pb-20">
+		<div class="grid gap-10 lg:grid-cols-[1fr_1.15fr]">
+			<div class="space-y-10">
+				<div>
+					<p class="font-mono text-xs uppercase tracking-[0.15em] text-ink-faint">Office</p>
+					<p class="mt-2 text-lg text-ink">250 Steele Street, Suite 100</p>
+					<p class="text-lg text-ink">Cherry Creek North, Denver, CO 80206</p>
+				</div>
+
+				<div>
+					<p class="font-mono text-xs uppercase tracking-[0.15em] text-ink-faint">Reach Us</p>
+					<p class="mt-2">
+						<a href="tel:+13035550148" class="text-lg text-ink hover:text-clinical-blue">(303) 555-0148</a>
+					</p>
+					<p>
+						<a href="mailto:hello@cherrycreekderm.com" class="text-lg text-ink hover:text-clinical-blue"
+							>hello@cherrycreekderm.com</a
+						>
+					</p>
+				</div>
+
+				<div>
+					<p class="font-mono text-xs uppercase tracking-[0.15em] text-ink-faint">Hours</p>
+					<dl class="mt-2 space-y-1 font-mono text-sm text-ink-soft">
+						<div class="flex justify-between gap-6"><dt>Mon&ndash;Thu</dt><dd>7:30a &ndash; 4:30p</dd></div>
+						<div class="flex justify-between gap-6"><dt>Fri</dt><dd>7:30a &ndash; 12:00p</dd></div>
+						<div class="flex justify-between gap-6"><dt>Sat&ndash;Sun</dt><dd>Closed</dd></div>
+					</dl>
+					<p class="mt-3 text-sm text-ink-faint">Most insurance plans accepted for medical visits; verify benefits before your visit.</p>
+				</div>
+
+				<div class="overflow-hidden rounded-sm border border-ink/10">
+					<iframe
+						title="Map to Cherry Creek Dermatology"
+						src={mapSrc}
+						class="h-56 w-full grayscale"
+						style="border: 0;"
+						loading="lazy"
+						referrerpolicy="no-referrer-when-downgrade"
+					></iframe>
+				</div>
+
+				<ClinicalReveal src={deskFlatlay} alt="A stethoscope and patient notebook on a clinician’s desk" aspect="aspect-[16/10]" />
+			</div>
+
+			<div class="rise-in rounded-sm border border-ink/10 bg-porcelain-2 p-7 sm:p-9">
+				<p class="font-mono text-xs uppercase tracking-[0.15em] text-clinical-blue">Intake</p>
+				<h2 class="mt-3 font-display text-2xl font-semibold text-ink">Request an appointment</h2>
+				<form id="contact-form" class="mt-6 space-y-5">
+					<div class="grid gap-5 sm:grid-cols-2">
+						<div>
+							<label for="name" class="block font-mono text-xs uppercase tracking-[0.15em] text-ink-faint">Name</label>
+							<input
+								id="name"
+								name="name"
+								type="text"
+								required
+								class="mt-2 w-full rounded-sm border border-ink/20 bg-porcelain px-4 py-2.5 text-ink placeholder:text-ink-faint focus:border-clinical-blue focus:outline-none"
+								placeholder="Your name"
+							/>
+						</div>
+						<div>
+							<label for="phone" class="block font-mono text-xs uppercase tracking-[0.15em] text-ink-faint">Phone</label>
+							<input
+								id="phone"
+								name="phone"
+								type="tel"
+								required
+								class="mt-2 w-full rounded-sm border border-ink/20 bg-porcelain px-4 py-2.5 text-ink placeholder:text-ink-faint focus:border-clinical-blue focus:outline-none"
+								placeholder="(303) 555-0100"
+							/>
+						</div>
+					</div>
+
+					<div>
+						<label for="email" class="block font-mono text-xs uppercase tracking-[0.15em] text-ink-faint">Email</label>
+						<input
+							id="email"
+							name="email"
+							type="email"
+							required
+							class="mt-2 w-full rounded-sm border border-ink/20 bg-porcelain px-4 py-2.5 text-ink placeholder:text-ink-faint focus:border-clinical-blue focus:outline-none"
+							placeholder="you@email.com"
+						/>
+					</div>
+
+					<div class="grid gap-5 sm:grid-cols-2">
+						<div>
+							<label for="patient-type" class="block font-mono text-xs uppercase tracking-[0.15em] text-ink-faint"
+								>Patient type</label
+							>
+							<select
+								id="patient-type"
+								name="patient-type"
+								class="mt-2 w-full rounded-sm border border-ink/20 bg-porcelain px-4 py-2.5 text-ink focus:border-clinical-blue focus:outline-none"
+							>
+								<option>New patient</option>
+								<option>Returning patient</option>
+							</select>
+						</div>
+						<div>
+							<label for="reason" class="block font-mono text-xs uppercase tracking-[0.15em] text-ink-faint"
+								>Reason for visit</label
+							>
+							<select
+								id="reason"
+								name="reason"
+								class="mt-2 w-full rounded-sm border border-ink/20 bg-porcelain px-4 py-2.5 text-ink focus:border-clinical-blue focus:outline-none"
+							>
+								<option>Full-body skin cancer screening</option>
+								<option>A specific spot or mole</option>
+								<option>Acne, eczema, psoriasis, or rosacea</option>
+								<option>Cosmetic consultation</option>
+								<option>Not sure yet</option>
+							</select>
+						</div>
+					</div>
+
+					<div>
+						<label for="message" class="block font-mono text-xs uppercase tracking-[0.15em] text-ink-faint">Anything we should know</label>
+						<textarea
+							id="message"
+							name="message"
+							rows="4"
+							class="mt-2 w-full rounded-sm border border-ink/20 bg-porcelain px-4 py-2.5 text-ink placeholder:text-ink-faint focus:border-clinical-blue focus:outline-none"
+							placeholder="A spot that's changed, a history of melanoma in your family, insurance questions — whatever's relevant."
+						></textarea>
+					</div>
+
+					<button
+						type="submit"
+						class="w-full rounded-sm bg-clinical-blue px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-porcelain transition-colors hover:bg-clinical-blue-dim"
+					>
+						Send Request
+					</button>
+					<p id="form-status" class="hidden font-mono text-xs uppercase tracking-[0.15em] text-clinical-blue" role="status"></p>
+				</form>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<script>
+	const form = document.getElementById('contact-form') as HTMLFormElement | null;
+	const status = document.getElementById('form-status');
+	form?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		if (status) {
+			status.textContent = 'Received — our front desk will call within one business day to schedule.';
+			status.classList.remove('hidden');
+		}
+		form.reset();
+	});
+</script>

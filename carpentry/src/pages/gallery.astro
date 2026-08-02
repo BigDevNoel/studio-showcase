@@ -1,0 +1,86 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+
+import chiselCuttingJoint from '../assets/images/chisel-cutting-joint.jpg';
+import roofConstruction from '../assets/images/roof-construction-loft-beams.jpg';
+import markingTimber from '../assets/images/marking-timber-pencil-tape.jpg';
+import handPlaneShavings from '../assets/images/hand-plane-wood-shavings-closeup.jpg';
+import barnInterior from '../assets/images/rustic-barn-interior-beams.jpg';
+import handPlaneFlattening from '../assets/images/hand-plane-flattening-board.jpg';
+import roofTrusses from '../assets/images/roof-trusses-under-construction.jpg';
+import workbenchShavings from '../assets/images/workbench-tools-shavings.jpg';
+import chiselHammerCarving from '../assets/images/chisel-hammer-carving-plank.jpg';
+import stackedTimber from '../assets/images/stacked-timber-planks-storage.jpg';
+import measuringTape from '../assets/images/measuring-tape-workshop.jpg';
+import sawmillInterior from '../assets/images/historic-sawmill-interior.jpg';
+
+const photos = [
+	{ img: chiselCuttingJoint, caption: 'Cutting a mortise by hand, shop bay 2', h: 420 },
+	{ img: roofConstruction, caption: 'Roof structure going up, Fayston addition', h: 460 },
+	{ img: markingTimber, caption: 'Marking timber before the cut', h: 340 },
+	{ img: handPlaneShavings, caption: 'First pass with the jack plane', h: 400 },
+	{ img: barnInterior, caption: 'Restored hemlock frame, Warren barn', h: 460 },
+	{ img: handPlaneFlattening, caption: 'Flattening a reference face before layout', h: 340 },
+	{ img: roofTrusses, caption: 'Common rafters set, Moretown addition', h: 420 },
+	{ img: workbenchShavings, caption: 'End of day, shavings on the bench', h: 340 },
+	{ img: chiselHammerCarving, caption: 'Chopping out a peg mortise', h: 400 },
+	{ img: stackedTimber, caption: 'Hemlock stock, air-drying under cover', h: 380 },
+	{ img: measuringTape, caption: 'Checking a rafter length against the plan', h: 340 },
+	{ img: sawmillInterior, caption: 'Inside the shop, west bay', h: 420 },
+];
+---
+
+<Layout
+	title="Gallery"
+	description="Photos from the shop floor and raising days at Broad Brook Timberworks — Waitsfield, Vermont."
+>
+	<section class="mx-auto max-w-6xl px-6 pt-16 pb-10 sm:pt-24">
+		<p class="font-mono text-xs uppercase tracking-[0.3em] text-verdigris-deep">Gallery</p>
+		<h1 class="mt-3 max-w-2xl font-display text-4xl font-semibold leading-[0.98] tracking-tight text-oak-ink sm:text-6xl">
+			The shop, on a normal week.
+		</h1>
+		<p class="mt-6 max-w-xl text-base leading-relaxed text-oak-ink-soft sm:text-lg">
+			No staged shots — this is what a frame looks like on its way from rough stock to raised.
+		</p>
+	</section>
+
+	<section class="mx-auto max-w-6xl px-6 py-10 pb-20">
+		<div class="columns-1 gap-5 sm:columns-2 lg:columns-3">
+			{
+				photos.map((p, i) => (
+					<div class="bench-reveal timber-card mb-5 break-inside-avoid overflow-hidden" style={`transition-delay:${(i % 6) * 70}ms`}>
+						<Image
+							src={p.img}
+							alt={p.caption}
+							class="w-full object-cover"
+							style={`height: ${p.h}px;`}
+							widths={[400, 700, 900]}
+							sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+							loading="lazy"
+						/>
+						<p class="mt-2 px-1 font-mono text-[11px] uppercase tracking-[0.1em] text-oak-ink-faint">{p.caption}</p>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="bg-sawdust-2 py-16 sm:py-20">
+		<div class="mx-auto max-w-3xl px-6 text-center">
+			<p class="bench-reveal font-mono text-xs uppercase tracking-[0.3em] text-verdigris-deep">Shot on the floor</p>
+			<h2 class="bench-reveal mt-2 font-display text-2xl font-semibold tracking-tight text-oak-ink sm:text-3xl">
+				Want to see a frame in progress?
+			</h2>
+			<p class="bench-reveal mt-3 text-sm text-oak-ink-soft">
+				Shop visits run by appointment — call ahead and we'll tell you what's on the floor that day.
+			</p>
+			<a
+				href="/contact"
+				class="plane-cta mt-7 inline-block rounded-sm bg-verdigris px-7 py-3 font-mono text-xs uppercase tracking-[0.15em] text-shaving transition-colors hover:bg-verdigris-deep"
+			>
+				Request a Quote
+			</a>
+		</div>
+	</section>
+</Layout>

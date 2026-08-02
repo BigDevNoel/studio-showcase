@@ -1,5 +1,13 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+
+import squatImg from '../assets/images/squat-lifter-barbell.jpg';
+import benchImg from '../assets/images/bench-press-barbell.jpg';
+import deadliftImg from '../assets/images/deadlift-hands-grip.jpg';
+import airBikeImg from '../assets/images/air-bike-conditioning.jpg';
+import trainingFloorImg from '../assets/images/training-floor-brick-trusses.jpg';
+import ctaBackgroundImg from '../assets/images/gym-floor-duotone-cta.jpg';
 
 const programs = [
 	{
@@ -23,10 +31,10 @@ const programs = [
 ];
 
 const disciplines = [
-	{ label: 'Squat', id: '33581693-sq', img: '13106591', alt: 'Lifter racking a loaded barbell for a back squat' },
-	{ label: 'Bench', id: '11433060-bp', img: '11433060', alt: 'Lifter pressing a barbell on a flat bench' },
-	{ label: 'Pull', id: '841125-dl', img: '841125', alt: 'Close-up of hands gripping a loaded barbell before a deadlift' },
-	{ label: 'Conditioning', id: '6389514-cd', img: '6389514', alt: 'Athlete training on an air bike' },
+	{ label: 'Squat', id: '33581693-sq', img: squatImg, alt: 'Lifter racking a loaded barbell for a back squat' },
+	{ label: 'Bench', id: '11433060-bp', img: benchImg, alt: 'Lifter pressing a barbell on a flat bench' },
+	{ label: 'Pull', id: '841125-dl', img: deadliftImg, alt: 'Close-up of hands gripping a loaded barbell before a deadlift' },
+	{ label: 'Conditioning', id: '6389514-cd', img: airBikeImg, alt: 'Athlete training on an air bike' },
 ];
 
 const schedule = [
@@ -64,10 +72,10 @@ const floorRules = [
 					loop
 					playsinline
 					preload="metadata"
-					poster="https://images.pexels.com/videos/5319998/pictures/preview-0.jpg"
+					poster="/videos/hero-video-poster.jpg"
 				>
-					<source src="https://videos.pexels.com/video-files/5319998/5319998-sd_640_360_25fps.mp4" media="(max-width: 639px)" type="video/mp4" />
-					<source src="https://videos.pexels.com/video-files/5319998/5319998-hd_1280_720_25fps.mp4" type="video/mp4" />
+					<source src="/videos/hero-video-sd.mp4" media="(max-width: 639px)" type="video/mp4" />
+					<source src="/videos/hero-video-hd.mp4" type="video/mp4" />
 				</video>
 			</div>
 		</div>
@@ -215,13 +223,13 @@ const floorRules = [
 			{
 				disciplines.map((d, i) => (
 					<div class="flash-reveal viewfinder aspect-[3/4] overflow-hidden rounded-md" style={`transition-delay: ${i * 80}ms`}>
-						<img
-							src={`https://images.pexels.com/photos/${d.img}/pexels-photo-${d.img}.jpeg?auto=compress&cs=tinysrgb&w=700`}
+						<Image
+							src={d.img}
 							alt={d.alt}
 							class="h-full w-full object-cover"
+							widths={[350, 700]}
+							sizes="(max-width: 640px) 50vw, 25vw"
 							loading="lazy"
-							width="700"
-							height="933"
 						/>
 						<span class="vf-corner"></span>
 						<span class="vf-corner"></span>
@@ -241,13 +249,13 @@ const floorRules = [
 	<section class="mx-auto max-w-6xl px-6 py-8 sm:py-16">
 		<div class="grid items-center gap-10 sm:grid-cols-2">
 			<div class="flash-reveal viewfinder overflow-hidden rounded-md">
-				<img
-					src="https://images.pexels.com/photos/34440925/pexels-photo-34440925.jpeg?auto=compress&cs=tinysrgb&w=1200"
+				<Image
+					src={trainingFloorImg}
 					alt="Exposed brick pillars and steel roof trusses in an industrial building, similar to the Foundry's training floor"
 					class="h-[420px] w-full object-cover"
+					widths={[600, 1200]}
+					sizes="(max-width: 640px) 100vw, 50vw"
 					loading="lazy"
-					width="1200"
-					height="420"
 				/>
 				<span class="vf-corner"></span>
 				<span class="vf-corner"></span>
@@ -303,10 +311,12 @@ const floorRules = [
 	<section class="relative overflow-hidden py-24 text-center sm:py-32">
 		<div class="absolute inset-0 -z-10">
 			<div class="duotone duotone-fade h-full w-full">
-				<img
-					src="https://images.pexels.com/photos/6389506/pexels-photo-6389506.jpeg?auto=compress&cs=tinysrgb&w=1800"
+				<Image
+					src={ctaBackgroundImg}
 					alt=""
 					class="h-full w-full object-cover opacity-70"
+					widths={[800, 1400, 1800]}
+					sizes="100vw"
 					loading="lazy"
 				/>
 			</div>

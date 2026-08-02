@@ -1,6 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import PlateStack from '../components/PlateStack.astro';
+
+import plateWallImg from '../assets/images/plate-wall-calibrated-bumpers.jpg';
 
 const tiers = [
 	{
@@ -113,13 +116,13 @@ const equipment = [
 	<section class="mx-auto max-w-6xl px-6 py-16">
 		<div class="grid gap-10 sm:grid-cols-2 sm:items-center">
 			<div class="flash-reveal viewfinder overflow-hidden rounded-md">
-				<img
-					src="https://images.pexels.com/photos/4793231/pexels-photo-4793231.jpeg?auto=compress&cs=tinysrgb&w=1200"
+				<Image
+					src={plateWallImg}
 					alt="Heavy weight plates racked inside a loft-style gym, similar to the Foundry's plate storage"
 					class="h-[380px] w-full object-cover"
+					widths={[600, 1200]}
+					sizes="(max-width: 640px) 100vw, 50vw"
 					loading="lazy"
-					width="1200"
-					height="380"
 				/>
 				<span class="vf-corner"></span>
 				<span class="vf-corner"></span>

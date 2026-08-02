@@ -1,0 +1,159 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TimberCard from '../components/TimberCard.astro';
+import BeamScale from '../components/BeamScale.astro';
+
+import stackedTimber from '../assets/images/stacked-timber-planks-storage.jpg';
+
+const services = [
+	{
+		id: 'joinery',
+		name: 'Custom Joinery',
+		price: 'From $2,800',
+		unit: 'per piece',
+		scope: 1,
+		blurb: 'A single feature piece — a staircase, a mantel beam, an interior timber truss — cut to match an existing frame or stand alone.',
+		features: ['Scribed to fit existing structure', 'White oak, hemlock, or reclaimed stock', 'Shop-finished, delivered ready to set', '2–4 week turnaround'],
+	},
+	{
+		id: 'restoration',
+		name: 'Historic Barn Restoration',
+		price: '$15,000–$90,000+',
+		unit: 'quoted per project',
+		scope: 2,
+		blurb: 'Sistering or replacing rotted posts and sills, releveling a settled frame, or a full structural re-raise on a barn that\'s losing the fight with gravity.',
+		features: ['Full structural assessment included', 'Timber matched to original scribe marks', 'Work staged to keep the barn usable', 'Often eligible for VT barn preservation grants'],
+	},
+	{
+		id: 'homes',
+		name: 'Additions & Porches',
+		price: 'From $32,000',
+		unit: 'per project',
+		scope: 3,
+		blurb: 'A post-and-beam addition, screened porch, or sunroom framed to tie visually and structurally into your existing house.',
+		features: ['Engineered, stamped plans for permitting', 'Dry-fit assembled in our shop first', 'One-day raising with your crew or ours', 'Eastern white pine or hemlock frame'],
+	},
+	{
+		id: 'pavilion',
+		name: 'Barn & Pavilion Framing',
+		price: 'From $48,000',
+		unit: 'per project',
+		scope: 4,
+		blurb: 'A new barn, run-in shed, or open event pavilion, framed the traditional way from foundation sills up.',
+		features: ['Full new-build timber frame', 'Design consultation on bent spacing', 'Coordinated raising day for up to 40 guests', 'Roof and siding subcontracted or owner-finished'],
+	},
+	{
+		id: 'homes-full',
+		name: 'Timber Frame Homes',
+		price: '$95–$130 / sq ft',
+		unit: 'framed shell',
+		scope: 5,
+		blurb: 'A full custom post-and-beam home frame, from first sketch through a standing, weathertight shell ready for your finish crew.',
+		features: ['Custom design with our in-house drafter', 'Engineered, stamped plans included', 'Full shop dry-fit before delivery', 'On-site raising, typically 3–5 days'],
+	},
+];
+
+const process = [
+	'Hand-drawn and CAD shop drawings for every frame',
+	'Eastern white pine, hemlock, or Douglas fir structural stock',
+	'White oak pegs (trunnels), hand-driven, no metal fasteners',
+	'Full dry-fit assembly in our Waitsfield shop before delivery',
+	'Engineered, stamped plans provided for permitting',
+	'Community raising day coordination, crew or gin-pole rigging',
+];
+---
+
+<Layout
+	title="Services &amp; Pricing"
+	description="Timber frame homes, additions, barn framing, restoration, and custom joinery pricing at Broad Brook Timberworks in Waitsfield, Vermont."
+>
+	<section class="mx-auto max-w-6xl px-6 pt-16 pb-10 sm:pt-24">
+		<p class="font-mono text-xs uppercase tracking-[0.3em] text-verdigris-deep">Services &amp; Pricing</p>
+		<h1 class="mt-3 max-w-2xl font-display text-4xl font-semibold leading-[0.98] tracking-tight text-oak-ink sm:text-6xl">
+			Pick your scope.
+		</h1>
+		<p class="mt-6 max-w-xl text-base leading-relaxed text-oak-ink-soft sm:text-lg">
+			Every project starts with a $150 site visit, waived if you move forward with us. Pricing
+			below reflects typical Mad River Valley projects &mdash; your quote depends on span, timber
+			species, and site access.
+		</p>
+	</section>
+
+	<section class="mx-auto max-w-6xl px-6 py-10">
+		<div class="grid gap-6 md:grid-cols-2">
+			{
+				services.map((s, i) => (
+					<div id={s.id} class="bench-reveal scroll-mt-24 rounded-sm border border-oak-ink-faint/30 bg-shaving p-7" style={`transition-delay: ${i * 70}ms`}>
+						<div class="flex items-start justify-between gap-4">
+							<div>
+								<h2 class="font-display text-xl font-semibold tracking-tight text-oak-ink">{s.name}</h2>
+								<p class="mt-1 font-mono text-xl text-verdigris-deep">
+									{s.price} <span class="text-sm text-oak-ink-faint">{s.unit}</span>
+								</p>
+							</div>
+							<BeamScale count={s.scope} />
+						</div>
+						<p class="mt-4 text-sm leading-relaxed text-oak-ink-soft">{s.blurb}</p>
+						<ul class="mt-5 space-y-2 border-t border-oak-ink-faint/20 pt-5">
+							{s.features.map((f) => (
+								<li class="flex gap-2 text-sm text-oak-ink-soft">
+									<span class="mt-1 h-1 w-1 shrink-0 rounded-full bg-verdigris" />
+									{f}
+								</li>
+							))}
+						</ul>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<div class="story-pole mx-auto max-w-6xl"></div>
+
+	<!-- PROCESS -->
+	<section class="mx-auto max-w-6xl px-6 py-16">
+		<div class="grid gap-10 sm:grid-cols-2 sm:items-center">
+			<div class="bench-reveal">
+				<TimberCard
+					src={stackedTimber}
+					alt="Stacked raw timber planks in outdoor storage, the stock used for Broad Brook frames"
+					aspect="aspect-[4/3]"
+				/>
+			</div>
+			<div class="bench-reveal" style="transition-delay: 100ms">
+				<p class="font-mono text-xs uppercase tracking-[0.3em] text-verdigris-deep">How every frame is built</p>
+				<h2 class="mt-2 font-display text-2xl font-semibold tracking-tight text-oak-ink sm:text-3xl">Our process</h2>
+				<ul class="mt-5 grid grid-cols-1 gap-x-6 gap-y-2 text-sm text-oak-ink-soft">
+					{process.map((p) => (
+						<li class="flex gap-2">
+							<span class="mt-1 h-1 w-1 shrink-0 rounded-full bg-verdigris" />
+							<span>{p}</span>
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<!-- POLICY NOTE -->
+	<section class="bg-sawdust-2 py-16 sm:py-20">
+		<div class="mx-auto max-w-3xl px-6 text-center">
+			<p class="bench-reveal font-mono text-xs uppercase tracking-[0.3em] text-verdigris-deep">The fine print</p>
+			<h2 class="bench-reveal mt-2 font-display text-2xl font-semibold tracking-tight text-oak-ink sm:text-3xl">
+				How we quote and schedule
+			</h2>
+			<ul class="bench-reveal mt-6 space-y-2 text-sm leading-relaxed text-oak-ink-soft">
+				<li>Fixed-price quotes after the site visit &mdash; no time-and-materials surprises.</li>
+				<li>Shop bookings run 4&ndash;9 months out depending on season; we'll give you a real date.</li>
+				<li>50% deposit to enter the cutting schedule, balance due before delivery.</li>
+				<li>Vermont barn preservation grant paperwork handled in-house for eligible restorations.</li>
+			</ul>
+			<a
+				href="/contact"
+				class="plane-cta mt-8 inline-block rounded-sm bg-verdigris px-7 py-3 font-mono text-xs uppercase tracking-[0.15em] text-shaving transition-colors hover:bg-verdigris-deep"
+			>
+				Request a Quote
+			</a>
+		</div>
+	</section>
+</Layout>

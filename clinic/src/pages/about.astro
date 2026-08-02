@@ -1,0 +1,152 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ClinicalReveal from '../components/ClinicalReveal.astro';
+import LoupeCard from '../components/LoupeCard.astro';
+import drMarsh from '../assets/images/portrait-doctor.jpg';
+import paAnand from '../assets/images/portrait-pa.jpg';
+import deskFlatlay from '../assets/images/stethoscope-notebook-desk.jpg';
+
+const values = [
+	{
+		letter: 'A',
+		title: 'Every new patient gets a full-body exam',
+		copy: 'Not just the spot you called about. Most of what we catch early, patients hadn’t noticed themselves.',
+	},
+	{
+		letter: 'B',
+		title: 'We photograph and track, not just glance',
+		copy: 'Dermoscopic images go in your chart and get compared visit over visit — change is what actually matters, not a single snapshot.',
+	},
+	{
+		letter: 'C',
+		title: 'A clinician reads your case, not a queue',
+		copy: 'Dr. Marsh or Priya sees your history before you’re in the room. Two-minute visits aren’t how skin cancer gets caught.',
+	},
+];
+---
+
+<Layout
+	title="About"
+	description="Cherry Creek Dermatology was founded in 2026 by Dr. Elena Marsh, FAAD. Meet the practice and the clinicians behind Denver's Cherry Creek North skin cancer screening and medical dermatology care."
+>
+	<section class="mx-auto max-w-6xl px-6 pb-16 pt-10 sm:pt-16">
+		<p class="font-mono text-xs uppercase tracking-[0.2em] text-clinical-blue">About</p>
+		<h1 class="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl">
+			A closer look, from day one.
+		</h1>
+		<p class="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
+			Cherry Creek Dermatology opened its doors in 2026 at 250 Steele Street in Cherry Creek
+			North &mdash; a five-person practice from day one, built around the same full-body
+			screening Dr. Marsh insisted on before she ever saw her first patient here.
+		</p>
+	</section>
+
+	<section class="border-t border-ink/10 bg-porcelain-2">
+		<div class="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-2 md:items-center">
+			<ClinicalReveal
+				src={deskFlatlay}
+				alt="A stethoscope and patient notebook on a clinician’s desk"
+				aspect="aspect-[4/5]"
+				class="md:order-2"
+			/>
+			<div class="md:order-1">
+				<p class="font-mono text-xs uppercase tracking-[0.2em] text-clinical-blue">How It Started</p>
+				<h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+					A residency spent seeing what altitude does to skin.
+				</h2>
+				<p class="mt-5 leading-relaxed text-ink-soft">
+					Dr. Marsh trained at National Jewish Health here in Denver, where a disproportionate
+					number of the melanoma cases she saw were diagnosed late &mdash; not because the
+					disease was unusual, but because nobody had done a full-body check in years. She opened
+					Cherry Creek Dermatology in 2026 to make that exam the default, not the exception.
+				</p>
+				<p class="mt-4 leading-relaxed text-ink-soft">
+					Starting this Melanoma Monday, the practice will offer a free screening morning every
+					May for anyone in the neighborhood &mdash; insured or not. It&rsquo;s the same exam
+					we charge for the rest of the year, offered because a five-minute look genuinely
+					changes outcomes.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- TEAM -->
+	<section class="border-t border-ink/10">
+		<div class="mx-auto max-w-6xl px-6 py-20">
+			<p class="font-mono text-xs uppercase tracking-[0.2em] text-clinical-blue">Clinicians</p>
+			<h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+				Dr. Elena Marsh &amp; Priya Anand, PA-C
+			</h2>
+
+			<div class="mt-14 grid gap-14 sm:grid-cols-2">
+				<div>
+					<LoupeCard src={drMarsh} alt="Portrait of Dr. Elena Marsh, founder of Cherry Creek Dermatology" priority={true} />
+					<h3 class="mt-5 font-display text-xl font-semibold text-ink">Dr. Elena Marsh, MD, FAAD</h3>
+					<p class="font-mono text-xs uppercase tracking-[0.15em] text-ink-faint">Founder &amp; Medical Director</p>
+					<p class="mt-3 text-sm leading-relaxed text-ink-soft">
+						Grew up in Colorado Springs. B.A. in Molecular Biology, CU Boulder. M.D., University
+						of Colorado School of Medicine. Dermatology residency at National Jewish Health.
+						Board-certified by the American Board of Dermatology and a Fellow of the American
+						Academy of Dermatology since 2013. Sees screening and medical dermatology patients
+						four days a week.
+					</p>
+				</div>
+				<div>
+					<LoupeCard src={paAnand} alt="Portrait of Priya Anand, PA-C, at Cherry Creek Dermatology" priority={true} />
+					<h3 class="mt-5 font-display text-xl font-semibold text-ink">Priya Anand, PA-C</h3>
+					<p class="font-mono text-xs uppercase tracking-[0.15em] text-ink-faint">Physician Assistant, Dermatology</p>
+					<p class="mt-3 text-sm leading-relaxed text-ink-soft">
+						Physician Assistant Studies, Regis University. Spent three years in Denver
+						Health&rsquo;s dermatology clinic before joining Dr. Marsh at Cherry Creek
+						Dermatology&rsquo;s opening in 2026. Handles a full caseload of screenings, mole
+						mapping, and acne and eczema management, and co-manages every biopsy with Dr. Marsh.
+					</p>
+				</div>
+			</div>
+
+			<p class="mt-14 max-w-2xl text-sm leading-relaxed text-ink-soft">
+				The rest of the practice: a medical assistant who runs same-week scheduling, and a
+				dermatopathology courier relationship with a Denver lab that turns most biopsy results
+				around in five business days.
+			</p>
+		</div>
+	</section>
+
+	<!-- VALUES -->
+	<section class="border-t border-ink/10 bg-porcelain-2">
+		<div class="mx-auto max-w-6xl px-6 py-20">
+			<p class="font-mono text-xs uppercase tracking-[0.2em] text-clinical-blue">How We Practice</p>
+			<h2 class="mt-4 max-w-xl font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+				Three things we haven&rsquo;t shortened for volume.
+			</h2>
+
+			<div class="mm-scale mt-10 mb-2"></div>
+
+			<div class="mt-8 grid gap-10 sm:grid-cols-3">
+				{
+					values.map((v) => (
+						<div class="rise-in">
+							<p class="font-display text-4xl font-semibold text-clinical-blue/40">{v.letter}</p>
+							<h3 class="mt-3 font-display text-lg font-semibold text-ink">{v.title}</h3>
+							<p class="mt-2 text-sm leading-relaxed text-ink-soft">{v.copy}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-ink/10">
+		<div class="mx-auto flex max-w-6xl flex-col items-start gap-6 px-6 py-20 sm:flex-row sm:items-center sm:justify-between">
+			<h2 class="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+				Ready to get on the schedule?
+			</h2>
+			<a
+				href="/contact"
+				class="whitespace-nowrap rounded-sm bg-clinical-blue px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-porcelain transition-colors hover:bg-clinical-blue-dim"
+			>
+				Request an Appointment
+			</a>
+		</div>
+	</section>
+</Layout>

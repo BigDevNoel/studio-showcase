@@ -1,24 +1,30 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+
+import daveImg from '../assets/images/overhead-press-rings.jpg';
+import priyaImg from '../assets/images/coach-priya-portrait.jpg';
+import marcusImg from '../assets/images/coach-marcus-technique-check.jpg';
+import warehouseInteriorImg from '../assets/images/vintage-warehouse-brick-interior.jpg';
 
 const coaches = [
 	{
 		name: 'Dave Kowalczyk',
 		role: 'Founder & Head Coach',
 		bio: 'USAPL national qualifier, 2013–2019. Grew up two blocks from this building and remembers it boarded up. Coaches the Tuesday/Thursday competitive squad.',
-		img: '4720780',
+		img: daveImg,
 	},
 	{
 		name: 'Priya Shah',
 		role: 'Coach, Olympic Lifting',
 		bio: 'Former Division I track athlete turned weightlifter. Runs the Monday/Wednesday/Friday Olympic lifting sessions and programs meet peaks for USAW competitors.',
-		img: '4373472',
+		img: priyaImg,
 	},
 	{
 		name: 'Marcus Webb',
 		role: 'Coach, Coached Strength Program',
 		bio: 'Started as a member in 2019 after a back injury sidelined him from another gym. Now runs our beginner-through-intermediate group programming.',
-		img: '6455906',
+		img: marcusImg,
 	},
 ];
 ---
@@ -57,13 +63,13 @@ const coaches = [
 				</p>
 			</div>
 			<div class="flash-reveal viewfinder order-1 overflow-hidden rounded-md sm:order-2">
-				<img
-					src="https://images.pexels.com/photos/5505165/pexels-photo-5505165.jpeg?auto=compress&cs=tinysrgb&w=1200"
+				<Image
+					src={warehouseInteriorImg}
 					alt="Vintage warehouse interior with exposed brick walls, similar to the original foundry floor"
 					class="h-[380px] w-full object-cover"
+					widths={[600, 1200]}
+					sizes="(max-width: 640px) 100vw, 50vw"
 					loading="lazy"
-					width="1200"
-					height="380"
 				/>
 				<span class="vf-corner"></span>
 				<span class="vf-corner"></span>
@@ -80,13 +86,13 @@ const coaches = [
 	<section class="mx-auto max-w-6xl px-6 py-16">
 		<div class="grid items-center gap-10 sm:grid-cols-2">
 			<div class="flash-reveal viewfinder overflow-hidden rounded-md">
-				<img
-					src="https://images.pexels.com/photos/4720780/pexels-photo-4720780.jpeg?auto=compress&cs=tinysrgb&w=1200"
+				<Image
+					src={daveImg}
 					alt="Lifter performing an overhead press in an industrial gym with gymnastic rings hanging from the trusses, representing founder Dave Kowalczyk's training"
 					class="h-[420px] w-full object-cover"
+					widths={[600, 1200]}
+					sizes="(max-width: 640px) 100vw, 50vw"
 					loading="lazy"
-					width="1200"
-					height="420"
 				/>
 				<span class="vf-corner"></span>
 				<span class="vf-corner"></span>
@@ -124,13 +130,13 @@ const coaches = [
 				coaches.map((c, i) => (
 					<div class="flash-reveal" style={`transition-delay: ${i * 90}ms`}>
 						<div class="viewfinder overflow-hidden rounded-md">
-							<img
-								src={`https://images.pexels.com/photos/${c.img}/pexels-photo-${c.img}.jpeg?auto=compress&cs=tinysrgb&w=800`}
+							<Image
+								src={c.img}
 								alt={`${c.name}, ${c.role} at The Foundry Barbell Club`}
 								class="h-64 w-full object-cover"
+								widths={[400, 800]}
+								sizes="(max-width: 640px) 100vw, 33vw"
 								loading="lazy"
-								width="800"
-								height="256"
 							/>
 							<span class="vf-corner"></span>
 							<span class="vf-corner"></span>
