@@ -64,7 +64,6 @@
 					<!-- beam: slides in, tenon-piece -->
 					<div
 						class="tenon-piece absolute left-0 top-[45%] h-14 w-[58%] -translate-y-1/2 rounded-[2px] bg-[#d8be8c] shadow-[0_16px_36px_-16px_rgba(43,33,22,0.5)] ring-1 ring-oak-ink-faint/30"
-						style="transform: translateZ(8px);"
 					>
 						<div class="absolute inset-x-2 top-1.5 h-1 rounded-full bg-shaving/40"></div>
 						<!-- tenon tongue -->
@@ -74,7 +73,6 @@
 					<!-- peg: drives down through the completed joint -->
 					<div
 						class="peg-piece absolute left-[58%] top-0 h-24 w-3 rounded-full bg-verdigris-deep shadow-[0_10px_18px_-6px_rgba(39,83,73,0.6)]"
-						style="transform: translateZ(16px);"
 					>
 					</div>
 				</div>
@@ -84,4 +82,33 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		const rig = document.querySelector<HTMLElement>('.joint-rig');
+
+		if (rig) {
+			if ('IntersectionObserver' in window) {
+				const observer = new IntersectionObserver(
+					(entries) => {
+						for (const entry of entries) {
+							if (entry.isIntersecting) {
+								// Re-trigger the CSS animation from scratch every time the
+								// rig re-enters view: drop the class, force a reflow, then
+								// re-add it so the keyframes restart at 0%.
+								rig.classList.remove('in-view');
+								void rig.offsetWidth;
+								rig.classList.add('in-view');
+							} else {
+								rig.classList.remove('in-view');
+							}
+						}
+					},
+					{ threshold: 0.4 },
+				);
+				observer.observe(rig);
+			} else {
+				rig.classList.add('in-view');
+			}
+		}
+	</script>
 </section>

@@ -86,61 +86,58 @@ body {
    the literal mechanism that holds a timber frame together with no metal
    fasteners — not a generic dimensional effect. */
 @keyframes tenon-slide {
-  0%,
-  8% {
-    opacity: 0;
-    transform: translateX(-38%) translateZ(0);
+  0% {
+    transform: translateX(-38%) translateZ(8px);
   }
-  16% {
-    opacity: 1;
+  70% {
+    transform: translateX(0%) translateZ(8px);
   }
-  55% {
-    opacity: 1;
-    transform: translateX(0%) translateZ(0);
-  }
-  88% {
-    opacity: 1;
-    transform: translateX(0%) translateZ(0);
-  }
-  96%,
   100% {
-    opacity: 0;
-    transform: translateX(-38%) translateZ(0);
+    transform: translateX(0%) translateZ(8px);
   }
 }
 @keyframes peg-drive {
   0%,
   55% {
-    transform: translateY(-140%);
+    transform: translateY(-140%) translateZ(16px);
     opacity: 0;
   }
   75% {
     opacity: 1;
   }
-  88% {
-    transform: translateY(4%);
-    opacity: 1;
+  90% {
+    transform: translateY(4%) translateZ(16px);
   }
-  92% {
-    transform: translateY(0%);
-    opacity: 1;
-  }
-  96%,
   100% {
-    transform: translateY(0%);
-    opacity: 0;
+    transform: translateY(0%) translateZ(16px);
+    opacity: 1;
   }
 }
+/* Idle state: pieces sit retracted/hidden until .joint-rig.in-view is
+   toggled by an IntersectionObserver (see JointHero.astro), so the joint
+   assembles fresh every time it scrolls into view, not just once on load. */
 .tenon-piece {
-  animation: tenon-slide 2s cubic-bezier(0.22, 0.8, 0.28, 1) infinite;
+  transform: translateX(-38%) translateZ(8px);
 }
 .peg-piece {
-  animation: peg-drive 2s cubic-bezier(0.3, 0.9, 0.3, 1) infinite;
+  transform: translateY(-140%) translateZ(16px);
+  opacity: 0;
+}
+.joint-rig.in-view .tenon-piece {
+  animation: tenon-slide 1.3s cubic-bezier(0.22, 0.8, 0.28, 1) 0.2s both;
+}
+.joint-rig.in-view .peg-piece {
+  animation: peg-drive 1.3s cubic-bezier(0.3, 0.9, 0.3, 1) 1.1s both;
 }
 @media (prefers-reduced-motion: reduce) {
-  .tenon-piece,
+  .tenon-piece {
+    animation: none;
+    transform: translateX(0%) translateZ(8px);
+  }
   .peg-piece {
     animation: none;
+    opacity: 1;
+    transform: translateY(0%) translateZ(16px);
   }
 }
 
