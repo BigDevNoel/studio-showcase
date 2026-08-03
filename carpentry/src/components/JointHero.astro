@@ -92,10 +92,14 @@
 					(entries) => {
 						for (const entry of entries) {
 							if (entry.isIntersecting) {
-								// Play the assembly once, then leave it joined: stop
-								// observing so scrolling away and back doesn't reset it.
+								// Re-trigger the CSS animation from scratch every time the
+								// rig re-enters view: drop the class, force a reflow, then
+								// re-add it so the keyframes restart at 0%.
+								rig.classList.remove('in-view');
+								void rig.offsetWidth;
 								rig.classList.add('in-view');
-								observer.unobserve(rig);
+							} else {
+								rig.classList.remove('in-view');
 							}
 						}
 					},
