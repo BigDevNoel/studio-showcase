@@ -107,7 +107,8 @@ body {
   45% {
     transform: translateY(4%) translateZ(16px);
   }
-  60% {
+  60%,
+  100% {
     transform: translateY(0%) translateZ(16px);
     opacity: 1;
   }
