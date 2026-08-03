@@ -11,7 +11,7 @@
   --color-ink: #08090d;
   --color-ink-2: #282b33;
   --color-ink-3: #1b1d24;
-  /* accent (borders, large/bold elements — 3:1 UI-component contrast is enough here) */
+  /* accent (borders, large/bold elements: 3:1 UI-component contrast is enough here) */
   --color-accent: #d33c2e;
   /* accent-dim: same hue, darkened to pass 4.5:1 AA as small text/button-fill on cream */
   --color-accent-dim: #c02f21;
@@ -113,6 +113,40 @@ body {
   .project-card:hover .desktop-shot img,
   .project-card:focus-within .desktop-shot img {
     transform: none;
+  }
+}
+
+/* ---- Hero: typewriter headline ---- */
+.typewriter-grid {
+  display: grid;
+}
+.typewriter-grid > * {
+  grid-area: 1 / 1;
+}
+.typewriter-sizer {
+  visibility: hidden;
+}
+.typewriter-visible {
+  visibility: visible;
+}
+.typewriter-cursor {
+  display: inline-block;
+  width: 0.06em;
+  margin-left: 0.06em;
+  background: currentColor;
+  height: 0.85em;
+  vertical-align: -0.05em;
+  animation: caret-blink 1s steps(1) infinite;
+}
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-cursor {
+    animation: none !important;
+    opacity: 0;
   }
 }
 

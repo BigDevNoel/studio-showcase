@@ -22,7 +22,7 @@ const projects = [
 	{
 		name: 'Broad Brook Timberworks',
 		description:
-			'A timber-frame restoration outfit hand-cutting joinery in an 1890s Vermont dairy barn — earthy oak-and-ink palette, hand-plane photography, a story-pole scroll divider.',
+			'A timber-frame restoration outfit hand-cutting joinery in an 1890s Vermont dairy barn. Earthy oak-and-ink palette, hand-plane photography, a story-pole scroll divider.',
 		href: 'https://bigdevnoel-carpentry.vercel.app/',
 		desktopImg: carpentryDesktop,
 		mobileImg: carpentryMobile,
@@ -30,7 +30,7 @@ const projects = [
 	{
 		name: 'Salt & Iron',
 		description:
-			'A unisex cut, color, and barbering studio inside a converted 1948 metal shop in Asheville — graphite and steel warmed by a hot temper-gold accent.',
+			'A unisex cut, color, and barbering studio inside a converted 1948 metal shop in Asheville. Graphite and steel warmed by a hot temper-gold accent.',
 		href: 'https://bigdevnoel-salon.vercel.app/',
 		desktopImg: salonDesktop,
 		mobileImg: salonMobile,
@@ -38,7 +38,7 @@ const projects = [
 	{
 		name: 'The Foundry',
 		description:
-			'A barbell gym for powerlifters in a 1911 Pittsburgh iron foundry — near-black and high-voltage green, viewfinder-style hover reveals.',
+			'A barbell gym for powerlifters in a 1911 Pittsburgh iron foundry. Near-black and high-voltage green, viewfinder-style hover reveals.',
 		href: 'https://bigdevnoel-gym.vercel.app/',
 		desktopImg: gymDesktop,
 		mobileImg: gymMobile,
@@ -46,7 +46,7 @@ const projects = [
 	{
 		name: 'Plumbline Studio',
 		description:
-			'A boutique interior design practice out of a Richmond tobacco warehouse — navy, vellum, and brass-light behind a slow Ken Burns hero.',
+			'A boutique interior design practice out of a Richmond tobacco warehouse. Navy, vellum, and brass-light behind a slow Ken Burns hero.',
 		href: 'https://bigdevnoel-interior-design.vercel.app/',
 		desktopImg: architectureDesktop,
 		mobileImg: architectureMobile,
@@ -54,7 +54,7 @@ const projects = [
 	{
 		name: 'Cherry Creek Dermatology',
 		description:
-			'A Denver dermatology practice built around high-altitude UV risk — porcelain and clinical blue, editorial and precise.',
+			'A Denver dermatology practice built around high-altitude UV risk. Porcelain and clinical blue, editorial and precise.',
 		href: 'https://bigdevnoel-clinic.vercel.app/',
 		desktopImg: clinicDesktop,
 		mobileImg: clinicMobile,
@@ -70,8 +70,8 @@ const heroFloats = [
 ---
 
 <Layout
-	title="BigDevNoel — Software engineer building SaaS, apps, e-commerce & websites"
-	description="I'm a software engineer who builds distinctive, well-crafted software — SaaS platforms, web and mobile apps, e-commerce, and marketing sites. No templates, no off-the-shelf answers. See five recent web projects."
+	title="BigDevNoel | Software engineer building AI software, SaaS, apps, e-commerce & websites"
+	description="I'm a software engineer who builds distinctive, well-crafted software: AI-powered software, SaaS platforms, web and mobile apps, e-commerce, and marketing sites. No templates, no off-the-shelf answers. See five recent web projects."
 >
 	<Nav />
 
@@ -89,10 +89,14 @@ const heroFloats = [
 			<div class="relative z-10 mx-auto max-w-2xl bg-cream px-4 py-6 sm:px-10 sm:py-10">
 				<p class="font-body text-xs font-semibold uppercase tracking-[0.25em] text-accent-dim">Software Engineer</p>
 				<h1 class="mx-auto mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-ink sm:text-6xl">
-					I build software that doesn't feel off-the-shelf.
+					<span class="sr-only">I build software that doesn't feel off-the-shelf.</span>
+					<span class="typewriter-grid" aria-hidden="true">
+						<span class="typewriter-sizer">I build software that doesn't feel off-the-shelf.</span>
+						<span class="typewriter-visible"><span id="typewriter"></span><span class="typewriter-cursor"></span></span>
+					</span>
 				</h1>
 				<p class="mx-auto mt-6 max-w-xl text-base leading-relaxed text-ink/70 sm:text-lg">
-					SaaS platforms, web and mobile apps, e-commerce, marketing sites — whatever the product is,
+					AI software, SaaS platforms, web and mobile apps, e-commerce, marketing sites. Whatever the product is,
 					it's built from the problem, not a starter template. Below are five recent web projects
 					that show the approach in practice.
 				</p>
@@ -133,7 +137,7 @@ const heroFloats = [
 			<div class="depth-reveal mx-auto max-w-2xl px-6">
 				<h2 class="font-display text-2xl font-bold tracking-tight sm:text-4xl">Have a project in mind?</h2>
 				<p class="mx-auto mt-4 max-w-md text-sm text-cream-light/70 sm:text-base">
-					SaaS, app, storefront, or site — if it needs to feel considered instead of templated, let's talk.
+					AI product, SaaS, app, storefront, or site. If it needs to feel considered instead of templated, let's talk.
 				</p>
 				<a
 					href="#contact"
@@ -149,7 +153,7 @@ const heroFloats = [
 			<div class="depth-reveal">
 				<h2 class="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">Let's talk about your project</h2>
 				<p class="mx-auto mt-4 max-w-md text-sm leading-relaxed text-ink/70 sm:text-base">
-					Send a note directly — tell me a bit about what you're building and I'll reply within a day.
+					Send a note directly. Tell me a bit about what you're building and I'll reply within a day.
 				</p>
 				<div class="mt-8 inline-flex flex-col items-center gap-4 rounded-md border border-line bg-cream-light px-8 py-8 sm:px-12">
 					<a href={`mailto:${email}`} class="font-display text-xl font-bold tracking-tight text-ink transition-colors hover:text-accent sm:text-2xl">
@@ -172,6 +176,47 @@ const heroFloats = [
 <script>
 	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+	// hero headline typewriter — type, hold, untype, repeat
+	const typewriterEl = document.getElementById('typewriter');
+	if (typewriterEl) {
+		const fullText = "I build software that doesn't feel off-the-shelf.";
+		if (reduceMotion) {
+			typewriterEl.textContent = fullText;
+		} else {
+			const typeSpeed = 90;
+			const deleteSpeed = 45;
+			const holdTime = 3000;
+			const restPause = 500;
+			let i = 0;
+			let deleting = false;
+
+			const tick = () => {
+				if (!deleting) {
+					i++;
+					typewriterEl.textContent = fullText.slice(0, i);
+					if (i >= fullText.length) {
+						setTimeout(() => {
+							deleting = true;
+							tick();
+						}, holdTime);
+						return;
+					}
+					setTimeout(tick, typeSpeed);
+				} else {
+					i--;
+					typewriterEl.textContent = fullText.slice(0, i);
+					if (i <= 0) {
+						deleting = false;
+						setTimeout(tick, restPause);
+						return;
+					}
+					setTimeout(tick, deleteSpeed);
+				}
+			};
+			tick();
+		}
+	}
+
 	// scroll-triggered 3D reveals
 	const revealEls = document.querySelectorAll<HTMLElement>('.depth-reveal');
 	if (reduceMotion) {
@@ -191,7 +236,7 @@ const heroFloats = [
 		revealEls.forEach((el) => observer.observe(el));
 	}
 
-	// hero floating rig — group tilt toward the cursor
+	// hero floating rig: group tilt toward the cursor
 	const heroStage = document.querySelector<HTMLElement>('.hero-stage');
 	const heroRig = document.querySelector<HTMLElement>('.hero-rig');
 	if (heroStage && heroRig && !reduceMotion && window.matchMedia('(pointer: fine)').matches) {
