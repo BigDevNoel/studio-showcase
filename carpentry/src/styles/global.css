@@ -86,14 +86,26 @@ body {
    the literal mechanism that holds a timber frame together with no metal
    fasteners — not a generic dimensional effect. */
 @keyframes tenon-slide {
-  0% {
+  0%,
+  8% {
+    opacity: 0;
     transform: translateX(-38%) translateZ(0);
   }
-  70% {
+  16% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
     transform: translateX(0%) translateZ(0);
   }
-  100% {
+  88% {
+    opacity: 1;
     transform: translateX(0%) translateZ(0);
+  }
+  96%,
+  100% {
+    opacity: 0;
+    transform: translateX(-38%) translateZ(0);
   }
 }
 @keyframes peg-drive {
@@ -105,19 +117,25 @@ body {
   75% {
     opacity: 1;
   }
-  90% {
+  88% {
     transform: translateY(4%);
+    opacity: 1;
   }
-  100% {
+  92% {
     transform: translateY(0%);
     opacity: 1;
   }
+  96%,
+  100% {
+    transform: translateY(0%);
+    opacity: 0;
+  }
 }
 .tenon-piece {
-  animation: tenon-slide 1.3s cubic-bezier(0.22, 0.8, 0.28, 1) 0.2s both;
+  animation: tenon-slide 2s cubic-bezier(0.22, 0.8, 0.28, 1) infinite;
 }
 .peg-piece {
-  animation: peg-drive 1.3s cubic-bezier(0.3, 0.9, 0.3, 1) 1.1s both;
+  animation: peg-drive 2s cubic-bezier(0.3, 0.9, 0.3, 1) infinite;
 }
 @media (prefers-reduced-motion: reduce) {
   .tenon-piece,
