@@ -17,6 +17,8 @@ import clinicDesktop from '../assets/screenshots/clinic-desktop.png';
 import clinicMobile from '../assets/screenshots/clinic-mobile.jpg';
 
 const email = 'emmanuelngerem05@gmail.com';
+const whatsapp = '2349138331909';
+const whatsappDisplay = '+234 913 833 1909';
 
 const projects = [
 	{
@@ -93,6 +95,24 @@ const heroFloats = [
 					<span class="typewriter-grid" aria-hidden="true">
 						<span class="typewriter-sizer">I build software that doesn't feel off-the-shelf.</span>
 						<span class="typewriter-visible"><span id="typewriter"></span><span class="typewriter-cursor"></span></span>
+						<span class="dev-setup" id="dev-setup">
+							<span class="dev-setup-stage">
+								<span class="dev-setup-rig">
+									<span class="ds-desk"></span>
+									<span class="ds-tower"><span class="ds-led"></span></span>
+									<span class="ds-mug"><span class="ds-mug-handle"></span></span>
+									<span class="ds-laptop">
+										<span class="ds-laptop-screen">
+											<span class="ds-code-line" style="width:70%"></span>
+											<span class="ds-code-line" style="width:45%"></span>
+											<span class="ds-code-line" style="width:58%"></span>
+											<span class="ds-code-line ds-code-line-caret" style="width:30%"><span class="ds-caret"></span></span>
+										</span>
+										<span class="ds-laptop-base"></span>
+									</span>
+								</span>
+							</span>
+						</span>
 					</span>
 				</h1>
 				<p class="mx-auto mt-6 max-w-xl text-base leading-relaxed text-ink/70 sm:text-lg">
@@ -133,15 +153,17 @@ const heroFloats = [
 		</section>
 
 		<!-- CTA BAND -->
-		<section class="bg-ink-3 py-20 text-center text-cream-light sm:py-28">
-			<div class="depth-reveal mx-auto max-w-2xl px-6">
+		<section class="cta-stage relative overflow-hidden bg-ink-3 py-20 text-center text-cream-light sm:py-28">
+			<div class="cta-grid-floor" aria-hidden="true"></div>
+			<div class="cta-glow" aria-hidden="true"></div>
+			<div class="depth-reveal cta-tilt relative mx-auto max-w-2xl px-6">
 				<h2 class="font-display text-2xl font-bold tracking-tight sm:text-4xl">Have a project in mind?</h2>
 				<p class="mx-auto mt-4 max-w-md text-sm text-cream-light/70 sm:text-base">
 					AI product, SaaS, app, storefront, or site. If it needs to feel considered instead of templated, let's talk.
 				</p>
 				<a
 					href="#contact"
-					class="mt-8 inline-block rounded-sm bg-accent-dim px-7 py-3 font-body text-sm font-semibold text-cream-light transition-colors hover:bg-accent-darker"
+					class="cta-button mt-8 inline-block rounded-sm bg-accent-dim px-7 py-3 font-body text-sm font-semibold text-cream-light"
 				>
 					Start a conversation
 				</a>
@@ -155,8 +177,8 @@ const heroFloats = [
 				<p class="mx-auto mt-4 max-w-md text-sm leading-relaxed text-ink/70 sm:text-base">
 					Send a note directly. Tell me a bit about what you're building and I'll reply within a day.
 				</p>
-				<div class="mt-8 inline-flex flex-col items-center gap-4 rounded-md border border-line bg-cream-light px-8 py-8 sm:px-12">
-					<a href={`mailto:${email}`} class="font-display text-xl font-bold tracking-tight text-ink transition-colors hover:text-accent sm:text-2xl">
+				<div class="mt-8 flex w-full flex-col items-center gap-4 rounded-md border border-line bg-cream-light px-6 py-6 sm:inline-flex sm:w-auto sm:px-12 sm:py-8">
+					<a href={`mailto:${email}`} class="max-w-full break-all font-display text-base font-bold tracking-tight text-ink transition-colors hover:text-accent sm:break-normal sm:text-2xl">
 						{email}
 					</a>
 					<a
@@ -164,6 +186,23 @@ const heroFloats = [
 						class="rounded-sm border-2 border-ink bg-ink px-6 py-3 font-body text-sm font-semibold text-cream-light transition-colors hover:border-accent-dim hover:bg-accent-dim"
 					>
 						Email me
+					</a>
+					<div class="h-px w-full bg-line"></div>
+					<a
+						href={`https://wa.me/${whatsapp}`}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="max-w-full break-all font-display text-base font-bold tracking-tight text-ink transition-colors hover:text-accent sm:break-normal sm:text-xl"
+					>
+						{whatsappDisplay}
+					</a>
+					<a
+						href={`https://wa.me/${whatsapp}`}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="rounded-sm border-2 border-ink px-6 py-3 font-body text-sm font-semibold text-ink transition-colors hover:border-accent-dim hover:text-accent-dim"
+					>
+						Message on WhatsApp
 					</a>
 				</div>
 			</div>
@@ -176,19 +215,34 @@ const heroFloats = [
 <script>
 	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-	// hero headline typewriter — type, hold, untype, repeat
+	// hero headline typewriter — type, hold, untype, then a small illustrated
+	// dev setup (desk, laptop, tower) fills the gap instead of blank space,
+	// before looping back to the main line
 	const typewriterEl = document.getElementById('typewriter');
+	const devSetupEl = document.getElementById('dev-setup');
 	if (typewriterEl) {
 		const fullText = "I build software that doesn't feel off-the-shelf.";
+
 		if (reduceMotion) {
 			typewriterEl.textContent = fullText;
 		} else {
 			const typeSpeed = 90;
 			const deleteSpeed = 45;
 			const holdTime = 3000;
-			const restPause = 500;
+			const illustrationHold = 1800;
+			const restPause = 350;
 			let i = 0;
 			let deleting = false;
+
+			const showIllustration = () => {
+				if (!devSetupEl) return;
+				devSetupEl.classList.remove('is-active');
+				void devSetupEl.offsetWidth;
+				devSetupEl.classList.add('is-active');
+			};
+			const hideIllustration = () => {
+				devSetupEl?.classList.remove('is-active');
+			};
 
 			const tick = () => {
 				if (!deleting) {
@@ -207,7 +261,11 @@ const heroFloats = [
 					typewriterEl.textContent = fullText.slice(0, i);
 					if (i <= 0) {
 						deleting = false;
-						setTimeout(tick, restPause);
+						showIllustration();
+						setTimeout(() => {
+							hideIllustration();
+							setTimeout(tick, restPause);
+						}, illustrationHold);
 						return;
 					}
 					setTimeout(tick, deleteSpeed);
@@ -248,6 +306,21 @@ const heroFloats = [
 		});
 		heroStage.addEventListener('mouseleave', () => {
 			heroRig.style.transform = 'rotateX(0deg) rotateY(0deg)';
+		});
+	}
+
+	// CTA band: content tilts toward the cursor
+	const ctaStage = document.querySelector<HTMLElement>('.cta-stage');
+	const ctaTilt = document.querySelector<HTMLElement>('.cta-tilt');
+	if (ctaStage && ctaTilt && !reduceMotion && window.matchMedia('(pointer: fine)').matches) {
+		ctaStage.addEventListener('mousemove', (e) => {
+			const rect = ctaStage.getBoundingClientRect();
+			const px = (e.clientX - rect.left) / rect.width - 0.5;
+			const py = (e.clientY - rect.top) / rect.height - 0.5;
+			ctaTilt.style.transform = `perspective(1000px) rotateX(${(py * -6).toFixed(2)}deg) rotateY(${(px * 8).toFixed(2)}deg)`;
+		});
+		ctaStage.addEventListener('mouseleave', () => {
+			ctaTilt.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
 		});
 	}
 </script>

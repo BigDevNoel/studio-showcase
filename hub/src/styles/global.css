@@ -138,6 +138,178 @@ body {
   vertical-align: -0.05em;
   animation: caret-blink 1s steps(1) infinite;
 }
+/* ---- Hero: dev-setup illustration (fills the typewriter's untype gap) ---- */
+/* Sized entirely in % of the headline's own reserved box (the typewriter-grid
+   cell, set by .typewriter-sizer) so it can never grow past that space and
+   cover the copy below it — same box on mobile and desktop, just resized. */
+.dev-setup {
+  display: flex;
+  opacity: 0;
+  transform: scale(0.85) translateY(14px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.dev-setup.is-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.dev-setup-stage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+  transform: scale(0.7);
+  transform-origin: center center;
+}
+.dev-setup-rig {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateX(20deg) rotateY(-16deg);
+}
+.ds-desk {
+  position: absolute;
+  display: block;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5.5%;
+  border-radius: 3px;
+  background: var(--color-line);
+  box-shadow: 0 12px 26px -10px rgba(8, 9, 13, 0.35);
+}
+.ds-tower {
+  position: absolute;
+  display: block;
+  left: 1.5%;
+  bottom: 5.5%;
+  width: 9.5%;
+  height: 36%;
+  border-radius: 4px;
+  background: var(--color-ink);
+  transform: translateZ(6px);
+  box-shadow: 0 10px 20px -8px rgba(8, 9, 13, 0.4);
+}
+.ds-led {
+  position: absolute;
+  display: block;
+  left: 50%;
+  bottom: 22%;
+  width: 0.32rem;
+  height: 0.32rem;
+  margin-left: -0.16rem;
+  border-radius: 999px;
+  background: var(--color-accent);
+  box-shadow: 0 0 6px 1px rgba(211, 60, 46, 0.8);
+  opacity: 0.5;
+}
+.dev-setup.is-active .ds-led {
+  animation: ds-led-pulse 1.4s ease-in-out infinite;
+}
+@keyframes ds-led-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+.ds-mug {
+  position: absolute;
+  display: block;
+  right: 3.25%;
+  bottom: 5.5%;
+  width: 6.5%;
+  height: 12%;
+  border-radius: 2px 2px 5px 5px;
+  background: var(--color-accent-dim);
+  transform: translateZ(10px);
+  box-shadow: 0 8px 16px -6px rgba(8, 9, 13, 0.35);
+}
+.ds-mug-handle {
+  position: absolute;
+  display: block;
+  right: -45%;
+  top: 15%;
+  width: 45%;
+  height: 55%;
+  border: 2px solid var(--color-accent-dim);
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+}
+.ds-laptop {
+  position: absolute;
+  display: block;
+  left: 50%;
+  bottom: 5.5%;
+  width: 52.5%;
+  height: 56.5%;
+  margin-left: -26.25%;
+  transform-style: preserve-3d;
+  transform: translateZ(14px);
+}
+.ds-laptop-base {
+  position: absolute;
+  display: block;
+  left: -3%;
+  right: -3%;
+  bottom: 0;
+  height: 6.5%;
+  border-radius: 2px;
+  background: var(--color-ink);
+  box-shadow: 0 12px 22px -8px rgba(8, 9, 13, 0.4);
+}
+.ds-laptop-screen {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6%;
+  left: 0;
+  right: 0;
+  bottom: 6.5%;
+  height: 90%;
+  border-radius: 4px 4px 1px 1px;
+  background: var(--color-ink);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  padding: 10% 9%;
+  transform-origin: bottom center;
+  transform: rotateX(90deg);
+}
+.dev-setup.is-active .ds-laptop-screen {
+  animation: ds-screen-open 0.6s cubic-bezier(0.22, 0.8, 0.28, 1) both;
+}
+@keyframes ds-screen-open {
+  from { transform: rotateX(90deg); }
+  to { transform: rotateX(4deg); }
+}
+.ds-code-line {
+  display: block;
+  height: 12%;
+  min-height: 3px;
+  border-radius: 999px;
+  background: var(--color-cream-light);
+  opacity: 0.55;
+}
+.ds-code-line:nth-child(1) {
+  background: var(--color-accent);
+  opacity: 0.9;
+}
+.ds-code-line-caret {
+  display: flex;
+  align-items: center;
+}
+.ds-caret {
+  display: inline-block;
+  width: 0.22rem;
+  height: 0.28rem;
+  margin-left: 0.18rem;
+  background: var(--color-cream-light);
+  animation: caret-blink 1s steps(1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dev-setup {
+    display: none !important;
+  }
+}
 @keyframes caret-blink {
   50% {
     opacity: 0;
@@ -147,6 +319,80 @@ body {
   .typewriter-cursor {
     animation: none !important;
     opacity: 0;
+  }
+}
+
+/* ---- CTA band: 3D grid floor, glow, tilt ---- */
+.cta-stage {
+  perspective: 1200px;
+}
+.cta-grid-floor {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(211, 60, 46, 0.55) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(211, 60, 46, 0.55) 1px, transparent 1px);
+  background-size: 48px 48px;
+  transform: perspective(500px) rotateX(58deg) scale(1.6);
+  transform-origin: center top;
+  animation: grid-drift 8s linear infinite;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 35%, black 75%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 35%, black 75%, transparent 100%);
+  pointer-events: none;
+}
+@keyframes grid-drift {
+  from { background-position: 0 0; }
+  to { background-position: 0 48px; }
+}
+.cta-glow {
+  position: absolute;
+  left: 50%;
+  top: 32%;
+  width: 26rem;
+  height: 26rem;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(211, 60, 46, 0.35), transparent 70%);
+  filter: blur(10px);
+  animation: glow-pulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.15); }
+}
+.cta-tilt {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-out;
+}
+.cta-button {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.cta-button:hover,
+.cta-button:focus-visible {
+  background-color: var(--color-accent-darker);
+  transform: translateY(-4px) translateZ(24px);
+  box-shadow: 0 18px 32px -12px rgba(211, 60, 46, 0.6);
+}
+.cta-button:active {
+  transform: translateY(-1px) translateZ(8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-grid-floor,
+  .cta-glow {
+    animation: none !important;
+  }
+  .cta-tilt {
+    transition: none !important;
+    transform: none !important;
+  }
+  .cta-button {
+    transition: none !important;
+  }
+  .cta-button:hover,
+  .cta-button:active {
+    transform: none !important;
+    box-shadow: none !important;
   }
 }
 
