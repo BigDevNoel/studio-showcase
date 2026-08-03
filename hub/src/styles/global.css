@@ -1,1 +1,239 @@
 @import "tailwindcss";
+
+@theme {
+  --font-display: "Unbounded", sans-serif;
+  --font-body: "Barlow", sans-serif;
+
+  /* palette pulled directly from vital-gym.webflow.io's live CSS variables */
+  --color-cream: #e6e5dd;
+  --color-cream-dim: #d9d7ce;
+  --color-cream-light: #f4f1ee;
+  --color-ink: #08090d;
+  --color-ink-2: #282b33;
+  --color-ink-3: #1b1d24;
+  /* accent (borders, large/bold elements — 3:1 UI-component contrast is enough here) */
+  --color-accent: #d33c2e;
+  /* accent-dim: same hue, darkened to pass 4.5:1 AA as small text/button-fill on cream */
+  --color-accent-dim: #c02f21;
+  --color-accent-darker: #b0281c;
+  /* accent-bright: same hue, lightened to pass 4.5:1 AA as text on dark ink backgrounds */
+  --color-accent-bright: #ff6b53;
+  --color-line: #cecbc1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-cream-light);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* nav link underline-slide */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* project card lift + screenshot zoom */
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card:hover,
+.project-card:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px -20px rgba(8, 9, 13, 0.25);
+}
+.project-card .desktop-shot img {
+  transition: transform 0.5s ease;
+}
+.project-card:hover .desktop-shot img,
+.project-card:focus-within .desktop-shot img {
+  transform: scale(1.04);
+}
+.project-card .mobile-shot {
+  transition: transform 0.3s ease;
+}
+.project-card:hover .mobile-shot,
+.project-card:focus-within .mobile-shot {
+  transform: translateY(-4px) rotate(0deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .project-card .desktop-shot img,
+  .project-card .mobile-shot {
+    transition: none !important;
+  }
+  .project-card:hover,
+  .project-card:focus-within {
+    transform: none;
+  }
+  .project-card:hover .desktop-shot img,
+  .project-card:focus-within .desktop-shot img {
+    transform: none;
+  }
+}
+
+/* ---- Hero: floating 3D screenshot rig ---- */
+.hero-stage {
+  position: relative;
+  perspective: 1400px;
+}
+.hero-rig {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-out;
+  pointer-events: none;
+}
+.hero-float {
+  position: absolute;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px -18px rgba(8, 9, 13, 0.35), 0 0 0 1px rgba(8, 9, 13, 0.08);
+  will-change: transform;
+}
+.hero-float img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@keyframes float-a {
+  0%, 100% { transform: translate3d(0, 0, 40px) rotate3d(1, 1, 0, 8deg); }
+  50% { transform: translate3d(0, -16px, 40px) rotate3d(1, 1, 0, 11deg); }
+}
+@keyframes float-b {
+  0%, 100% { transform: translate3d(0, 0, 20px) rotate3d(-1, 1, 0, -9deg); }
+  50% { transform: translate3d(0, 14px, 20px) rotate3d(-1, 1, 0, -6deg); }
+}
+@keyframes float-c {
+  0%, 100% { transform: translate3d(0, 0, 60px) rotate3d(1, -1, 0, 6deg); }
+  50% { transform: translate3d(0, -12px, 60px) rotate3d(1, -1, 0, 9deg); }
+}
+@keyframes float-d {
+  0%, 100% { transform: translate3d(0, 0, 10px) rotate3d(-1, -1, 0, -5deg); }
+  50% { transform: translate3d(0, 10px, 10px) rotate3d(-1, -1, 0, -8deg); }
+}
+.hero-float[data-float="a"] { animation: float-a 7s ease-in-out infinite; }
+.hero-float[data-float="b"] { animation: float-b 8.5s ease-in-out infinite; }
+.hero-float[data-float="c"] { animation: float-c 6.5s ease-in-out infinite; }
+.hero-float[data-float="d"] { animation: float-d 9s ease-in-out infinite; }
+
+/* ---- Pointer-tracked 3D tilt (project cards) ---- */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+.tilt-card:hover,
+.tilt-card:focus-within {
+  transition: transform 0.1s ease-out, box-shadow 0.3s ease;
+}
+.tilt-card .desktop-shot {
+  transform-style: preserve-3d;
+}
+.tilt-card .mobile-shot {
+  transform: translateZ(36px);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tilt-card:hover .mobile-shot,
+.tilt-card:focus-within .mobile-shot {
+  transform: translateZ(64px);
+}
+.tilt-card .card-body {
+  transform: translateZ(18px);
+}
+.tilt-card .glare {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: linear-gradient(115deg, transparent 42%, rgba(255, 255, 255, 0.4) 50%, transparent 58%);
+  opacity: 0;
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+.tilt-card:hover .glare,
+.tilt-card:focus-within .glare {
+  opacity: 1;
+  animation: glare-sweep 0.85s ease forwards;
+}
+@keyframes glare-sweep {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(120%); }
+}
+
+/* ---- Scroll-triggered 3D reveal ---- */
+.depth-reveal {
+  opacity: 0;
+  transform: perspective(1000px) translateY(36px) rotateX(10deg);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.depth-reveal.is-visible {
+  opacity: 1;
+  transform: perspective(1000px) translateY(0) rotateX(0deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-float,
+  .hero-rig {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  .tilt-card,
+  .tilt-card .mobile-shot,
+  .tilt-card .card-body {
+    transform: none !important;
+    transition: none !important;
+  }
+  .tilt-card .glare {
+    display: none !important;
+  }
+  .depth-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
