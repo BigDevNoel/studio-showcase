@@ -64,10 +64,28 @@ const projects = [
 ];
 
 const heroFloats = [
-	{ img: gymDesktop, float: 'a', style: 'top:6%; left:1%; width:15rem; height:9.5rem;' },
-	{ img: architectureDesktop, float: 'b', style: 'top:2%; right:2%; width:13rem; height:8.5rem;' },
-	{ img: clinicDesktop, float: 'c', style: 'bottom:10%; left:8%; width:12rem; height:8rem;' },
-	{ img: salonDesktop, float: 'd', style: 'bottom:4%; right:9%; width:14rem; height:9rem;' },
+	{
+		img: gymDesktop,
+		float: 'a',
+		style: '--m-top:0.25rem; --m-left:3%; --m-w:4rem; --m-h:2.7rem; --d-top:6%; --d-left:1%; --d-w:15rem; --d-h:9.5rem;',
+	},
+	{
+		img: architectureDesktop,
+		float: 'b',
+		style: '--m-top:0.25rem; --m-right:3%; --m-w:4rem; --m-h:2.7rem; --d-top:2%; --d-right:2%; --d-w:13rem; --d-h:8.5rem;',
+	},
+	{
+		img: clinicDesktop,
+		float: 'c',
+		style: '--d-bottom:10%; --d-left:8%; --d-w:12rem; --d-h:8rem;',
+		desktopOnly: true,
+	},
+	{
+		img: salonDesktop,
+		float: 'd',
+		style: '--d-bottom:4%; --d-right:9%; --d-w:14rem; --d-h:9rem;',
+		desktopOnly: true,
+	},
 ];
 ---
 
@@ -80,10 +98,17 @@ const heroFloats = [
 	<main id="top">
 		<!-- HERO -->
 		<section class="hero-stage mx-auto max-w-6xl overflow-hidden px-6 pb-16 pt-16 text-center sm:pb-24 sm:pt-24">
-			<div class="hero-rig z-0 hidden sm:block" aria-hidden="true">
+			<div class="hero-rig z-0" aria-hidden="true">
 				{heroFloats.map((f) => (
-					<div class="hero-float" data-float={f.float} style={f.style}>
-						<Image src={f.img} alt="" class="h-full w-full object-cover object-top" widths={[300, 500]} sizes="240px" loading="eager" />
+					<div class={`hero-float ${f.desktopOnly ? 'hidden sm:block' : ''}`} data-float={f.float} style={f.style}>
+						<Image
+							src={f.img}
+							alt=""
+							class="h-full w-full object-cover object-top"
+							widths={[160, 300, 500]}
+							sizes="(min-width: 640px) 240px, 80px"
+							loading="eager"
+						/>
 					</div>
 				))}
 			</div>
@@ -115,6 +140,14 @@ const heroFloats = [
 						</span>
 					</span>
 				</h1>
+				<div class="hero-inline-rig mt-6 flex items-center justify-between px-2 sm:hidden" aria-hidden="true">
+					<div class="hero-float-inline" data-float="c">
+						<Image src={clinicDesktop} alt="" class="h-full w-full object-cover object-top" widths={[160, 240]} sizes="80px" loading="eager" />
+					</div>
+					<div class="hero-float-inline" data-float="d">
+						<Image src={salonDesktop} alt="" class="h-full w-full object-cover object-top" widths={[160, 240]} sizes="80px" loading="eager" />
+					</div>
+				</div>
 				<p class="mx-auto mt-6 max-w-xl text-base leading-relaxed text-ink/70 sm:text-lg">
 					AI software, SaaS platforms, web and mobile apps, e-commerce, marketing sites. Whatever the product is,
 					it's built from the problem, not a starter template. Below are five recent web projects
@@ -297,15 +330,19 @@ const heroFloats = [
 	// hero floating rig: group tilt toward the cursor
 	const heroStage = document.querySelector<HTMLElement>('.hero-stage');
 	const heroRig = document.querySelector<HTMLElement>('.hero-rig');
-	if (heroStage && heroRig && !reduceMotion && window.matchMedia('(pointer: fine)').matches) {
+	const heroInlineRig = document.querySelector<HTMLElement>('.hero-inline-rig');
+	if (heroStage && (heroRig || heroInlineRig) && !reduceMotion && window.matchMedia('(pointer: fine)').matches) {
 		heroStage.addEventListener('mousemove', (e) => {
 			const rect = heroStage.getBoundingClientRect();
 			const px = (e.clientX - rect.left) / rect.width - 0.5;
 			const py = (e.clientY - rect.top) / rect.height - 0.5;
-			heroRig.style.transform = `rotateX(${(py * -8).toFixed(2)}deg) rotateY(${(px * 10).toFixed(2)}deg)`;
+			const tilt = `rotateX(${(py * -8).toFixed(2)}deg) rotateY(${(px * 10).toFixed(2)}deg)`;
+			if (heroRig) heroRig.style.transform = tilt;
+			if (heroInlineRig) heroInlineRig.style.transform = tilt;
 		});
 		heroStage.addEventListener('mouseleave', () => {
-			heroRig.style.transform = 'rotateX(0deg) rotateY(0deg)';
+			if (heroRig) heroRig.style.transform = 'rotateX(0deg) rotateY(0deg)';
+			if (heroInlineRig) heroInlineRig.style.transform = 'rotateX(0deg) rotateY(0deg)';
 		});
 	}
 
